@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kvs.pfr.com/pensions-on-date/1.0.1" xmlns:benefits="http://kvs.pfr.com/benefits-common/1.0.0" targetNamespace="http://kvs.pfr.com/pensions-on-date/1.0.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<import namespace="http://kvs.pfr.com/benefits-common/1.0.0" schemaLocation="commons/benefits-common-1.0.0.xsd"/>
+	<element name="PensionsOnDateRequest">
+		<complexType>
+			<group ref="benefits:RequestOnDateGroup"/>
+		</complexType>
+	</element>
+	<element name="PensionsOnDateResponse">
+		<complexType>
+			<group ref="benefits:ResponseOnDateGroup" minOccurs="0"/>
+		</complexType>
+	</element>
+</schema>
