@@ -2,6 +2,8 @@ package sx.microservices;
 
 import org.json.JSONObject;
 import org.w3c.dom.Document;
+import sx.microservices.xsd2inst.XmlInstance;
+import sx.microservices.xsd2inst.XmlInstanceGenerator;
 
 public class Main {
 
@@ -11,12 +13,11 @@ public class Main {
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
 
 
-        Document document = xmlInstanceGenerator.createInstance();
+        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance();
 
-        Document transformed = transformer.transform(document);
+        Document transformed = transformer.transform(xmlInstance.getDocument());
 
         JSONObject jsonObject = converter.toJson(transformed);
-
 
         System.out.println(jsonObject);
     }

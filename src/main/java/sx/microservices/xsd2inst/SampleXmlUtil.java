@@ -25,33 +25,34 @@ package sx.microservices.xsd2inst;
  */
 
 import org.apache.xmlbeans.*;
-import org.apache.xmlbeans.impl.util.HexBin;
 import org.apache.xmlbeans.soap.SOAPArrayType;
 import org.apache.xmlbeans.soap.SchemaWSDLArrayType;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.namespace.QName;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class SampleXmlUtil {
     private final boolean _soapEnc;
     private static final int MAX_ELEMENTS = 1000;
     private int _nElements;
+    private final Map<String, TypeInfo> types = new HashMap<>();
 
     private SampleXmlUtil(boolean soapEnc) {
         _soapEnc = soapEnc;
     }
 
-    public static String createSampleForType(SchemaType sType) {
+    public static XmlInstance createSampleForType(SchemaType sType) {
         XmlObject object = XmlObject.Factory.newInstance();
         XmlCursor cursor = object.newCursor();
         // Skip the document node
         cursor.toNextToken();
         // Using the type and the cursor, call the utility method to get a
         // sample XML payload for that Schema element
-        new SampleXmlUtil(false).createSampleForType(sType, cursor);
+        Map<String, TypeInfo> types = new SampleXmlUtil(false).createSampleForType(sType, cursor);
         // Cursor now contains the sample payload
         // Pretty print the result.  Note that the cursor is positioned at the
         // end of the doc so we use the original xml object that the cursor was
@@ -60,7 +61,11 @@ public class SampleXmlUtil {
         options.setSavePrettyPrint();
         options.setSavePrettyPrintIndent(2);
         options.setSaveAggressiveNamespaces();
-        return object.xmlText(options);
+
+        XmlInstance instance = new XmlInstance();
+        instance.setXml(object.xmlText(options));
+        instance.setTypes(types);
+        return instance;
     }
 
     Random _picker = new Random(1);
@@ -72,9 +77,9 @@ public class SampleXmlUtil {
      * After:
      * <theElement><lots of stuff/>^</theElement>
      */
-    private void createSampleForType(SchemaType stype, XmlCursor xmlc) {
+    private Map<String, TypeInfo> createSampleForType(SchemaType stype, XmlCursor xmlc) {
         if (_typeStack.contains(stype)) {
-            return;
+            return this.types;
         }
 
         _typeStack.add(stype);
@@ -82,7 +87,7 @@ public class SampleXmlUtil {
         try {
             if (stype.isSimpleType() || stype.isURType()) {
                 processSimpleType(stype, xmlc);
-                return;
+                return this.types;
             }
 
             // complex Type
@@ -115,6 +120,7 @@ public class SampleXmlUtil {
         } finally {
             _typeStack.remove(_typeStack.size() - 1);
         }
+        return this.types;
     }
 
     private void processSimpleType(SchemaType stype, XmlCursor xmlc) {
@@ -123,126 +129,7 @@ public class SampleXmlUtil {
     }
 
     private String sampleDataForSimpleType(SchemaType sType) {
-        if (XmlObject.type.equals(sType)) {
-            return "anyType";
-        }
-
-        if (XmlAnySimpleType.type.equals(sType)) {
-            return "anySimpleType";
-        }
-
-        if (sType.getSimpleVariety() == SchemaType.LIST) {
-            SchemaType itemType = sType.getListItemType();
-            StringBuilder sb = new StringBuilder();
-            int length = pickLength(sType);
-            if (length > 0) {
-                sb.append(sampleDataForSimpleType(itemType));
-            }
-            for (int i = 1; i < length; i += 1) {
-                sb.append(' ');
-                sb.append(sampleDataForSimpleType(itemType));
-            }
-            return sb.toString();
-        }
-
-        if (sType.getSimpleVariety() == SchemaType.UNION) {
-            SchemaType[] possibleTypes = sType.getUnionConstituentTypes();
-            if (possibleTypes.length == 0) {
-                return "";
-            }
-            return sampleDataForSimpleType(possibleTypes[pick(possibleTypes.length)]);
-        }
-
-        XmlAnySimpleType[] enumValues = sType.getEnumerationValues();
-        if (enumValues != null && enumValues.length > 0) {
-            return enumValues[pick(enumValues.length)].getStringValue();
-        }
-
-        switch (sType.getPrimitiveType().getBuiltinTypeCode()) {
-            default:
-            case SchemaType.BTC_NOT_BUILTIN:
-                return "";
-
-            case SchemaType.BTC_ANY_TYPE:
-            case SchemaType.BTC_ANY_SIMPLE:
-                return "anything";
-
-            case SchemaType.BTC_BOOLEAN:
-                return pick(2) == 0 ? "true" : "false";
-
-            case SchemaType.BTC_BASE_64_BINARY: {
-                byte[] v = formatToLength(pick(WORDS), sType).getBytes(StandardCharsets.UTF_8);
-                return Base64.getEncoder().encodeToString(v);
-            }
-
-            case SchemaType.BTC_HEX_BINARY:
-                return HexBin.encode(formatToLength(pick(WORDS), sType));
-
-            case SchemaType.BTC_ANY_URI:
-                return formatToLength("http://www." + pick(DNS1) + "." + pick(DNS2) + "/" + pick(WORDS) + "/" + pick(WORDS), sType);
-
-            case SchemaType.BTC_QNAME:
-                return formatToLength("qname", sType);
-
-            case SchemaType.BTC_NOTATION:
-                return formatToLength("notation", sType);
-
-            case SchemaType.BTC_FLOAT:
-                return "1.5E2";
-            case SchemaType.BTC_DOUBLE:
-                return "1.051732E7";
-            case SchemaType.BTC_DECIMAL:
-                switch (closestBuiltin(sType).getBuiltinTypeCode()) {
-                    case SchemaType.BTC_SHORT:
-                        return formatDecimal("1", sType);
-                    case SchemaType.BTC_UNSIGNED_SHORT:
-                        return formatDecimal("5", sType);
-                    case SchemaType.BTC_BYTE:
-                        return formatDecimal("2", sType);
-                    case SchemaType.BTC_UNSIGNED_BYTE:
-                        return formatDecimal("6", sType);
-                    case SchemaType.BTC_INT:
-                        return formatDecimal("3", sType);
-                    case SchemaType.BTC_UNSIGNED_INT:
-                        return formatDecimal("7", sType);
-                    case SchemaType.BTC_LONG:
-                        return formatDecimal("10", sType);
-                    case SchemaType.BTC_UNSIGNED_LONG:
-                        return formatDecimal("11", sType);
-                    case SchemaType.BTC_INTEGER:
-                        return formatDecimal("100", sType);
-                    case SchemaType.BTC_NON_POSITIVE_INTEGER:
-                        return formatDecimal("-200", sType);
-                    case SchemaType.BTC_NEGATIVE_INTEGER:
-                        return formatDecimal("-201", sType);
-                    case SchemaType.BTC_NON_NEGATIVE_INTEGER:
-                        return formatDecimal("200", sType);
-                    case SchemaType.BTC_POSITIVE_INTEGER:
-                        return formatDecimal("201", sType);
-                    default:
-                    case SchemaType.BTC_DECIMAL:
-                        return formatDecimal("1000.00", sType);
-                }
-
-            case SchemaType.BTC_STRING: {
-                String result = closestBuiltin(sType).getBuiltinTypeCode() == SchemaType.BTC_TOKEN ? "token" : "string";
-
-                return formatToLength(result, sType);
-            }
-
-            case SchemaType.BTC_DURATION:
-                return formatDuration(sType);
-
-            case SchemaType.BTC_DATE_TIME:
-            case SchemaType.BTC_TIME:
-            case SchemaType.BTC_DATE:
-            case SchemaType.BTC_G_YEAR_MONTH:
-            case SchemaType.BTC_G_YEAR:
-            case SchemaType.BTC_G_MONTH_DAY:
-            case SchemaType.BTC_G_DAY:
-            case SchemaType.BTC_G_MONTH:
-                return formatDate(sType);
-        }
+        return UUID.randomUUID().toString();
     }
 
     // a bit from the Aenid
@@ -953,10 +840,47 @@ public class SampleXmlUtil {
         xmlc.toPrevToken();
         // -> <elem>stuff^</elem>
 
-        createSampleForType(element.getType(), xmlc);
+        SchemaType elementType = element.getType();
+        createSampleForType(elementType, xmlc);
         // -> <elem>stuff</elem>^
+        if (elementType.isSimpleType() || elementType.isURType() ||
+                elementType.getContentType() == SchemaType.SIMPLE_CONTENT){
+            String uuid = xmlc.getDomNode().getFirstChild().getNodeValue();
+            String type = elementType.getPrimitiveType().getShortJavaName();
+            QName qName = element.getName();
+            String description = retrieveDescription(element);
+
+            TypeInfo typeInfo = new TypeInfo();
+            typeInfo.setUuid(uuid);
+            typeInfo.setDescription(description);
+            typeInfo.setqName(qName);
+            typeInfo.setType(type);
+            types.put(uuid, typeInfo);
+            //todo
+
+        }
+
         xmlc.toNextToken();
 
+    }
+
+    private String retrieveDescription(SchemaLocalElement element){
+        SchemaAnnotation annotation = element.getAnnotation();
+        if (annotation == null) return null;
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(annotation.getUserInformation()).forEach(xmlObject -> {
+            Node docInfo = xmlObject.getDomNode();
+            NodeList list = docInfo.getChildNodes();
+            for (int i = 0; i < list.getLength(); i++){
+                Node c = list.item(i);
+                if (c.getNodeType() == Node.TEXT_NODE) {
+                    String str = c.getNodeValue();
+                    sb.append(str.trim());
+                    break;
+                }
+            }
+        });
+        return sb.length() != 0 ? sb.toString() : null;
     }
 
     private static String formatQName(XmlCursor xmlc, QName qName) {
