@@ -15,9 +15,9 @@ import java.util.HashMap;
 
 public class XslTransformer {
 
-    public Document transform(Document document) throws IOException, TransformerException {
+    public Document transform(Document document, String templatePath) throws IOException, TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        InputStream inputStream = ClassLoader.getSystemResource("templates/response.xsl").openStream();
+        InputStream inputStream = ClassLoader.getSystemResource(templatePath).openStream();
         try(inputStream){
             Source xslt = new StreamSource(inputStream);
             Source data = new DOMSource(document);

@@ -3,6 +3,7 @@ package sx.microservices.schema;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
 
 import java.util.Map;
@@ -22,6 +23,7 @@ public class SchemaBean {
     @Override
     public String toString() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
             return objectMapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {

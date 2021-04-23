@@ -12,8 +12,11 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 
 public class XmlInstanceGenerator {
@@ -24,20 +27,25 @@ public class XmlInstanceGenerator {
         this.converter = converter;
     }
 
-    public XmlInstance createInstance() throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
-        String elementName = "PensionsOnDateResponse";
+    public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
 
-        String schema = getSchema("schema/schema.xsd");
-        String schema1 = getSchema("schema/commons/benefits-common-1.0.0.xsd");
-        String schema2 = getSchema("schema/commons/smev-supplementary-commons-1.0.1.xsd");
-
+        String schema = ClassLoader.getSystemResource(schemaPath).getFile();
+        Path path = new File(schema).toPath();
+        String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
+                .map(p -> {
+                    try {
+                        return Files.readString(p);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toArray(String[]::new);
 
         SchemaInstanceGenerator.Xsd2InstOptions options = new SchemaInstanceGenerator.Xsd2InstOptions();
         options.setNetworkDownloads(false);
         options.setNopvr(false);
         options.setNoupa(true);
 
-        String[] schemas = {schema, schema1, schema2};
         XmlInstance xmlInstance = SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
         Document document = converter.toDocument(xmlInstance.getXml());
         xmlInstance.setDocument(document);
