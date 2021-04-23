@@ -846,7 +846,12 @@ public class SampleXmlUtil {
         if (elementType.isSimpleType() || elementType.isURType() ||
                 elementType.getContentType() == SchemaType.SIMPLE_CONTENT){
             String uuid = xmlc.getDomNode().getFirstChild().getNodeValue();
-            String type = elementType.getPrimitiveType().getShortJavaName();
+            String type;
+            if (elementType.isNumeric()){
+                type = elementType.getShortJavaName();
+            }else {
+                type = elementType.getPrimitiveType().getShortJavaName();
+            }
             QName qName = element.getName();
             String description = retrieveDescription(element);
 

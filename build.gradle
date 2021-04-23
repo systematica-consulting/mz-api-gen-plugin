@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '5.0.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     compile group: 'xalan', name: 'xalan', version: '2.7.2'
     compile group: 'org.json', name: 'json', version: '20200518'
 
