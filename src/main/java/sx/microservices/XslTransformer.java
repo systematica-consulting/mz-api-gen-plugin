@@ -8,10 +8,14 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class XslTransformer {
 
@@ -27,6 +31,28 @@ public class XslTransformer {
             transformer.transform(data, result);
             return (Document) result.getNode();
         }
+    }
 
+    public Map<String, String> transformToMap(Document document) throws IOException, TransformerException{
+        TransformerFactory factory = TransformerFactory.newInstance();
+        InputStream inputStream = ClassLoader.getSystemResource("toMapTemplate.xsl").openStream();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try(inputStream){
+            Source xslt = new StreamSource(inputStream);
+            Source data = new DOMSource(document);
+            StreamResult result = new StreamResult(baos);
+            Transformer transformer = factory.newTransformer(xslt);
+            transformer.transform(data, result);
+        }
+        String res = new String(baos.toByteArray());
+        Map<String, String> result = new HashMap<>();
+        Arrays.stream(res.split("\\r?\\n")).forEach(s -> {
+            String[] parts = s.split("=");
+            if (parts.length == 2){
+                result.put(parts[0], parts[1]);
+            }
+        });
+
+        return result;
     }
 }
