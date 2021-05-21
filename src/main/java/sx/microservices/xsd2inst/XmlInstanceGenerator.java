@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
 public class XmlInstanceGenerator {
@@ -29,8 +30,7 @@ public class XmlInstanceGenerator {
 
     public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
 
-        String schema = ClassLoader.getSystemResource(schemaPath).getFile();
-        Path path = new File(schema).toPath();
+        Path path = Paths.get(schemaPath);
         String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
                 .map(p -> {
                     try {

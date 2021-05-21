@@ -19,23 +19,6 @@ gradlePlugin {
     }
 }
 
-
-/*apiGenerator{
-    response{
-        template = "templates/response.xsl"
-        element = "PensionsOnDateResponse"
-        schema= "schema/schema.xsd"
-        out = "response.json"
-    }
-    request{
-        request = "request-our.xml"
-        template = "templates/request.xsl"
-        element = "PensionsOnDateRequest"
-        schema = "schema/schema.xsd"
-        out = "request.json"
-    }
-}*/
-
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
@@ -55,4 +38,18 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 artifacts {
     archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://nexus.devsun.ru/repository/releases/devsun/") {
+                authentication(userName: System.env.NEXUS_USER, password: System.env.NEXUS_PASS)
+            }
+
+            snapshotRepository(url: "https://nexus.devsun.ru/repository/snapshots/devsun/") {
+                authentication(userName: System.env.NEXUS_USER, password: System.env.NEXUS_PASS)
+            }
+        }
+    }
 }

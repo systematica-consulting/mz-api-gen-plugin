@@ -18,8 +18,11 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,6 +57,7 @@ public class ApiPlugin implements Plugin<Project> {
 
         SchemaBean response = jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
 
+        Files.createDirectories(Paths.get(config.getOut()).getParent());
         PrintStream responseStream = new PrintStream(config.getOut());
         responseStream.print(response.toString());
         responseStream.close();
@@ -69,7 +73,7 @@ public class ApiPlugin implements Plugin<Project> {
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
 
 
-        InputStream inputStream = ClassLoader.getSystemResource(config.getRequest()).openStream();
+        InputStream inputStream = new FileInputStream(config.getRequest());
         byte[] request;
         try(inputStream){
             request = inputStream.readAllBytes();
@@ -97,6 +101,7 @@ public class ApiPlugin implements Plugin<Project> {
         SchemaBean schema = jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
 
 
+        Files.createDirectories(Paths.get(config.getOut()).getParent());
         PrintStream requestStream = new PrintStream(config.getOut());
         requestStream.print(schema);
         requestStream.close();

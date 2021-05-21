@@ -11,6 +11,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -21,7 +22,8 @@ public class XslTransformer {
 
     public Document transform(Document document, String templatePath) throws IOException, TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        InputStream inputStream = ClassLoader.getSystemResource(templatePath).openStream();
+
+        InputStream inputStream = new FileInputStream(templatePath);
         try(inputStream){
             Source xslt = new StreamSource(inputStream);
             Source data = new DOMSource(document);
@@ -35,7 +37,7 @@ public class XslTransformer {
 
     public Map<String, String> transformToMap(Document document) throws IOException, TransformerException{
         TransformerFactory factory = TransformerFactory.newInstance();
-        InputStream inputStream = ClassLoader.getSystemResource("toMapTemplate.xsl").openStream();
+        InputStream inputStream = getClass().getClassLoader().getResource("toMapTemplate.xsl").openStream();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try(inputStream){
             Source xslt = new StreamSource(inputStream);
