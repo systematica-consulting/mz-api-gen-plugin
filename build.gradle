@@ -1,5 +1,6 @@
 plugins {
-    id 'java'
+    id 'maven'
+    id 'java-gradle-plugin'
 }
 
 group 'sx.microservices'
@@ -8,6 +9,32 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'mz-api-gen-plugin'
+            implementationClass = 'sx.microservices.ApiPlugin'
+        }
+    }
+}
+
+
+/*apiGenerator{
+    response{
+        template = "templates/response.xsl"
+        element = "PensionsOnDateResponse"
+        schema= "schema/schema.xsd"
+        out = "response.json"
+    }
+    request{
+        request = "request-our.xml"
+        template = "templates/request.xsl"
+        element = "PensionsOnDateRequest"
+        schema = "schema/schema.xsd"
+        out = "request.json"
+    }
+}*/
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
@@ -19,4 +46,13 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20200518'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
 }

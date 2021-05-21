@@ -1,5 +1,9 @@
 package sx.microservices;
 
+import lombok.SneakyThrows;
+import org.gradle.api.Plugin;
+import org.gradle.api.Project;
+import org.gradle.api.plugins.ExtensionAware;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -20,48 +24,44 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Main {
+public class ApiPlugin implements Plugin<Project> {
 
-    public static void main(String[] args) throws Exception {
-        ResponseConfig responseConfig = new ResponseConfig();
-        responseConfig.template = "templates/response.xsl";
-        responseConfig.element = "PensionsOnDateResponse";
-        responseConfig.schema= "schema/schema.xsd";
-        responseConfig.out = "response.json";
-
-        RequestConfig requestConfig = new RequestConfig();
-        requestConfig.request = "request-our.xml";
-        requestConfig.template = "templates/request.xsl";
-        requestConfig.element = "PensionsOnDateRequest";
-        requestConfig.schema = "schema/schema.xsd";
-        requestConfig.out = "request.json";
-
-        generateResponse(responseConfig);
-        generateRequest(requestConfig);
+    @Override
+    public void apply(Project project) {
+        Config config = project.getExtensions().create("apiGenerator", Config.class);
+        RequestConfig requestConfig = ((ExtensionAware) config).getExtensions().create("request", RequestConfig.class);
+        ResponseConfig responseConfig = ((ExtensionAware) config).getExtensions().create("response", ResponseConfig.class);
+        project.task("generateApi").doLast(task -> {
+            System.out.println("Hello Gradle!!");
+            generateResponse(responseConfig);
+            generateRequest(requestConfig);
+        });
     }
 
 
-    private static void generateResponse(ResponseConfig config) throws Exception{
+    @SneakyThrows
+    private static void generateResponse(ResponseConfig config){
         Converter converter = new Converter();
         XslTransformer transformer = new XslTransformer();
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
         JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
-        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.schema, config.element);
+        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
-        Document transformed = transformer.transform(xmlInstance.getDocument(), config.template);
+        Document transformed = transformer.transform(xmlInstance.getDocument(), config.getTemplate());
 
         JSONObject jsonObject = converter.toJson(transformed);
 
         SchemaBean response = jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
 
-        PrintStream responseStream = new PrintStream(config.out);
+        PrintStream responseStream = new PrintStream(config.getOut());
         responseStream.print(response.toString());
         responseStream.close();
 
     }
 
-    private static void generateRequest(RequestConfig config) throws Exception{
+    @SneakyThrows
+    private static void generateRequest(RequestConfig config){
 
         Converter converter = new Converter();
         JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
@@ -69,7 +69,7 @@ public class Main {
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
 
 
-        InputStream inputStream = ClassLoader.getSystemResource(config.request).openStream();
+        InputStream inputStream = ClassLoader.getSystemResource(config.getRequest()).openStream();
         byte[] request;
         try(inputStream){
             request = inputStream.readAllBytes();
@@ -78,10 +78,10 @@ public class Main {
         Document document = converter.toDocument(new String(request));
         setGuids(document);
 
-        Document transformed = transformer.transform(document, config.template);
+        Document transformed = transformer.transform(document, config.getTemplate());
 
 
-        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.schema, config.element);
+        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
 
         Map<String, String> requestMap = transformer.transformToMap(transformed);
@@ -97,7 +97,7 @@ public class Main {
         SchemaBean schema = jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
 
 
-        PrintStream requestStream = new PrintStream(config.out);
+        PrintStream requestStream = new PrintStream(config.getOut());
         requestStream.print(schema);
         requestStream.close();
     }
@@ -126,21 +126,6 @@ public class Main {
         }
     }
 
-
-    static class ResponseConfig{
-        private String template;
-        private String element;
-        private String schema;
-        private String out;
-    }
-
-    static class RequestConfig{
-        private String template;
-        private String element;
-        private String schema;
-        private String request;
-        private String out;
-    }
 
 }
 
