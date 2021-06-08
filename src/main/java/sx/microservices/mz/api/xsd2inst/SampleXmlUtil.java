@@ -842,34 +842,39 @@ public class SampleXmlUtil {
 
         SchemaType elementType = element.getType();
         createSampleForType(elementType, xmlc);
-        // -> <elem>stuff</elem>^
+
         if (elementType.isSimpleType() || elementType.isURType() ||
                 elementType.getContentType() == SchemaType.SIMPLE_CONTENT){
             String uuid = xmlc.getDomNode().getFirstChild().getNodeValue();
-            String type;
-            if (elementType.isNumeric()){
-                type = elementType.getShortJavaName();
-            }else {
-                type = elementType.getPrimitiveType().getShortJavaName();
-            }
-            QName qName = element.getName();
-            String description = retrieveDescription(element);
-
-            TypeInfo typeInfo = new TypeInfo();
-            typeInfo.setUuid(uuid);
-            typeInfo.setDescription(description);
-            typeInfo.setqName(qName);
-            typeInfo.setType(type);
-            types.put(uuid, typeInfo);
-            //todo
-
+            putType(uuid, elementType, element);
         }
 
         xmlc.toNextToken();
 
     }
 
-    private String retrieveDescription(SchemaLocalElement element){
+    private void putType(String uuid, SchemaType elementType, SchemaAnnotated element){
+        String type;
+        if (elementType.isNumeric()){
+            type = elementType.getShortJavaName() != null ? elementType.getShortJavaName()
+                    : elementType.getBaseType().getShortJavaName();
+        }else {
+            type = elementType.getPrimitiveType().getShortJavaName();
+        }
+        if (type == null){
+            System.out.println("ds");
+        }
+
+        String description = retrieveDescription(element);
+
+        TypeInfo typeInfo = new TypeInfo();
+        typeInfo.setUuid(uuid);
+        typeInfo.setDescription(description);
+        typeInfo.setType(type);
+        types.put(uuid, typeInfo);
+    }
+
+    private String retrieveDescription(SchemaAnnotated element){
         SchemaAnnotation annotation = element.getAnnotation();
         if (annotation == null) return null;
         StringBuilder sb = new StringBuilder();
@@ -918,8 +923,8 @@ public class SampleXmlUtil {
             }
         }
 
-        SchemaProperty[] attrProps = stype.getAttributeProperties();
-        for (SchemaProperty attr : attrProps) {
+        SchemaLocalAttribute[] attributes = stype.getAttributeModel().getAttributes();
+        for (SchemaLocalAttribute attr : attributes) {
             if (_soapEnc) {
                 if (SKIPPED_SOAP_ATTRS.contains(attr.getName())) {
                     continue;
@@ -933,8 +938,9 @@ public class SampleXmlUtil {
                 }
             }
             String defaultValue = attr.getDefaultText();
-            xmlc.insertAttributeWithValue(attr.getName(), defaultValue == null ?
-                sampleDataForSimpleType(attr.getType()) : defaultValue);
+            String uuid = sampleDataForSimpleType(attr.getType());
+            xmlc.insertAttributeWithValue(attr.getName(),uuid);
+            putType(uuid, attr.getType(), attr);
         }
     }
 

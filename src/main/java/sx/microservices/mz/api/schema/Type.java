@@ -12,10 +12,12 @@ enum Type {
             case "XmlString":
                 return string;
             case "XmlDecimal":
+            case "XmlGYear":
                 return number;
             case "XmlDate":
                 return date;
             case "XmlInt":
+            case "XmlInteger":
                 return integer;
             case "XmlBoolean":
                 return _boolean;

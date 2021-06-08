@@ -3,35 +3,35 @@
   "type" : "object",
   "properties" : {
     "SNILS" : {
-      "title" : "",
+      "title" : "Страховой номер индивидуального лицевого счета",
       "type" : "string"
     },
     "FamilyName" : {
-      "title" : "",
+      "title" : "Фамилия",
       "type" : "string"
     },
     "INNFL" : {
-      "title" : "",
+      "title" : "ИНН физического лица",
       "type" : "string"
     },
     "FirstName" : {
-      "title" : "",
+      "title" : "Имя",
       "type" : "string"
     },
     "reqOtchetGod" : {
-      "title" : "",
-      "type" : "string"
+      "title" : "Отчетный налоговый периодГод в формате ГГГГ",
+      "type" : "number"
     },
     "guid" : {
-      "title" : "",
+      "title" : "Идентификатор запроса, сформированный запрашивающей стороной",
       "type" : "string"
     },
     "SeriesNumber" : {
-      "title" : "",
+      "title" : "Серия и номер документа, удостоверяющего личность",
       "type" : "string"
     },
     "Patronymic" : {
-      "title" : "",
+      "title" : "Отчество",
       "type" : "string"
     },
     "DocumentCode" : {
@@ -39,14 +39,14 @@
       "type" : "object",
       "properties" : {
         "code" : {
-          "title" : "",
+          "title" : "Код вида документа, удостоверяющего личность",
           "type" : "string"
         }
       }
     },
     "DataRozhd" : {
-      "title" : "",
-      "type" : "string"
+      "title" : "Дата рождения",
+      "type" : "date"
     }
   }
 }

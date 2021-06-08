@@ -17,39 +17,39 @@
             "type" : "object",
             "properties" : {
               "SvNAFLFIOPatronymic" : {
-                "title" : "",
+                "title" : "Отчество",
                 "type" : "string"
               },
               "FamilyName" : {
-                "title" : "",
+                "title" : "Фамилия",
                 "type" : "string"
               },
               "INNFL" : {
-                "title" : "",
+                "title" : "ИНН  физического лица",
                 "type" : "string"
               },
               "FirstName" : {
-                "title" : "",
+                "title" : "Имя",
                 "type" : "string"
               },
               "INNYUL" : {
-                "title" : "",
+                "title" : "ИНН организации",
                 "type" : "string"
               },
               "SvNAFLINNFL" : {
-                "title" : "",
+                "title" : "ИНН физического лица",
                 "type" : "string"
               },
               "SvNAFLFIOFamilyName" : {
-                "title" : "",
+                "title" : "Фамилия",
                 "type" : "string"
               },
               "KPP" : {
-                "title" : "",
+                "title" : "КПП",
                 "type" : "string"
               },
               "NaimOrg" : {
-                "title" : "",
+                "title" : "Наименование организации",
                 "type" : "string"
               },
               "SvedDoh2NDFL" : {
@@ -63,8 +63,8 @@
                       "type" : "object",
                       "properties" : {
                         "NalBaza" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Налоговая база",
+                          "type" : "number"
                         },
                         "SvSumDoh" : {
                           "title" : "",
@@ -77,16 +77,16 @@
                                 "type" : "object",
                                 "properties" : {
                                   "KodDohod" : {
-                                    "title" : "",
+                                    "title" : "Код дохода",
                                     "type" : "string"
                                   },
                                   "Mesyac" : {
-                                    "title" : "",
+                                    "title" : "Месяц",
                                     "type" : "string"
                                   },
                                   "SumDohod" : {
-                                    "title" : "",
-                                    "type" : "string"
+                                    "title" : "Сумма дохода",
+                                    "type" : "number"
                                   }
                                 }
                               }
@@ -94,12 +94,12 @@
                           }
                         },
                         "SumDohObsh" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Общая сумма дохода",
+                          "type" : "number"
                         },
                         "Stavka" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Ставка налога",
+                          "type" : "integer"
                         }
                       }
                     }
@@ -117,16 +117,16 @@
                       "type" : "object",
                       "properties" : {
                         "NalBaza" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Налоговая база",
+                          "type" : "number"
                         },
                         "SumDohObsh" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Общая сумма дохода",
+                          "type" : "number"
                         },
                         "Stavka" : {
-                          "title" : "",
-                          "type" : "string"
+                          "title" : "Налоговая ставка (%)",
+                          "type" : "integer"
                         }
                       }
                     }
@@ -134,24 +134,24 @@
                 }
               },
               "SvNAFLFIOFirstName" : {
-                "title" : "",
+                "title" : "Имя",
                 "type" : "string"
               },
               "SeriesNumber" : {
-                "title" : "",
+                "title" : "Серия и номер документа, удостоверяющего личность",
                 "type" : "string"
               },
               "Patronymic" : {
-                "title" : "",
+                "title" : "Отчество",
                 "type" : "string"
               },
               "DocumentCode" : {
-                "title" : "",
+                "title" : "Код вида документа, удостоверяющего личность",
                 "type" : "string"
               },
               "DataRozhd" : {
-                "title" : "",
-                "type" : "string"
+                "title" : "Дата рождения",
+                "type" : "date"
               }
             }
           }
@@ -159,12 +159,12 @@
       }
     },
     "IdZapros" : {
-      "title" : "",
+      "title" : "Идентификатор запроса, сформированный запрашивающей стороной",
       "type" : "string"
     },
     "OtchetGod" : {
-      "title" : "",
-      "type" : "string"
+      "title" : "Отчетный налоговый периодГод в формате ГГГГ",
+      "type" : "number"
     }
   }
 }

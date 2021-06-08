@@ -58,13 +58,6 @@ public class XmlInstanceGenerator {
         return xmlInstance;
     }
 
-    private String getSchema(String path) throws IOException {
-        InputStream inputStream = ClassLoader.getSystemResource(path).openStream();
-        try(inputStream){
-            return new String(inputStream.readAllBytes());
-        }
-    }
-
 
     private void replaceComments(Document document) throws XPathExpressionException {
         Set<String> plentyNodes = Set.of("1 or more repetitions:", "Zero or more repetitions:");
