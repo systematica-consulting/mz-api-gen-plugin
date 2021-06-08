@@ -1,4 +1,4 @@
-package sx.microservices.xsd2inst;
+package sx.microservices.mz.api.xsd2inst;
 
 import org.w3c.dom.Document;
 

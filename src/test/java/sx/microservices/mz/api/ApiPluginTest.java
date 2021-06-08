@@ -1,4 +1,4 @@
-package sx.microservices;
+package sx.microservices.mz.api;
 
 import org.gradle.api.Project;
 import org.gradle.testfixtures.ProjectBuilder;

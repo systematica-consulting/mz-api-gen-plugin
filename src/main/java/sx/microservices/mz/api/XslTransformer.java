@@ -1,4 +1,4 @@
-package sx.microservices;
+package sx.microservices.mz.api;
 
 import org.w3c.dom.Document;
 
@@ -11,7 +11,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;

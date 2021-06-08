@@ -1,4 +1,4 @@
-package sx.microservices;
+package sx.microservices.mz.api;
 
 import lombok.SneakyThrows;
 import org.gradle.api.Plugin;
@@ -8,17 +8,16 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sx.microservices.schema.JsonSchemaGenerator;
-import sx.microservices.schema.SchemaBean;
-import sx.microservices.xsd2inst.TypeInfo;
-import sx.microservices.xsd2inst.XmlInstance;
-import sx.microservices.xsd2inst.XmlInstanceGenerator;
+import sx.microservices.mz.api.schema.JsonSchemaGenerator;
+import sx.microservices.mz.api.schema.SchemaBean;
+import sx.microservices.mz.api.xsd2inst.TypeInfo;
+import sx.microservices.mz.api.xsd2inst.XmlInstance;
+import sx.microservices.mz.api.xsd2inst.XmlInstanceGenerator;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;

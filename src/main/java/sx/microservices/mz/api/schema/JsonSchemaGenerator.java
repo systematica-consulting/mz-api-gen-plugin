@@ -1,8 +1,8 @@
-package sx.microservices.schema;
+package sx.microservices.mz.api.schema;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import sx.microservices.xsd2inst.TypeInfo;
+import sx.microservices.mz.api.xsd2inst.TypeInfo;
 
 import java.util.HashMap;
 import java.util.Map;

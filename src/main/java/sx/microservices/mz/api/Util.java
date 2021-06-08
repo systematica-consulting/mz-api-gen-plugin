@@ -1,4 +1,4 @@
-package sx.microservices;
+package sx.microservices.mz.api;
 
 import lombok.SneakyThrows;
 

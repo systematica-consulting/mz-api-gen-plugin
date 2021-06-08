@@ -13,7 +13,7 @@
  *  limitations under the License.
  */
 
-package sx.microservices.xsd2inst;
+package sx.microservices.mz.api.xsd2inst;
 
 import org.apache.xmlbeans.*;
 

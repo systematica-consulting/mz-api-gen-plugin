@@ -14,7 +14,7 @@ gradlePlugin {
     plugins {
         simplePlugin {
             id = 'mz-api-gen-plugin'
-            implementationClass = 'sx.microservices.ApiPlugin'
+            implementationClass = 'sx.microservices.mz.api.ApiPlugin'
         }
     }
 }
