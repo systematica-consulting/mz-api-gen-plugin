@@ -1,0 +1,30 @@
+{
+  "title" : "Запрос",
+  "type" : "object",
+  "properties" : {
+    "reqFamilyName" : {
+      "title" : "Фамилия",
+      "type" : "string"
+    },
+    "reqSnils" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "reqFirstName" : {
+      "title" : "Имя",
+      "type" : "string"
+    },
+    "reqGender" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "reqPatronymic" : {
+      "title" : "Отчество",
+      "type" : "string"
+    },
+    "reqBirthDate" : {
+      "title" : "",
+      "type" : "string"
+    }
+  }
+}

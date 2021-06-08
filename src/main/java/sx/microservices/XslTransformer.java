@@ -23,7 +23,7 @@ public class XslTransformer {
     public Document transform(Document document, String templatePath) throws IOException, TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
 
-        InputStream inputStream = new FileInputStream(templatePath);
+        InputStream inputStream = Util.getFileInputStream(templatePath);
         try(inputStream){
             Source xslt = new StreamSource(inputStream);
             Source data = new DOMSource(document);

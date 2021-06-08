@@ -9,4 +9,8 @@ class RequestConfig {
     private String schema;
     private String request;
     private String out;
+
+    public boolean isFull(){
+        return template != null && element != null && schema != null && request != null && out != null;
+    }
 }

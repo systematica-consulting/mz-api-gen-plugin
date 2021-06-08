@@ -18,7 +18,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
@@ -35,15 +34,20 @@ public class ApiPlugin implements Plugin<Project> {
         RequestConfig requestConfig = ((ExtensionAware) config).getExtensions().create("request", RequestConfig.class);
         ResponseConfig responseConfig = ((ExtensionAware) config).getExtensions().create("response", ResponseConfig.class);
         project.task("generateApi").doLast(task -> {
-            System.out.println("Hello Gradle!!");
-            generateResponse(responseConfig);
-            generateRequest(requestConfig);
+            if (responseConfig.isFull()) {
+                SchemaBean schemaBean = generateResponse(responseConfig);
+                print(schemaBean, responseConfig.getOut());
+            }
+            if (requestConfig.isFull()) {
+                SchemaBean schemaBean = generateRequest(requestConfig);
+                print(schemaBean, requestConfig.getOut());
+            }
         });
     }
 
 
     @SneakyThrows
-    private static void generateResponse(ResponseConfig config){
+    public static SchemaBean generateResponse(ResponseConfig config){
         Converter converter = new Converter();
         XslTransformer transformer = new XslTransformer();
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
@@ -55,29 +59,18 @@ public class ApiPlugin implements Plugin<Project> {
 
         JSONObject jsonObject = converter.toJson(transformed);
 
-        SchemaBean response = jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
-
-        Files.createDirectories(Paths.get(config.getOut()).getParent());
-        PrintStream responseStream = new PrintStream(config.getOut());
-        responseStream.print(response.toString());
-        responseStream.close();
-
+        return jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
     }
 
     @SneakyThrows
-    private static void generateRequest(RequestConfig config){
+    public static SchemaBean generateRequest(RequestConfig config){
 
         Converter converter = new Converter();
         JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
         XslTransformer transformer = new XslTransformer();
         XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
 
-
-        InputStream inputStream = new FileInputStream(config.getRequest());
-        byte[] request;
-        try(inputStream){
-            request = inputStream.readAllBytes();
-        }
+        byte[] request = Util.getFileContent(config.getRequest());
 
         Document document = converter.toDocument(new String(request));
         setGuids(document);
@@ -98,11 +91,15 @@ public class ApiPlugin implements Plugin<Project> {
 
 
         JSONObject jsonObject = converter.toJson(document);
-        SchemaBean schema = jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
 
+        return jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
 
-        Files.createDirectories(Paths.get(config.getOut()).getParent());
-        PrintStream requestStream = new PrintStream(config.getOut());
+    }
+
+    @SneakyThrows
+    private static void print(SchemaBean schema, String path){
+        Files.createDirectories(Paths.get(path).getParent());
+        PrintStream requestStream = new PrintStream(path);
         requestStream.print(schema);
         requestStream.close();
     }

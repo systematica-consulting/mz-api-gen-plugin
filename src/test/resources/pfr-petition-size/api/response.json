@@ -1,0 +1,108 @@
+{
+  "title" : "Ответ",
+  "type" : "object",
+  "properties" : {
+    "FamilyName" : {
+      "title" : "Фамилия",
+      "type" : "string"
+    },
+    "FirstName" : {
+      "title" : "Имя",
+      "type" : "string"
+    },
+    "TotalPaymentsSum" : {
+      "title" : "",
+      "type" : "number"
+    },
+    "messageId" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "Payments" : {
+      "title" : "",
+      "type" : "object",
+      "properties" : {
+        "Payment" : {
+          "type" : "array",
+          "items" : {
+            "title" : "",
+            "type" : "object",
+            "properties" : {
+              "Type" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "Payments" : {
+                "title" : "",
+                "type" : "object",
+                "properties" : {
+                  "Payment" : {
+                    "type" : "array",
+                    "items" : {
+                      "title" : "",
+                      "type" : "object",
+                      "properties" : {
+                        "Type" : {
+                          "title" : "",
+                          "type" : "string"
+                        },
+                        "Sum" : {
+                          "title" : "",
+                          "type" : "number"
+                        },
+                        "Base" : {
+                          "title" : "",
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Sum" : {
+                "title" : "",
+                "type" : "number"
+              },
+              "Base" : {
+                "title" : "",
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ActualDate" : {
+      "title" : "",
+      "type" : "date"
+    },
+    "Gender" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "ExistData" : {
+      "title" : "",
+      "type" : "boolean"
+    },
+    "Snils" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "AppDate" : {
+      "title" : "",
+      "type" : "date"
+    },
+    "Patronymic" : {
+      "title" : "Отчество",
+      "type" : "string"
+    },
+    "NumberOfPayments" : {
+      "title" : "",
+      "type" : "integer"
+    },
+    "BirthDate" : {
+      "title" : "",
+      "type" : "date"
+    }
+  }
+}

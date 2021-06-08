@@ -31,6 +31,10 @@ public class XmlInstanceGenerator {
     public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
 
         Path path = Paths.get(schemaPath);
+        if (!Files.exists(path)){
+            String schema = ClassLoader.getSystemResource(schemaPath).getFile();
+            path = new File(schema).toPath();
+        }
         String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
                 .map(p -> {
                     try {
