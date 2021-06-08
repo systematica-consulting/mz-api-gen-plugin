@@ -1,0 +1,52 @@
+{
+  "title" : "Запрос",
+  "type" : "object",
+  "properties" : {
+    "SNILS" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "FamilyName" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "INNFL" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "FirstName" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "reqOtchetGod" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "guid" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "SeriesNumber" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "Patronymic" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "DocumentCode" : {
+      "title" : "",
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "title" : "",
+          "type" : "string"
+        }
+      }
+    },
+    "DataRozhd" : {
+      "title" : "",
+      "type" : "string"
+    }
+  }
+}

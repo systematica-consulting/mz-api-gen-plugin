@@ -1,0 +1,170 @@
+{
+  "title" : "Ответ",
+  "type" : "object",
+  "properties" : {
+    "messageId" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "DohFLNA" : {
+      "title" : "",
+      "type" : "object",
+      "properties" : {
+        "fs3FNSDohflnaDohFLNA" : {
+          "type" : "array",
+          "items" : {
+            "title" : "",
+            "type" : "object",
+            "properties" : {
+              "SvNAFLFIOPatronymic" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "FamilyName" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "INNFL" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "FirstName" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "INNYUL" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "SvNAFLINNFL" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "SvNAFLFIOFamilyName" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "KPP" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "NaimOrg" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "SvedDoh2NDFL" : {
+                "title" : "",
+                "type" : "object",
+                "properties" : {
+                  "fs3FNSDohflnaSvedDoh2NDFL" : {
+                    "type" : "array",
+                    "items" : {
+                      "title" : "",
+                      "type" : "object",
+                      "properties" : {
+                        "NalBaza" : {
+                          "title" : "",
+                          "type" : "string"
+                        },
+                        "SvSumDoh" : {
+                          "title" : "",
+                          "type" : "object",
+                          "properties" : {
+                            "fs3FNSDohflnaSvSumDoh" : {
+                              "type" : "array",
+                              "items" : {
+                                "title" : "",
+                                "type" : "object",
+                                "properties" : {
+                                  "KodDohod" : {
+                                    "title" : "",
+                                    "type" : "string"
+                                  },
+                                  "Mesyac" : {
+                                    "title" : "",
+                                    "type" : "string"
+                                  },
+                                  "SumDohod" : {
+                                    "title" : "",
+                                    "type" : "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SumDohObsh" : {
+                          "title" : "",
+                          "type" : "string"
+                        },
+                        "Stavka" : {
+                          "title" : "",
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "SvedDohNDPrib" : {
+                "title" : "",
+                "type" : "object",
+                "properties" : {
+                  "fs3FNSDohflnaSvedDohNDPrib" : {
+                    "type" : "array",
+                    "items" : {
+                      "title" : "",
+                      "type" : "object",
+                      "properties" : {
+                        "NalBaza" : {
+                          "title" : "",
+                          "type" : "string"
+                        },
+                        "SumDohObsh" : {
+                          "title" : "",
+                          "type" : "string"
+                        },
+                        "Stavka" : {
+                          "title" : "",
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "SvNAFLFIOFirstName" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "SeriesNumber" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "Patronymic" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "DocumentCode" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "DataRozhd" : {
+                "title" : "",
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "IdZapros" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "OtchetGod" : {
+      "title" : "",
+      "type" : "string"
+    }
+  }
+}

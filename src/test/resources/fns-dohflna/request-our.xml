@@ -1,0 +1,14 @@
+<params>
+  <guid>a</guid>
+  <reqOtchetGod>2000</reqOtchetGod>
+  <DataRozhd>2000-01-01</DataRozhd>
+  <INNFL>526317984689</INNFL>
+  <SNILS>11111111111</SNILS>
+  <FamilyName>b</FamilyName>
+  <FirstName>c</FirstName>
+  <Patronymic>d</Patronymic>
+  <DocumentCode>
+    <code>33</code>
+  </DocumentCode>
+  <SeriesNumber>4444</SeriesNumber>
+</params>
