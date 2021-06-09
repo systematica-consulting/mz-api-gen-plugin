@@ -1,108 +1,108 @@
 {
-  "title" : "Ответ",
-  "type" : "object",
-  "properties" : {
-    "FamilyName" : {
-      "title" : "Фамилия",
-      "type" : "string"
+  "title": "Ответ",
+  "type": "object",
+  "properties": {
+    "FamilyName": {
+      "title": "Фамилия",
+      "type": "string"
     },
-    "FirstName" : {
-      "title" : "Имя",
-      "type" : "string"
+    "FirstName": {
+      "title": "Имя",
+      "type": "string"
     },
-    "TotalPaymentsSum" : {
-      "title" : "",
-      "type" : "number"
+    "TotalPaymentsSum": {
+      "title": "",
+      "type": "number"
     },
-    "messageId" : {
-      "title" : "",
-      "type" : "string"
+    "messageId": {
+      "title": "",
+      "type": "string"
     },
-    "Payments" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "Payment" : {
-          "type" : "array",
-          "items" : {
-            "title" : "",
-            "type" : "object",
-            "properties" : {
-              "Type" : {
-                "title" : "",
-                "type" : "string"
+    "Payments": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "Payment": {
+          "type": "array",
+          "items": {
+            "title": "",
+            "type": "object",
+            "properties": {
+              "Type": {
+                "title": "",
+                "type": "string"
               },
-              "Payments" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Payment" : {
-                    "type" : "array",
-                    "items" : {
-                      "title" : "",
-                      "type" : "object",
-                      "properties" : {
-                        "Type" : {
-                          "title" : "",
-                          "type" : "string"
+              "Payments": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Payment": {
+                    "type": "array",
+                    "items": {
+                      "title": "",
+                      "type": "object",
+                      "properties": {
+                        "Type": {
+                          "title": "",
+                          "type": "string"
                         },
-                        "Sum" : {
-                          "title" : "",
-                          "type" : "number"
+                        "Sum": {
+                          "title": "",
+                          "type": "number"
                         },
-                        "Base" : {
-                          "title" : "",
-                          "type" : "string"
+                        "Base": {
+                          "title": "",
+                          "type": "string"
                         }
                       }
                     }
                   }
                 }
               },
-              "Sum" : {
-                "title" : "",
-                "type" : "number"
+              "Sum": {
+                "title": "",
+                "type": "number"
               },
-              "Base" : {
-                "title" : "",
-                "type" : "string"
+              "Base": {
+                "title": "",
+                "type": "string"
               }
             }
           }
         }
       }
     },
-    "ActualDate" : {
-      "title" : "",
-      "type" : "date"
+    "ActualDate": {
+      "title": "",
+      "type": "date"
     },
-    "Gender" : {
-      "title" : "",
-      "type" : "string"
+    "Gender": {
+      "title": "Пол.",
+      "type": "string"
     },
-    "ExistData" : {
-      "title" : "",
-      "type" : "boolean"
+    "ExistData": {
+      "title": "",
+      "type": "boolean"
     },
-    "Snils" : {
-      "title" : "",
-      "type" : "string"
+    "Snils": {
+      "title": "СНИЛС",
+      "type": "string"
     },
-    "AppDate" : {
-      "title" : "",
-      "type" : "date"
+    "AppDate": {
+      "title": "",
+      "type": "date"
     },
-    "Patronymic" : {
-      "title" : "Отчество",
-      "type" : "string"
+    "Patronymic": {
+      "title": "Отчество",
+      "type": "string"
     },
-    "NumberOfPayments" : {
-      "title" : "",
-      "type" : "integer"
+    "NumberOfPayments": {
+      "title": "",
+      "type": "integer"
     },
-    "BirthDate" : {
-      "title" : "",
-      "type" : "date"
+    "BirthDate": {
+      "title": "",
+      "type": "date"
     }
   }
 }

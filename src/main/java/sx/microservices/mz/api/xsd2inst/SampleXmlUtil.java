@@ -866,6 +866,9 @@ public class SampleXmlUtil {
         }
 
         String description = retrieveDescription(element);
+        if (description == null){
+            description = retrieveDescription(elementType);
+        }
 
         TypeInfo typeInfo = new TypeInfo();
         typeInfo.setUuid(uuid);

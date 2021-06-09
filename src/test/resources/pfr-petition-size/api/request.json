@@ -1,30 +1,30 @@
 {
-  "title" : "Запрос",
-  "type" : "object",
-  "properties" : {
-    "reqFamilyName" : {
-      "title" : "Фамилия",
-      "type" : "string"
+  "title": "Запрос",
+  "type": "object",
+  "properties": {
+    "reqFamilyName": {
+      "title": "Фамилия",
+      "type": "string"
     },
-    "reqSnils" : {
-      "title" : "",
-      "type" : "string"
+    "reqSnils": {
+      "title": "СНИЛС",
+      "type": "string"
     },
-    "reqFirstName" : {
-      "title" : "Имя",
-      "type" : "string"
+    "reqFirstName": {
+      "title": "Имя",
+      "type": "string"
     },
-    "reqGender" : {
-      "title" : "",
-      "type" : "string"
+    "reqGender": {
+      "title": "Пол.",
+      "type": "string"
     },
-    "reqPatronymic" : {
-      "title" : "Отчество",
-      "type" : "string"
+    "reqPatronymic": {
+      "title": "Отчество",
+      "type": "string"
     },
-    "reqBirthDate" : {
-      "title" : "",
-      "type" : "string"
+    "reqBirthDate": {
+      "title": "",
+      "type": "string"
     }
   }
 }

@@ -33,13 +33,13 @@ public class PfrPetitionSizeTest {
         byte[] reqExpected = Util.getFileContent(requestConfig.getOut());
         JsonNode expectedRequest = objectMapper.readTree(reqExpected);
 
-        assertEquals(requestNode, expectedRequest);
+        assertEquals(expectedRequest, requestNode);
 
         JsonNode responseNode = objectMapper.readTree(response.toString());
         byte[] respExpected = Util.getFileContent(responseConfig.getOut());
         JsonNode expectedResponse = objectMapper.readTree(respExpected);
 
-        assertEquals(responseNode, expectedResponse);
+        assertEquals(expectedResponse, responseNode);
 
     }
 
