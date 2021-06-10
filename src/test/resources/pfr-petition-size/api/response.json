@@ -11,11 +11,10 @@
       "type": "string"
     },
     "TotalPaymentsSum": {
-      "title": "",
-      "type": "number"
+      "type": "number",
+      "format": "double"
     },
     "messageId": {
-      "title": "",
       "type": "string"
     },
     "Payments": {
@@ -29,7 +28,6 @@
             "type": "object",
             "properties": {
               "Type": {
-                "title": "",
                 "type": "string"
               },
               "Payments": {
@@ -43,15 +41,13 @@
                       "type": "object",
                       "properties": {
                         "Type": {
-                          "title": "",
                           "type": "string"
                         },
                         "Sum": {
-                          "title": "",
-                          "type": "number"
+                          "type": "number",
+                          "format": "double"
                         },
                         "Base": {
-                          "title": "",
                           "type": "string"
                         }
                       }
@@ -60,11 +56,10 @@
                 }
               },
               "Sum": {
-                "title": "",
-                "type": "number"
+                "type": "number",
+                "format": "double"
               },
               "Base": {
-                "title": "",
                 "type": "string"
               }
             }
@@ -73,15 +68,14 @@
       }
     },
     "ActualDate": {
-      "title": "",
-      "type": "date"
+      "type": "string",
+      "format": "date"
     },
     "Gender": {
       "title": "Пол.",
       "type": "string"
     },
     "ExistData": {
-      "title": "",
       "type": "boolean"
     },
     "Snils": {
@@ -89,20 +83,20 @@
       "type": "string"
     },
     "AppDate": {
-      "title": "",
-      "type": "date"
+      "type": "string",
+      "format": "date"
     },
     "Patronymic": {
       "title": "Отчество",
       "type": "string"
     },
     "NumberOfPayments": {
-      "title": "",
-      "type": "integer"
+      "type": "integer",
+      "format": "int32"
     },
     "BirthDate": {
-      "title": "",
-      "type": "date"
+      "type": "string",
+      "format": "date"
     }
   }
 }

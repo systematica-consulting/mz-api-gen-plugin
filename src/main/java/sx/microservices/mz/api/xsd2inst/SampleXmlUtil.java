@@ -854,15 +854,14 @@ public class SampleXmlUtil {
     }
 
     private void putType(String uuid, SchemaType elementType, SchemaAnnotated element){
-        String type;
-        if (elementType.isNumeric()){
-            type = elementType.getShortJavaName() != null ? elementType.getShortJavaName()
-                    : elementType.getBaseType().getShortJavaName();
-        }else {
-            type = elementType.getPrimitiveType().getShortJavaName();
-        }
-        if (type == null){
-            System.out.println("ds");
+        String type = elementType.getPrimitiveType().getShortJavaName();
+        if ("XmlDecimal".equals(type)){
+            int size = elementType.getDecimalSize();
+            if (size == SchemaType.SIZE_LONG){
+                type = "XmlLong";
+            }else if (size == SchemaType.SIZE_INT || size == SchemaType.SIZE_SHORT || size == SchemaType.SIZE_BYTE) {
+                type = "XmlInt";
+            }
         }
 
         String description = retrieveDescription(element);

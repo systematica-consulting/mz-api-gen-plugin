@@ -14,6 +14,7 @@ import java.util.Set;
 public class SchemaBean {
     private String title;
     private Type type;
+    private Format format;
     private Map<String, SchemaBean> properties;
     private Set<String> required;
 

@@ -31,13 +31,12 @@ public class JsonSchemaGenerator {
                 TypeInfo typeInfo = types.get(uuid);
                 SchemaBean bean = new SchemaBean();
                 if (typeInfo == null){
+                    //todo log warn: couldn't find type
                     bean.setType(Type.string);
                 }else {
                     bean.setType(Type.fromXmlType(typeInfo.getType()));
+                    bean.setFormat(Format.fromXmlType(typeInfo.getType()));
                     bean.setTitle(typeInfo.getDescription());
-                }
-                if (bean.getTitle() == null){
-                    bean.setTitle("");
                 }
                 properties.put(k, bean);
             }

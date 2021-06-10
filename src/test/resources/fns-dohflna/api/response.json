@@ -1,170 +1,177 @@
 {
-  "title" : "Ответ",
-  "type" : "object",
-  "properties" : {
-    "messageId" : {
-      "title" : "",
-      "type" : "string"
+  "title": "Ответ",
+  "type": "object",
+  "properties": {
+    "messageId": {
+      "type": "string"
     },
-    "DohFLNA" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "fs3FNSDohflnaDohFLNA" : {
-          "type" : "array",
-          "items" : {
-            "title" : "",
-            "type" : "object",
-            "properties" : {
-              "SvNAFLFIOPatronymic" : {
-                "title" : "Отчество",
-                "type" : "string"
+    "DohFLNA": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "fs3FNSDohflnaDohFLNA": {
+          "type": "array",
+          "items": {
+            "title": "",
+            "type": "object",
+            "properties": {
+              "SvNAFLFIOPatronymic": {
+                "title": "Отчество",
+                "type": "string"
               },
-              "FamilyName" : {
-                "title" : "Фамилия",
-                "type" : "string"
+              "FamilyName": {
+                "title": "Фамилия",
+                "type": "string"
               },
-              "INNFL" : {
-                "title" : "ИНН  физического лица",
-                "type" : "string"
+              "INNFL": {
+                "title": "ИНН  физического лица",
+                "type": "string"
               },
-              "FirstName" : {
-                "title" : "Имя",
-                "type" : "string"
+              "FirstName": {
+                "title": "Имя",
+                "type": "string"
               },
-              "INNYUL" : {
-                "title" : "ИНН организации",
-                "type" : "string"
+              "INNYUL": {
+                "title": "ИНН организации",
+                "type": "string"
               },
-              "SvNAFLINNFL" : {
-                "title" : "ИНН физического лица",
-                "type" : "string"
+              "SvNAFLINNFL": {
+                "title": "ИНН физического лица",
+                "type": "string"
               },
-              "SvNAFLFIOFamilyName" : {
-                "title" : "Фамилия",
-                "type" : "string"
+              "SvNAFLFIOFamilyName": {
+                "title": "Фамилия",
+                "type": "string"
               },
-              "KPP" : {
-                "title" : "КПП",
-                "type" : "string"
+              "KPP": {
+                "title": "КПП",
+                "type": "string"
               },
-              "NaimOrg" : {
-                "title" : "Наименование организации",
-                "type" : "string"
+              "NaimOrg": {
+                "title": "Наименование организации",
+                "type": "string"
               },
-              "SvedDoh2NDFL" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "fs3FNSDohflnaSvedDoh2NDFL" : {
-                    "type" : "array",
-                    "items" : {
-                      "title" : "",
-                      "type" : "object",
-                      "properties" : {
-                        "NalBaza" : {
-                          "title" : "Налоговая база",
-                          "type" : "number"
+              "SvedDoh2NDFL": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "fs3FNSDohflnaSvedDoh2NDFL": {
+                    "type": "array",
+                    "items": {
+                      "title": "",
+                      "type": "object",
+                      "properties": {
+                        "NalBaza": {
+                          "title": "Налоговая база",
+                          "type": "number",
+                          "format": "double"
                         },
-                        "SvSumDoh" : {
-                          "title" : "",
-                          "type" : "object",
-                          "properties" : {
-                            "fs3FNSDohflnaSvSumDoh" : {
-                              "type" : "array",
-                              "items" : {
-                                "title" : "",
-                                "type" : "object",
-                                "properties" : {
-                                  "KodDohod" : {
-                                    "title" : "Код дохода",
-                                    "type" : "string"
+                        "SvSumDoh": {
+                          "title": "",
+                          "type": "object",
+                          "properties": {
+                            "fs3FNSDohflnaSvSumDoh": {
+                              "type": "array",
+                              "items": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                  "KodDohod": {
+                                    "title": "Код дохода",
+                                    "type": "string"
                                   },
-                                  "Mesyac" : {
-                                    "title" : "Месяц",
-                                    "type" : "string"
+                                  "Mesyac": {
+                                    "title": "Месяц",
+                                    "type": "string"
                                   },
-                                  "SumDohod" : {
-                                    "title" : "Сумма дохода",
-                                    "type" : "number"
+                                  "SumDohod": {
+                                    "title": "Сумма дохода",
+                                    "type": "number",
+                                    "format": "double"
                                   }
                                 }
                               }
                             }
                           }
                         },
-                        "SumDohObsh" : {
-                          "title" : "Общая сумма дохода",
-                          "type" : "number"
+                        "SumDohObsh": {
+                          "title": "Общая сумма дохода",
+                          "type": "number",
+                          "format": "double"
                         },
-                        "Stavka" : {
-                          "title" : "Ставка налога",
-                          "type" : "integer"
+                        "Stavka": {
+                          "title": "Ставка налога",
+                          "type": "integer",
+                          "format": "int32"
                         }
                       }
                     }
                   }
                 }
               },
-              "SvedDohNDPrib" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "fs3FNSDohflnaSvedDohNDPrib" : {
-                    "type" : "array",
-                    "items" : {
-                      "title" : "",
-                      "type" : "object",
-                      "properties" : {
-                        "NalBaza" : {
-                          "title" : "Налоговая база",
-                          "type" : "number"
+              "SvedDohNDPrib": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "fs3FNSDohflnaSvedDohNDPrib": {
+                    "type": "array",
+                    "items": {
+                      "title": "",
+                      "type": "object",
+                      "properties": {
+                        "NalBaza": {
+                          "title": "Налоговая база",
+                          "type": "number",
+                          "format": "double"
                         },
-                        "SumDohObsh" : {
-                          "title" : "Общая сумма дохода",
-                          "type" : "number"
+                        "SumDohObsh": {
+                          "title": "Общая сумма дохода",
+                          "type": "number",
+                          "format": "double"
                         },
-                        "Stavka" : {
-                          "title" : "Налоговая ставка (%)",
-                          "type" : "integer"
+                        "Stavka": {
+                          "title": "Налоговая ставка (%)",
+                          "type": "integer",
+                          "format": "int32"
                         }
                       }
                     }
                   }
                 }
               },
-              "SvNAFLFIOFirstName" : {
-                "title" : "Имя",
-                "type" : "string"
+              "SvNAFLFIOFirstName": {
+                "title": "Имя",
+                "type": "string"
               },
-              "SeriesNumber" : {
-                "title" : "Серия и номер документа, удостоверяющего личность",
-                "type" : "string"
+              "SeriesNumber": {
+                "title": "Серия и номер документа, удостоверяющего личность",
+                "type": "string"
               },
-              "Patronymic" : {
-                "title" : "Отчество",
-                "type" : "string"
+              "Patronymic": {
+                "title": "Отчество",
+                "type": "string"
               },
-              "DocumentCode" : {
-                "title" : "Код вида документа, удостоверяющего личность",
-                "type" : "string"
+              "DocumentCode": {
+                "title": "Код вида документа, удостоверяющего личность",
+                "type": "string"
               },
-              "DataRozhd" : {
-                "title" : "Дата рождения",
-                "type" : "date"
+              "DataRozhd": {
+                "title": "Дата рождения",
+                "type": "string",
+                "format": "date"
               }
             }
           }
         }
       }
     },
-    "IdZapros" : {
-      "title" : "Идентификатор запроса, сформированный запрашивающей стороной",
-      "type" : "string"
+    "IdZapros": {
+      "title": "Идентификатор запроса, сформированный запрашивающей стороной",
+      "type": "string"
     },
-    "OtchetGod" : {
-      "title" : "Отчетный налоговый периодГод в формате ГГГГ",
-      "type" : "number"
+    "OtchetGod": {
+      "title": "Отчетный налоговый периодГод в формате ГГГГ",
+      "type": "string"
     }
   }
 }

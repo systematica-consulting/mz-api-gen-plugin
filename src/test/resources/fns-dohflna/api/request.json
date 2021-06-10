@@ -1,52 +1,53 @@
 {
-  "title" : "Запрос",
-  "type" : "object",
-  "properties" : {
-    "SNILS" : {
-      "title" : "Страховой номер индивидуального лицевого счета",
-      "type" : "string"
+  "title": "Запрос",
+  "type": "object",
+  "properties": {
+    "SNILS": {
+      "title": "Страховой номер индивидуального лицевого счета",
+      "type": "string"
     },
-    "FamilyName" : {
-      "title" : "Фамилия",
-      "type" : "string"
+    "FamilyName": {
+      "title": "Фамилия",
+      "type": "string"
     },
-    "INNFL" : {
-      "title" : "ИНН физического лица",
-      "type" : "string"
+    "INNFL": {
+      "title": "ИНН физического лица",
+      "type": "string"
     },
-    "FirstName" : {
-      "title" : "Имя",
-      "type" : "string"
+    "FirstName": {
+      "title": "Имя",
+      "type": "string"
     },
-    "reqOtchetGod" : {
-      "title" : "Отчетный налоговый периодГод в формате ГГГГ",
-      "type" : "number"
+    "reqOtchetGod": {
+      "title": "Отчетный налоговый периодГод в формате ГГГГ",
+      "type": "string"
     },
-    "guid" : {
-      "title" : "Идентификатор запроса, сформированный запрашивающей стороной",
-      "type" : "string"
+    "guid": {
+      "title": "Идентификатор запроса, сформированный запрашивающей стороной",
+      "type": "string"
     },
-    "SeriesNumber" : {
-      "title" : "Серия и номер документа, удостоверяющего личность",
-      "type" : "string"
+    "SeriesNumber": {
+      "title": "Серия и номер документа, удостоверяющего личность",
+      "type": "string"
     },
-    "Patronymic" : {
-      "title" : "Отчество",
-      "type" : "string"
+    "Patronymic": {
+      "title": "Отчество",
+      "type": "string"
     },
-    "DocumentCode" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "code" : {
-          "title" : "Код вида документа, удостоверяющего личность",
-          "type" : "string"
+    "DocumentCode": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Код вида документа, удостоверяющего личность",
+          "type": "string"
         }
       }
     },
-    "DataRozhd" : {
-      "title" : "Дата рождения",
-      "type" : "date"
+    "DataRozhd": {
+      "title": "Дата рождения",
+      "type": "string",
+      "format": "date"
     }
   }
 }
