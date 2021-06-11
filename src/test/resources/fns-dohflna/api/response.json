@@ -103,10 +103,16 @@
                                     "type": "number",
                                     "format": "double"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "KodDohod",
+                                  "Mesyac",
+                                  "SumDohod"
+                                ]
                               }
                             }
-                          }
+                          },
+                          "required": []
                         },
                         "SumDohObsh": {
                           "title": "Общая сумма дохода",
@@ -118,10 +124,16 @@
                           "type": "integer",
                           "format": "int32"
                         }
-                      }
+                      },
+                      "required": [
+                        "NalBaza",
+                        "SumDohObsh",
+                        "Stavka"
+                      ]
                     }
                   }
-                }
+                },
+                "required": []
               },
               "SvedDohNDPrib": {
                 "title": "",
@@ -148,10 +160,16 @@
                           "type": "integer",
                           "format": "int32"
                         }
-                      }
+                      },
+                      "required": [
+                        "NalBaza",
+                        "SumDohObsh",
+                        "Stavka"
+                      ]
                     }
                   }
-                }
+                },
+                "required": []
               },
               "SvNAFLFIOFirstName": {
                 "title": "Имя",
@@ -174,10 +192,24 @@
                 "type": "string",
                 "format": "date"
               }
-            }
+            },
+            "required": [
+              "FamilyName",
+              "FirstName",
+              "INNYUL",
+              "SvNAFLINNFL",
+              "SvNAFLFIOFirstName",
+              "SvNAFLFIOFamilyName",
+              "KPP",
+              "SeriesNumber",
+              "NaimOrg",
+              "DocumentCode",
+              "DataRozhd"
+            ]
           }
         }
-      }
+      },
+      "required": []
     },
     "IdZapros": {
       "title": "Идентификатор запроса, сформированный запрашивающей стороной",
@@ -187,5 +219,8 @@
       "title": "Отчетный налоговый периодГод в формате ГГГГ",
       "type": "string"
     }
-  }
+  },
+  "required": [
+    "OtchetGod"
+  ]
 }

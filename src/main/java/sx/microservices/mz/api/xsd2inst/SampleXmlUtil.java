@@ -878,10 +878,14 @@ public class SampleXmlUtil {
             typeInfo.setEnumeration(vals);
         }
 
+        SchemaField field = (SchemaField) element;
+
+        boolean required = field.getMinOccurs().intValue() > 0;
 
         typeInfo.setUuid(uuid);
         typeInfo.setDescription(description);
         typeInfo.setType(type);
+        typeInfo.setRequired(required);
         types.put(uuid, typeInfo);
     }
 

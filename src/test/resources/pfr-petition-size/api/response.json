@@ -50,10 +50,15 @@
                         "Base": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "required": [
+                        "Type",
+                        "Sum"
+                      ]
                     }
                   }
-                }
+                },
+                "required": []
               },
               "Sum": {
                 "type": "number",
@@ -62,10 +67,15 @@
               "Base": {
                 "type": "string"
               }
-            }
+            },
+            "required": [
+              "Type",
+              "Sum"
+            ]
           }
         }
-      }
+      },
+      "required": []
     },
     "ActualDate": {
       "type": "string",
@@ -102,5 +112,17 @@
       "type": "string",
       "format": "date"
     }
-  }
+  },
+  "required": [
+    "Snils",
+    "AppDate",
+    "FamilyName",
+    "FirstName",
+    "TotalPaymentsSum",
+    "ActualDate",
+    "Gender",
+    "ExistData",
+    "NumberOfPayments",
+    "BirthDate"
+  ]
 }

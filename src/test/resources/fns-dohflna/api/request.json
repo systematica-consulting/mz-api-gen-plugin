@@ -42,12 +42,22 @@
           "title": "Код вида документа, удостоверяющего личность",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "code"
+      ]
     },
     "DataRozhd": {
       "title": "Дата рождения",
       "type": "string",
       "format": "date"
     }
-  }
+  },
+  "required": [
+    "FamilyName",
+    "FirstName",
+    "reqOtchetGod",
+    "SeriesNumber",
+    "DataRozhd"
+  ]
 }

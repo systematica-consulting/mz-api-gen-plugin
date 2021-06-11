@@ -12,4 +12,5 @@ public class TypeInfo {
     private QName qName;
     private List<String> enumeration;
     private String description;
+    private boolean required;
 }

@@ -6,12 +6,12 @@
       "title": "Фамилия",
       "type": "string"
     },
-    "reqSnils": {
-      "title": "СНИЛС",
-      "type": "string"
-    },
     "reqFirstName": {
       "title": "Имя",
+      "type": "string"
+    },
+    "reqSnils": {
+      "title": "СНИЛС",
       "type": "string"
     },
     "reqGender": {
@@ -22,12 +22,25 @@
         "Female"
       ]
     },
+    "reqAppDate": {
+      "type": "string",
+      "format": "date"
+    },
     "reqPatronymic": {
       "title": "Отчество",
       "type": "string"
     },
     "reqBirthDate": {
-      "type": "string"
+      "type": "string",
+      "format": "date"
     }
-  }
+  },
+  "required": [
+    "reqFamilyName",
+    "reqFirstName",
+    "reqSnils",
+    "reqGender",
+    "reqAppDate",
+    "reqBirthDate"
+  ]
 }

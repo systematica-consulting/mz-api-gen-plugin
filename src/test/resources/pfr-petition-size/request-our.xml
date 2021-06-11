@@ -1,8 +1,9 @@
 <params>
+  <reqFamilyName>Петина</reqFamilyName>
+  <reqFirstName>Елена</reqFirstName>
+  <reqPatronymic>Владимировна</reqPatronymic>
   <reqSnils>02773319862</reqSnils>
-  <reqFamilyName>ТЕСТ</reqFamilyName>
-  <reqFirstName>ЕЛЕНА</reqFirstName>
-  <reqPatronymic>ВЛАДИМИРОВНА</reqPatronymic>
-  <reqBirthDate>1967-08-13</reqBirthDate>
+  <reqBirthDate>1966-09-12</reqBirthDate>
   <reqGender>Female</reqGender>
+  <reqAppDate>2014-09-01</reqAppDate>
 </params>
