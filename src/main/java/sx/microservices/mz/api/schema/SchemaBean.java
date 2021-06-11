@@ -1,11 +1,13 @@
 package sx.microservices.mz.api.schema;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +17,8 @@ public class SchemaBean {
     private String title;
     private Type type;
     private Format format;
+    @JsonProperty("enum")
+    private List<String> enumeration;
     private Map<String, SchemaBean> properties;
     private Set<String> required;
 

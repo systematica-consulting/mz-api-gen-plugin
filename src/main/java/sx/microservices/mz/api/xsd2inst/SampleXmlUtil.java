@@ -870,6 +870,15 @@ public class SampleXmlUtil {
         }
 
         TypeInfo typeInfo = new TypeInfo();
+
+        if (elementType.getEnumerationValues() != null && elementType.getEnumerationValues().length != 0){
+            XmlAnySimpleType[] values = elementType.getEnumerationValues();
+            List<String> vals = new ArrayList<>();
+            Arrays.stream(values).forEach(v -> vals.add(v.getStringValue()));
+            typeInfo.setEnumeration(vals);
+        }
+
+
         typeInfo.setUuid(uuid);
         typeInfo.setDescription(description);
         typeInfo.setType(type);

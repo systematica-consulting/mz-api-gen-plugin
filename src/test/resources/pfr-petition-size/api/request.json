@@ -16,7 +16,11 @@
     },
     "reqGender": {
       "title": "Пол.",
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "Male",
+        "Female"
+      ]
     },
     "reqPatronymic": {
       "title": "Отчество",

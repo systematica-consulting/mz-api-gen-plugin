@@ -37,6 +37,7 @@ public class JsonSchemaGenerator {
                     bean.setType(Type.fromXmlType(typeInfo.getType()));
                     bean.setFormat(Format.fromXmlType(typeInfo.getType()));
                     bean.setTitle(typeInfo.getDescription());
+                    bean.setEnumeration(typeInfo.getEnumeration());
                 }
                 properties.put(k, bean);
             }

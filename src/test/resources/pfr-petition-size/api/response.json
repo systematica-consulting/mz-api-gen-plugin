@@ -73,7 +73,11 @@
     },
     "Gender": {
       "title": "Пол.",
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "Male",
+        "Female"
+      ]
     },
     "ExistData": {
       "type": "boolean"
