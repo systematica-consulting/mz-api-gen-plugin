@@ -867,7 +867,7 @@ public class SampleXmlUtil {
         }
         if ("XmlDecimal".equals(type)){
             int size = elementType.getDecimalSize();
-            if (size == SchemaType.SIZE_LONG){
+            if (size == SchemaType.SIZE_LONG || size == SchemaType.SIZE_BIG_INTEGER){
                 type = "XmlLong";
             }else if (size == SchemaType.SIZE_INT || size == SchemaType.SIZE_SHORT || size == SchemaType.SIZE_BYTE) {
                 type = "XmlInt";
