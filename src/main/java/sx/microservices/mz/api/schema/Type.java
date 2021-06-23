@@ -2,6 +2,8 @@ package sx.microservices.mz.api.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.ByteArrayOutputStream;
+
 enum Type {
     string, array, object, number, integer, @JsonProperty("boolean") _boolean;
 
@@ -19,5 +21,18 @@ enum Type {
             default:
                 return string;
         }
+    }
+
+    public static Type fromValue(Object value) {
+        if (value instanceof String){
+            return string;
+        }else if (value instanceof Float || value instanceof Double){
+            return number;
+        }else if (value instanceof Boolean){
+            return _boolean;
+        }else if (value instanceof Integer || value instanceof Byte || value instanceof Short) {
+            return integer;
+        }
+        throw new RuntimeException("Failed to get type of object " + value);
     }
 }

@@ -35,10 +35,11 @@ public class JsonSchemaGenerator {
         jsonObject.keySet().forEach(k -> {
             if (k.equals("_json")) return;
 
+            SchemaBean bean;
             if (jsonObject.get(k) instanceof JSONObject){
-                properties.put(k, generate(jsonObject.getJSONObject(k), "", types));
+                bean = generate(jsonObject.getJSONObject(k), "", types);
             }else if (jsonObject.get(k) instanceof JSONArray){
-                SchemaBean bean = new SchemaBean();
+                bean = new SchemaBean();
                 bean.setType(Type.array);
                 Object obj = jsonObject.getJSONArray(k).get(0);
 
@@ -47,18 +48,20 @@ public class JsonSchemaGenerator {
                 }else if (obj instanceof String){
                     bean.setItems(processString(k, (String) obj, types, required));
                 }else {
-                    //todo log warn
+                    SchemaBean b = new SchemaBean();
+                    bean.setType(Type.fromValue(obj));
+                    bean.setItems(b);
                 }
-
-                properties.put(k, bean);
             }else {// simple type
                 Object obj = jsonObject.get(k);
                 if (obj instanceof String){
-                    properties.put(k, processString(k, (String) obj, types, required));
+                    bean = processString(k, (String) obj, types, required);
                 }else {
-                    //todo log warn:
+                    bean = new SchemaBean();
+                    bean.setType(Type.fromValue(obj));
                 }
             }
+            properties.put(k, bean);
         });
         schemaBean.setProperties(properties);
         schemaBean.setRequired(required);
