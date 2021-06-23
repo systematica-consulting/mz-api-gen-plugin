@@ -60,14 +60,13 @@ public class XmlInstanceGenerator {
 
 
     private void replaceComments(Document document) throws XPathExpressionException {
-        Set<String> plentyNodes = Set.of("1 or more repetitions:", "Zero or more repetitions:");
         XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//comment()");
         NodeList nodeList;
         do {
             nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
-                if (plentyNodes.contains(node.getTextContent())) {
+                if (node.getTextContent() != null && node.getTextContent().contains("repetitions:")) {
                     Node cloneNode = node.getNextSibling().getNextSibling().cloneNode(true);
                     Node parentNode = node.getParentNode();
                     parentNode.appendChild(cloneNode);

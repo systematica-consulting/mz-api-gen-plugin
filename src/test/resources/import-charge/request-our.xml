@@ -1,0 +1,42 @@
+<params>
+  <guid>fce0c544-b08d-44bc-83d8-738f10e9d068</guid>
+  <date>2018-11-02T15:27:53.045+03:00</date>
+  <participant>
+    <senderId>3eacb7</senderId>
+    <senderRole>1</senderRole>
+    <originatorId>5cacb7</originatorId>
+  </participant>
+  <charges>
+    <params>
+      <guid>54a59db2-3845-4915-8770-dd95394aadb4</guid>
+      <supplierBillId>32116102414550976332</supplierBillId>
+      <billDate>2018-11-02T14:06:30.313+03:00</billDate>
+      <totalAmount>500000</totalAmount>
+      <billFor>Плата за предоставление сведений из Единого государственного реестра недвижимости</billFor>
+      <KBK>32111301031016000130</KBK>
+      <OKTMO>45348000</OKTMO>
+      <organization>
+        <name>ФГБУ «ФКП Росреестра» по г Москва</name>
+        <INN>7705401341</INN>
+        <KPP>770542151</KPP>
+        <OGRN>7723819340452</OGRN>
+        <bank>
+          <account>40101810045250010041</account>
+          <name>ГУ Банка России по ЦФО</name>
+          <BIK>044525000</BIK>
+        </bank>
+      </organization>
+      <payerId>
+        <payerId>1220000000007712579832</payerId>
+      </payerId>
+      <payerName>Тестовый плательщик</payerName>
+      <budgetIndex>
+        <status>01</status>
+        <purpose>0</purpose>
+        <taxPeriod>0</taxPeriod>
+        <taxDocNumber>0</taxDocNumber>
+        <taxDocDate>0</taxDocDate>
+      </budgetIndex>
+    </params>
+  </charges>
+</params>

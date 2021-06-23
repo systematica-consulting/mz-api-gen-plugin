@@ -1,0 +1,62 @@
+{
+  "title": "Ответ",
+  "type": "object",
+  "properties": {
+    "respSenderId": {
+      "type": "string"
+    },
+    "respId": {
+      "type": "string"
+    },
+    "packageId": {
+      "title": "Идентификатор ответа",
+      "type": "string"
+    },
+    "resultCode": {
+      "type": "string"
+    },
+    "messageId": {
+      "type": "string"
+    },
+    "resultDesc": {
+      "type": "string"
+    },
+    "respTimestamp": {
+      "type": "string"
+    },
+    "packageProcessResult": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "gg116EntityProcessResult": {
+          "type": "array",
+          "items": {
+            "title": "",
+            "type": "object",
+            "properties": {
+              "charge": {
+                "type": "string"
+              },
+              "resultCode": {
+                "title": "Код результата обработки: \n0 — если запрос успешно принят или код ошибки в случае отказа в приеме к обработке документа",
+                "type": "string"
+              },
+              "resultDesc": {
+                "title": "Описание результата обработки",
+                "type": "string"
+              }
+            },
+            "required": [
+              "resultCode",
+              "resultDesc"
+            ]
+          }
+        }
+      },
+      "required": []
+    }
+  },
+  "required": [
+    "packageId"
+  ]
+}

@@ -854,7 +854,17 @@ public class SampleXmlUtil {
     }
 
     private void putType(String uuid, SchemaType elementType, SchemaAnnotated element){
-        String type = elementType.getPrimitiveType().getShortJavaName();
+        String type;
+        SchemaType primitiveType = elementType.getPrimitiveType();
+        if (primitiveType == null){ // всякие unions
+            if (elementType.isNumeric()){
+                type = "XmlDecimal";
+            }else {
+                type = "XmlString";
+            }
+        }else {
+            type = elementType.getPrimitiveType().getShortJavaName();
+        }
         if ("XmlDecimal".equals(type)){
             int size = elementType.getDecimalSize();
             if (size == SchemaType.SIZE_LONG){
