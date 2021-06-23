@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class Util {
 
@@ -13,7 +14,11 @@ public class Util {
         try {
             return new FileInputStream(path);
         }catch (FileNotFoundException e){
-            return ClassLoader.getSystemResource(path).openStream();
+            URL systemResource = ClassLoader.getSystemResource(path);
+            if (systemResource == null){
+                throw e;
+            }
+            return systemResource.openStream();
         }
     }
 

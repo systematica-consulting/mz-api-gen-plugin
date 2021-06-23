@@ -40,44 +40,62 @@ public class JsonSchemaGenerator {
             }else if (jsonObject.get(k) instanceof JSONArray){
                 SchemaBean bean = new SchemaBean();
                 bean.setType(Type.array);
-                JSONObject obj = jsonObject.getJSONArray(k).getJSONObject(0);
-                bean.setItems(generate(obj, "", types));
+                Object obj = jsonObject.getJSONArray(k).get(0);
+
+                if (obj instanceof JSONObject){
+                    bean.setItems(generate((JSONObject) obj, "", types));
+                }else if (obj instanceof String){
+                    bean.setItems(processString(k, (String) obj, types, required));
+                }else {
+                    //todo log warn
+                }
+
                 properties.put(k, bean);
             }else {// simple type
-                String uuid = jsonObject.getString(k);
-                TypeInfo typeInfo = types.get(uuid);
-                SchemaBean bean = new SchemaBean();
-
-                if (typeInfo == null){
-                    typeInfo = functions
-                            .stream()
-                            .map(f -> f.apply(uuid))
-                            .filter(types::containsKey)
-                            .map(types::get)
-                            .findFirst()
-                            .orElse(null);
-                }
-
-                if (typeInfo == null){
-                    //todo log warn: couldn't find type
-                    bean.setType(Type.string);
+                Object obj = jsonObject.get(k);
+                if (obj instanceof String){
+                    properties.put(k, processString(k, (String) obj, types, required));
                 }else {
-                    bean.setType(Type.fromXmlType(typeInfo.getType()));
-                    bean.setFormat(Format.fromXmlType(typeInfo.getType()));
-                    bean.setTitle(typeInfo.getDescription());
-                    bean.setEnumeration(typeInfo.getEnumeration());
-
-                    if (typeInfo.isRequired()){
-                        required.add(k);
-                    }
+                    //todo log warn:
                 }
-                properties.put(k, bean);
             }
         });
         schemaBean.setProperties(properties);
         schemaBean.setRequired(required);
 
         return schemaBean;
+    }
+
+    private SchemaBean processString(String key,
+                                     String uuid,
+                                     Map<String, TypeInfo> types,
+                                     Set<String> required) {
+        SchemaBean bean = new SchemaBean();
+        TypeInfo typeInfo = types.get(uuid);
+        if (typeInfo == null){
+            typeInfo = functions
+                    .stream()
+                    .map(f -> f.apply(uuid))
+                    .filter(types::containsKey)
+                    .map(types::get)
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        if (typeInfo == null){
+            //todo log warn: couldn't find type
+            bean.setType(Type.string);
+        }else {
+            bean.setType(Type.fromXmlType(typeInfo.getType()));
+            bean.setFormat(Format.fromXmlType(typeInfo.getType()));
+            bean.setTitle(typeInfo.getDescription());
+            bean.setEnumeration(typeInfo.getEnumeration());
+        }
+
+        if (typeInfo != null && typeInfo.isRequired()){
+            required.add(key);
+        }
+        return bean;
     }
 
 

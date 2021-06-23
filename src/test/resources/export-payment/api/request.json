@@ -1,0 +1,76 @@
+{
+  "title": "Запрос",
+  "type": "object",
+  "properties": {
+    "date": {
+      "title": "Дата и время формирования запроса",
+      "type": "string",
+      "format": "date-time"
+    },
+    "supplierBillIdList": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "supplierBillId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": []
+    },
+    "pageNumber": {
+      "title": "Номер страницы предоставления информации\n\nВся выборка по запросу разбивается на страницы размером pageLength, начиная с первого элемента. \nПоследняя страница может быть меньше, чем pageLength.\n В ответ на запрос возвращается только страница, номер которой равен pageNumber.",
+      "type": "number",
+      "format": "double"
+    },
+    "pageLength": {
+      "title": "Количество элементов на странице предоставления информации",
+      "type": "number",
+      "format": "double"
+    },
+    "kind": {
+      "title": "Тип запроса на предоставление информации об уплате",
+      "type": "string",
+      "enum": [
+        "PAYMENT",
+        "PAYMENTMODIFIED",
+        "PAYMENTUNMATCHED",
+        "PAYMENTCANCELLED",
+        "PAYMENTMAINCHARGE"
+      ]
+    },
+    "guid": {
+      "type": "string"
+    },
+    "participant": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "senderId": {
+          "title": "УРН участника-отправителя запроса",
+          "type": "string"
+        },
+        "originatorId": {
+          "title": "УРН участника косвенного взаимодействия, сформировавшего запрос",
+          "type": "string"
+        },
+        "senderRole": {
+          "title": "Полномочие участника-отправителя сообщения, с которым происходит обращение к ГИС ГМП",
+          "type": "string"
+        }
+      },
+      "required": [
+        "senderId",
+        "senderRole"
+      ]
+    }
+  },
+  "required": [
+    "date",
+    "pageNumber",
+    "pageLength",
+    "kind"
+  ]
+}

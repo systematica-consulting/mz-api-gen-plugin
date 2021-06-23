@@ -1,0 +1,17 @@
+<params>
+  <guid>739c665c-063e-11ea-9be6-fa163e24a723</guid>
+  <date>2018-11-10T18:13:51.0</date>
+  <participant>
+    <senderId>3eb646</senderId>
+    <senderRole>9</senderRole>
+    <originatorId>5cb646</originatorId>
+  </participant>
+  <pageLength>20</pageLength>
+  <pageNumber>1</pageNumber>
+  <kind>PAYMENT</kind>
+  <supplierBillIdList>
+    <supplierBillId>32117072411021588933</supplierBillId>
+    <supplierBillId>32117072411021588934</supplierBillId>
+    <supplierBillId>32117072411021588935</supplierBillId>
+  </supplierBillIdList>
+</params>

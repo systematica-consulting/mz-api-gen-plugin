@@ -13,8 +13,10 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,8 +34,11 @@ public class XmlInstanceGenerator {
 
         Path path = Paths.get(schemaPath);
         if (!Files.exists(path)){
-            String schema = ClassLoader.getSystemResource(schemaPath).getFile();
-            path = new File(schema).toPath();
+            URL systemResource = ClassLoader.getSystemResource(schemaPath);
+            if (systemResource == null){
+                throw new FileNotFoundException(schemaPath + " not found");
+            }
+            path = new File(systemResource.getFile()).toPath();
         }
         String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
                 .map(p -> {
