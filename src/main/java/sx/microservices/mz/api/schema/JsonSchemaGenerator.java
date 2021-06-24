@@ -36,18 +36,21 @@ public class JsonSchemaGenerator {
             if (k.equals("_json")) return;
 
             SchemaBean bean;
-            if (jsonObject.get(k) instanceof JSONObject){
-                bean = generate(jsonObject.getJSONObject(k), "", types);
-            }else if (jsonObject.get(k) instanceof JSONArray){
+            Object object = jsonObject.get(k);
+            if (object instanceof JSONObject){
+                bean = generate((JSONObject) object, "", types);
+            }else if (object instanceof JSONArray){
+                JSONArray array = (JSONArray) object;
                 bean = new SchemaBean();
                 bean.setType(Type.array);
-                Object obj = jsonObject.getJSONArray(k).get(0);
-
+                Object obj = array.get(array.length()-1);
                 if (obj instanceof JSONObject){
                     bean.setItems(generate((JSONObject) obj, "", types));
                 }else if (obj instanceof String){
                     bean.setItems(processString(k, (String) obj, types, required));
-                }else {
+                }else if (obj instanceof  JSONArray){
+                    throw new UnsupportedOperationException("Not implemented, yet");
+                } else {
                     SchemaBean b = new SchemaBean();
                     bean.setType(Type.fromValue(obj));
                     bean.setItems(b);
