@@ -19,6 +19,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -98,7 +99,7 @@ public class ApiPlugin implements Plugin<Project> {
     @SneakyThrows
     private static void print(SchemaBean schema, String path){
         Files.createDirectories(Paths.get(path).getParent());
-        PrintStream requestStream = new PrintStream(path);
+        PrintStream requestStream = new PrintStream(path, StandardCharsets.UTF_8);
         requestStream.print(schema);
         requestStream.close();
     }
