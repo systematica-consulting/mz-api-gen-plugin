@@ -14,7 +14,7 @@
     <xsl:template match="*" mode="path">
         <xsl:value-of select="concat('/',local-name())"/>
         <xsl:variable name="vnumPrecSiblings" select=
-                "count(preceding-sibling::*[name()=local-name(current())])"/>
+                "count(preceding-sibling::*[local-name()=local-name(current())])"/>
         <xsl:if test="$vnumPrecSiblings">
             <xsl:value-of select="concat('[', $vnumPrecSiblings +1, ']')"/>
         </xsl:if>
