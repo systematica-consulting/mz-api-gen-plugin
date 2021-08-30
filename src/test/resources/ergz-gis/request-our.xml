@@ -1,0 +1,15 @@
+<params>
+  <guid>00000000-0000-0000-0000-000000000006</guid>
+  <ExpertiseResultNumber>00-1-2-3-000010-2000</ExpertiseResultNumber>
+  <ExpertiseResultDate>2017-12-01</ExpertiseResultDate>
+  <SignedExpertiseDocuments>
+    <DetachedSignAttachment>
+      <Document>e63ed94d-7b21-4c94-ba4e-2c8dad9caa2f</Document>
+      <Signature>58efa07a-9e44-4558-81ee-e66eeb560ebb</Signature>
+    </DetachedSignAttachment>
+    <DetachedSignAttachment>
+      <Document>e62ed94d-7b21-4c94-ba4e-2c8dad9caa2f</Document>
+      <Signature>57efa07a-9e44-4558-81ee-e66eeb560ebb</Signature>
+    </DetachedSignAttachment>
+  </SignedExpertiseDocuments>
+</params>

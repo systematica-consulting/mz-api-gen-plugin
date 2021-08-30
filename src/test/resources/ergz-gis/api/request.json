@@ -1,0 +1,44 @@
+{
+  "title" : "Запрос",
+  "type" : "object",
+  "properties" : {
+    "SignedExpertiseDocuments" : {
+      "title" : "",
+      "type" : "object",
+      "properties" : {
+        "DetachedSignAttachment" : {
+          "type" : "array",
+          "items" : {
+            "title" : "",
+            "type" : "object",
+            "properties" : {
+              "Signature" : {
+                "title" : "Идентификатор вложения, на которое ссылаемся. Должен быть равен значению\n          //{urn://x-artefacts-smev-gov-ru/smev-core/client-interaction/basic/1.0}AttachedFile[n]/Id/text()\n          того вложения, на которое нужно сослаться.",
+                "type" : "string"
+              },
+              "Document" : {
+                "title" : "Идентификатор вложения, на которое ссылаемся. Должен быть равен значению\n          //{urn://x-artefacts-smev-gov-ru/smev-core/client-interaction/basic/1.0}AttachedFile[n]/Id/text()\n          того вложения, на которое нужно сослаться.",
+                "type" : "string"
+              }
+            },
+            "required" : [ ]
+          }
+        }
+      },
+      "required" : [ ]
+    },
+    "ExpertiseResultNumber" : {
+      "title" : "Номер заключения экспертизы",
+      "type" : "string"
+    },
+    "ExpertiseResultDate" : {
+      "title" : "Дата заключения экспертизы",
+      "type" : "string",
+      "format" : "date"
+    },
+    "guid" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "ExpertiseResultNumber", "ExpertiseResultDate" ]
+}
