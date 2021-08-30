@@ -43,7 +43,7 @@ public class JsonSchemaGenerator {
                 JSONArray array = (JSONArray) object;
                 bean = new SchemaBean();
                 bean.setType(Type.array);
-                Object obj = array.get(array.length()-1);
+                Object obj = array.get(0);
                 if (obj instanceof JSONObject){
                     bean.setItems(generate((JSONObject) obj, "", types));
                 }else if (obj instanceof String){

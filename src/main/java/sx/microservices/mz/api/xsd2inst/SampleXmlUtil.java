@@ -25,6 +25,7 @@ package sx.microservices.mz.api.xsd2inst;
  */
 
 import org.apache.xmlbeans.*;
+import org.apache.xmlbeans.impl.schema.SchemaParticleImpl;
 import org.apache.xmlbeans.soap.SOAPArrayType;
 import org.apache.xmlbeans.soap.SchemaWSDLArrayType;
 import org.w3c.dom.Node;
@@ -985,6 +986,9 @@ public class SampleXmlUtil {
         SchemaParticle[] spc = sp.getParticleChildren();
         xmlc.insertComment("You have a CHOICE of the next " + spc.length + " items at this level");
         for (SchemaParticle schemaParticle : spc) {
+            if (sp.getMaxOccurs() == null) {
+              ((SchemaParticleImpl) schemaParticle).setMaxOccurs(null);
+            }
             processParticle(schemaParticle, xmlc, mixed);
         }
     }
