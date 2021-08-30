@@ -10,6 +10,7 @@ pipeline {
       steps {
         container('gradle') {
           withCredentials([usernamePassword(credentialsId: 'nexus.devsun.ru', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+            sh "gradle test"
             sh "gradle uploadArchives"
           }
         }
