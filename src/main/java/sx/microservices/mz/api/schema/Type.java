@@ -24,15 +24,14 @@ enum Type {
     }
 
     public static Type fromValue(Object value) {
-        if (value instanceof String){
-            return string;
-        }else if (value instanceof Float || value instanceof Double){
+        if (value instanceof Float || value instanceof Double){
             return number;
         }else if (value instanceof Boolean){
             return _boolean;
         }else if (value instanceof Integer || value instanceof Byte || value instanceof Short) {
             return integer;
+        }else {
+          return string;
         }
-        throw new RuntimeException("Failed to get type of object " + value);
     }
 }
