@@ -61,6 +61,7 @@ public class JsonSchemaGenerator {
                 }else {
                     bean = new SchemaBean();
                     bean.setType(Type.fromValue(obj));
+                    bean.setTitle("");
                 }
             }
             properties.put(k, bean);
@@ -90,6 +91,7 @@ public class JsonSchemaGenerator {
         if (typeInfo == null){
             //todo log warn: couldn't find type
             bean.setType(Type.string);
+            bean.setTitle("");
         }else {
             bean.setType(Type.fromXmlType(typeInfo.getType()));
             bean.setFormat(Format.fromXmlType(typeInfo.getType()));
