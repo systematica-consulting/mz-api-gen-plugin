@@ -911,6 +911,9 @@ public class SampleXmlUtil {
         Node c = list.item(i);
         if (c.getNodeType() == Node.TEXT_NODE) {
           String str = c.getNodeValue();
+          if (sb.length() != 0){
+            sb.append(". ");
+          }
           sb.append(str.trim());
           break;
         }
