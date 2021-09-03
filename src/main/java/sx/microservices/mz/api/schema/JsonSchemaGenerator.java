@@ -33,7 +33,6 @@ public class JsonSchemaGenerator {
 
         Map<String, SchemaBean> properties = new HashMap<>();
         jsonObject.keySet().forEach(k -> {
-            if (k.equals("_json")) return;
 
             SchemaBean bean;
             Object object = jsonObject.get(k);

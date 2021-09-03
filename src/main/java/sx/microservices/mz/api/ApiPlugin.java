@@ -6,6 +6,7 @@ import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import sx.microservices.mz.api.schema.JsonSchemaGenerator;
@@ -56,6 +57,8 @@ public class ApiPlugin implements Plugin<Project> {
         XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
         Document transformed = transformer.transform(xmlInstance.getDocument(), config.getTemplate());
+
+        removeJsonAttrs(transformed);
 
         JSONObject jsonObject = converter.toJson(transformed);
 
@@ -116,6 +119,16 @@ public class ApiPlugin implements Plugin<Project> {
         return result;
     }
 
+
+    private static void removeJsonAttrs(Document document) throws XPathExpressionException{
+      XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[@_json]");
+      NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+      for (int i = 0; i< nodeList.getLength(); i++){
+        Element element = (Element)nodeList.item(i);
+        element.removeAttribute("_json");
+      }
+
+    }
 
 
     private  static void setGuids(Document document) throws XPathExpressionException {
