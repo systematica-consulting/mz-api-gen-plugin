@@ -140,35 +140,35 @@
       <xsl:if test="./additionalData/params/name[text()='discountSizePercent'] or
                     ./additionalData/params/name[text()='discountSizeMultiplier'] or
                     ./additionalData/params/name[text()='discountSize']">
-          <xsl:choose>
-            <xsl:when test="./additionalData/params/name[text()='discountSizePercent']">
-              <!-- Процент скидки-->
-              <com:DiscountSize>
-                <com:Value>
-                  <xsl:value-of select="./additionalData/params/value[../name[text()='discountSizePercent']]"/>
-                </com:Value>
-                <xsl:call-template name="discountExpiry"/>
-              </com:DiscountSize>
-            </xsl:when>
-            <xsl:when test="./additionalData/params/name[text()='discountSizeMultiplier']">
-              <!--Коэффициент скидки-->
-              <com:MultiplierSize>
-                <com:Value>
-                  <xsl:value-of select="./additionalData/params/value[../name[text()='discountSizeMultiplier']]"/>
-                </com:Value>
-                <xsl:call-template name="discountExpiry"/>
-              </com:MultiplierSize>
-            </xsl:when>
-            <xsl:otherwise>
-              <!-- Фиксированный размер скидки-->
-              <com:DiscountFixed>
-                <com:Value>
-                  <xsl:value-of select="./additionalData/params/value[../name[text()='discountSize']]"/>
-                </com:Value>
-                <xsl:call-template name="discountExpiry"/>
-              </com:DiscountFixed>
-            </xsl:otherwise>
-          </xsl:choose>
+        <xsl:choose>
+          <xsl:when test="./additionalData/params/name[text()='discountSizePercent']">
+            <!-- Процент скидки-->
+            <com:DiscountSize>
+              <com:Value>
+                <xsl:value-of select="./additionalData/params/value[../name[text()='discountSizePercent']]"/>
+              </com:Value>
+              <xsl:call-template name="discountExpiry"/>
+            </com:DiscountSize>
+          </xsl:when>
+          <xsl:when test="./additionalData/params/name[text()='discountSizeMultiplier']">
+            <!--Коэффициент скидки-->
+            <com:MultiplierSize>
+              <com:Value>
+                <xsl:value-of select="./additionalData/params/value[../name[text()='discountSizeMultiplier']]"/>
+              </com:Value>
+              <xsl:call-template name="discountExpiry"/>
+            </com:MultiplierSize>
+          </xsl:when>
+          <xsl:otherwise>
+            <!-- Фиксированный размер скидки-->
+            <com:DiscountFixed>
+              <com:Value>
+                <xsl:value-of select="./additionalData/params/value[../name[text()='discountSize']]"/>
+              </com:Value>
+              <xsl:call-template name="discountExpiry"/>
+            </com:DiscountFixed>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:if>
       <xsl:apply-templates select="./additionalData/params"/>
     </pkg:ImportedCharge>
@@ -270,34 +270,34 @@
     <ns:PersonalSignature/>
   </xsl:template>
 </xsl:stylesheet>
-<!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
+  <!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
 
-<metaInformation>
-	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="no" url="..\..\..\test\resources\request-our.xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength=""
-		          urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal"
-		          customvalidator="">
-			<advancedProp name="bSchemaAware" value="true"/>
-			<advancedProp name="xsltVersion" value="2.0"/>
-			<advancedProp name="iWhitespace" value="0"/>
-			<advancedProp name="bWarnings" value="true"/>
-			<advancedProp name="bXml11" value="false"/>
-			<advancedProp name="bUseDTD" value="false"/>
-			<advancedProp name="bXsltOneIsOkay" value="true"/>
-			<advancedProp name="bTinyTree" value="true"/>
-			<advancedProp name="bGenerateByteCode" value="true"/>
-			<advancedProp name="bExtensions" value="true"/>
-			<advancedProp name="iValidation" value="0"/>
-			<advancedProp name="iErrorHandling" value="fatal"/>
-			<advancedProp name="sInitialTemplate" value=""/>
-			<advancedProp name="sInitialMode" value=""/>
-		</scenario>
-	</scenarios>
-	<MapperMetaTag>
-		<MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/>
-		<MapperBlockPosition></MapperBlockPosition>
-		<TemplateContext></TemplateContext>
-		<MapperFilter side="source"></MapperFilter>
-	</MapperMetaTag>
-</metaInformation>
--->
+  <metaInformation>
+    <scenarios>
+      <scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="no" url="..\..\..\test\resources\request-our.xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength=""
+                urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal"
+                customvalidator="">
+        <advancedProp name="bSchemaAware" value="true"/>
+        <advancedProp name="xsltVersion" value="2.0"/>
+        <advancedProp name="iWhitespace" value="0"/>
+        <advancedProp name="bWarnings" value="true"/>
+        <advancedProp name="bXml11" value="false"/>
+        <advancedProp name="bUseDTD" value="false"/>
+        <advancedProp name="bXsltOneIsOkay" value="true"/>
+        <advancedProp name="bTinyTree" value="true"/>
+        <advancedProp name="bGenerateByteCode" value="true"/>
+        <advancedProp name="bExtensions" value="true"/>
+        <advancedProp name="iValidation" value="0"/>
+        <advancedProp name="iErrorHandling" value="fatal"/>
+        <advancedProp name="sInitialTemplate" value=""/>
+        <advancedProp name="sInitialMode" value=""/>
+      </scenario>
+    </scenarios>
+    <MapperMetaTag>
+      <MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/>
+      <MapperBlockPosition></MapperBlockPosition>
+      <TemplateContext></TemplateContext>
+      <MapperFilter side="source"></MapperFilter>
+    </MapperMetaTag>
+  </metaInformation>
+  -->

@@ -30,9 +30,9 @@
         </xsl:attribute>
       </xsl:if>
       <xsl:if test="//participant/originatorId">
-      	<xsl:attribute name="originatorId">
-        	<xsl:value-of select="//participant/originatorId"/>
-      </xsl:attribute>
+        <xsl:attribute name="originatorId">
+          <xsl:value-of select="//participant/originatorId"/>
+        </xsl:attribute>
       </xsl:if>
       <xsl:if test="//pageLength and //pageNumber">
         <com:Paging>

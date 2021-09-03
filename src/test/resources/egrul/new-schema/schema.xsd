@@ -215,7 +215,7 @@
                               </xs:sequence>
                               <xs:attribute name="ПризнНедАдресЮЛ" use="required">
                                 <xs:annotation>
-                                  <xs:documentation>Признак недостоверности адреса  </xs:documentation>
+                                  <xs:documentation>Признак недостоверности адреса</xs:documentation>
                                 </xs:annotation>
                                 <xs:simpleType>
                                   <xs:restriction base="xs:string">
@@ -304,7 +304,7 @@
                           </xs:element>
                           <xs:element name="ГРНДатаИспр" type="ГРНДатаТип" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>ГРН и дата внесения в ЕГРЮЛ записи об исправлении технической  ошибки в указанных сведениях</xs:documentation>
+                              <xs:documentation>ГРН и дата внесения в ЕГРЮЛ записи об исправлении технической ошибки в указанных сведениях</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                         </xs:sequence>
@@ -468,7 +468,9 @@
                         </xs:attribute>
                         <xs:attribute name="РегНом" use="optional">
                           <xs:annotation>
-                            <xs:documentation>Регистрационный номер, присвоенный российскому юридическому лицу до 1 июля 2002 года, или регистрационный номер юридического лица на территории Республики Крым или территории города федерального значения Севастополя на день принятия в Российской Федерации и образования в составе Российской Федерации новых субъектов - Республики Крым и города федерального значения Севастополя</xs:documentation>
+                            <xs:documentation>Регистрационный номер, присвоенный российскому юридическому лицу до 1 июля 2002 года, или регистрационный номер юридического лица на территории Республики Крым или территории города федерального значения Севастополя на день принятия в Российской
+                              Федерации и образования в составе Российской Федерации новых субъектов - Республики Крым и города федерального значения Севастополя
+                            </xs:documentation>
                           </xs:annotation>
                           <xs:simpleType>
                             <xs:restriction base="xs:string">
@@ -607,7 +609,7 @@
                               </xs:attribute>
                               <xs:attribute name="ДатаПубликации" use="required">
                                 <xs:annotation>
-                                  <xs:documentation>Дата публикации решения </xs:documentation>
+                                  <xs:documentation>Дата публикации решения</xs:documentation>
                                 </xs:annotation>
                                 <xs:simpleType>
                                   <xs:restriction base="xs:date">
@@ -911,7 +913,7 @@
                         <xs:sequence>
                           <xs:element name="ДоляРубля" type="ДробьТип" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Доля рубля в капитале в виде простой дроби </xs:documentation>
+                              <xs:documentation>Доля рубля в капитале в виде простой дроби</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                           <xs:element name="ГРНДата" type="ГРНДатаТип">
@@ -1314,7 +1316,7 @@
                               </xs:attribute>
                               <xs:attribute name="ДатаРеш" use="required">
                                 <xs:annotation>
-                                  <xs:documentation>Дата вынесения судебным органом постановления о дисквалификации </xs:documentation>
+                                  <xs:documentation>Дата вынесения судебным органом постановления о дисквалификации</xs:documentation>
                                 </xs:annotation>
                                 <xs:simpleType>
                                   <xs:restriction base="xs:date"/>
@@ -1434,7 +1436,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="ДоляУстКап" type="ДоляУстКапЕГРЮЛТип" minOccurs="0">
@@ -1503,7 +1505,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="ДоляУстКап" type="ДоляУстКапЕГРЮЛТип" minOccurs="0">
@@ -1567,7 +1569,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="СвПолФЛ" type="СвПолФЛТип" minOccurs="0">
@@ -1722,7 +1724,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="ДоляУстКап" type="ДоляУстКапЕГРЮЛТип" minOccurs="0">
@@ -1839,7 +1841,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="СвУпрКомпПИФ" minOccurs="0">
@@ -1990,7 +1992,7 @@
                                 </xs:element>
                                 <xs:element name="СвНедДанУчр" type="СвНедДанУчрТип" minOccurs="0" maxOccurs="unbounded">
                                   <xs:annotation>
-                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике) </xs:documentation>
+                                    <xs:documentation>Сведения о недостоверности данных об учредителе (участнике)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="ДоляУстКап" type="ДоляУстКапЕГРЮЛТип" minOccurs="0">
@@ -2725,7 +2727,7 @@
                               </xs:attribute>
                               <xs:attribute name="ДатаВыдСвид" use="required">
                                 <xs:annotation>
-                                  <xs:documentation>Дата выдачи свидетельства </xs:documentation>
+                                  <xs:documentation>Дата выдачи свидетельства</xs:documentation>
                                 </xs:annotation>
                                 <xs:simpleType>
                                   <xs:restriction base="xs:date"/>
@@ -3321,7 +3323,7 @@
     </xs:attribute>
     <xs:attribute name="НаимГород" use="required">
       <xs:annotation>
-        <xs:documentation>Наименование (элемент город) </xs:documentation>
+        <xs:documentation>Наименование (элемент город)</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
@@ -3549,7 +3551,7 @@
     </xs:attribute>
     <xs:attribute name="НаимРайон" use="required">
       <xs:annotation>
-        <xs:documentation>Наименование (элемент район)  </xs:documentation>
+        <xs:documentation>Наименование (элемент район)</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
@@ -4002,7 +4004,7 @@
               </xs:element>
               <xs:element name="СвФЛ" type="СвФЛЕГРЮЛТип">
                 <xs:annotation>
-                  <xs:documentation>Сведения о фамилии, имени, отчестве и  ИНН физического лица</xs:documentation>
+                  <xs:documentation>Сведения о фамилии, имени, отчестве и ИНН физического лица</xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name="СвПолФЛ" type="СвПолФЛТип" minOccurs="0">
@@ -4551,7 +4553,7 @@
     </xs:attribute>
     <xs:attribute name="НаимУлица" use="required">
       <xs:annotation>
-        <xs:documentation>Наименование (элемент улица) </xs:documentation>
+        <xs:documentation>Наименование (элемент улица)</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
@@ -4619,7 +4621,7 @@
   </xs:simpleType>
   <xs:simpleType name="КППТип">
     <xs:annotation>
-      <xs:documentation>Код причины постановки на учет (КПП) </xs:documentation>
+      <xs:documentation>Код причины постановки на учет (КПП)</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:length value="9"/>
@@ -4628,7 +4630,7 @@
   </xs:simpleType>
   <xs:simpleType name="ОГРНТип">
     <xs:annotation>
-      <xs:documentation>Основной  государственный регистрационный номер юридического лица</xs:documentation>
+      <xs:documentation>Основной государственный регистрационный номер юридического лица</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:length value="13"/>
@@ -4687,7 +4689,7 @@
   </xs:simpleType>
   <xs:simpleType name="CCРФТип">
     <xs:annotation>
-      <xs:documentation>Код из Справочника субъектов Российской Федерации </xs:documentation>
+      <xs:documentation>Код из Справочника субъектов Российской Федерации</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:length value="2"/>

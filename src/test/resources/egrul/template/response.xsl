@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:map="java.util.Map"
                 exclude-result-prefixes="map">
-  <xsl:output method="xml" omit-xml-declaration="yes" encoding="UTF-8" indent="yes" />
+  <xsl:output method="xml" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
   <xsl:param name="headers"/>
 
   <xsl:template match="/">
@@ -186,7 +186,7 @@
       </xsl:if>
       <xsl:variable name="SvAdresUL" select="$SvUL/*[local-name() = 'СвАдресЮЛ']"/>
       <xsl:if test="$SvAdresUL/*[local-name() = 'СвАдрЮЛФИАС']">
-        <xsl:variable name="SvAdrYULFIAS" select="$SvAdresUL/*[local-name() = 'СвАдрЮЛФИАС']" />
+        <xsl:variable name="SvAdrYULFIAS" select="$SvAdresUL/*[local-name() = 'СвАдрЮЛФИАС']"/>
         <SvAdrYULFIAS>
           <GRNDataGRN>
             <xsl:value-of select="$SvAdrYULFIAS/*[local-name()='ГРНДата']/@ГРН"/>

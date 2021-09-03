@@ -19,41 +19,41 @@ import java.util.Map;
 
 public class XslTransformer {
 
-    public Document transform(Document document, String templatePath) throws IOException, TransformerException {
-        TransformerFactory factory = TransformerFactory.newInstance();
+  public Document transform(Document document, String templatePath) throws IOException, TransformerException {
+    TransformerFactory factory = TransformerFactory.newInstance();
 
-        InputStream inputStream = Util.getFileInputStream(templatePath);
-        try(inputStream){
-            Source xslt = new StreamSource(inputStream);
-            Source data = new DOMSource(document);
-            DOMResult result = new DOMResult();
-            Transformer transformer = factory.newTransformer(xslt);
-            transformer.setParameter("headers", new HashMap<>());
-            transformer.transform(data, result);
-            return (Document) result.getNode();
-        }
+    InputStream inputStream = Util.getFileInputStream(templatePath);
+    try (inputStream) {
+      Source xslt = new StreamSource(inputStream);
+      Source data = new DOMSource(document);
+      DOMResult result = new DOMResult();
+      Transformer transformer = factory.newTransformer(xslt);
+      transformer.setParameter("headers", new HashMap<>());
+      transformer.transform(data, result);
+      return (Document) result.getNode();
     }
+  }
 
-    public Map<String, String> transformToMap(Document document) throws IOException, TransformerException{
-        TransformerFactory factory = TransformerFactory.newInstance();
-        InputStream inputStream = getClass().getClassLoader().getResource("toMapTemplate.xsl").openStream();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try(inputStream){
-            Source xslt = new StreamSource(inputStream);
-            Source data = new DOMSource(document);
-            StreamResult result = new StreamResult(baos);
-            Transformer transformer = factory.newTransformer(xslt);
-            transformer.transform(data, result);
-        }
-        String res = new String(baos.toByteArray());
-        Map<String, String> result = new HashMap<>();
-        Arrays.stream(res.split("\\r?\\n")).forEach(s -> {
-            String[] parts = s.split("=");
-            if (parts.length == 2){
-                result.put(parts[0], parts[1]);
-            }
-        });
-
-        return result;
+  public Map<String, String> transformToMap(Document document) throws IOException, TransformerException {
+    TransformerFactory factory = TransformerFactory.newInstance();
+    InputStream inputStream = getClass().getClassLoader().getResource("toMapTemplate.xsl").openStream();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try (inputStream) {
+      Source xslt = new StreamSource(inputStream);
+      Source data = new DOMSource(document);
+      StreamResult result = new StreamResult(baos);
+      Transformer transformer = factory.newTransformer(xslt);
+      transformer.transform(data, result);
     }
+    String res = new String(baos.toByteArray());
+    Map<String, String> result = new HashMap<>();
+    Arrays.stream(res.split("\\r?\\n")).forEach(s -> {
+      String[] parts = s.split("=");
+      if (parts.length == 2) {
+        result.put(parts[0], parts[1]);
+      }
+    });
+
+    return result;
+  }
 }

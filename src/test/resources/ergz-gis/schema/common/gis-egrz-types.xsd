@@ -71,8 +71,8 @@
       <xs:documentation>2.9 Сведения о лице, которому принадлежит исключительное право на проектную документацию либо право на ее многократное использование, в том числе для подготовки на ее основе проектной документации</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="PublicFormationName" type="egrzt:OrgNameType" minOccurs="0" maxOccurs="1" />
-      <xs:element name="UL" type="egrzt:OrganizationInfoType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="PublicFormationName" type="egrzt:OrgNameType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="UL" type="egrzt:OrganizationInfoType" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -272,8 +272,8 @@
       <xs:documentation>Форма заключения экспертизы</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Государственная экспертиза" />
-      <xs:enumeration value="Негосударственная экспертиза" />
+      <xs:enumeration value="Государственная экспертиза"/>
+      <xs:enumeration value="Негосударственная экспертиза"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -282,9 +282,9 @@
       <xs:documentation>Вид объекта экспертизы</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Проектная документация" />
-      <xs:enumeration value="Проектная документация и результаты инженерных изысканий" />
-      <xs:enumeration value="Результаты инженерных изысканий" />
+      <xs:enumeration value="Проектная документация"/>
+      <xs:enumeration value="Проектная документация и результаты инженерных изысканий"/>
+      <xs:enumeration value="Результаты инженерных изысканий"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -333,8 +333,8 @@
       <xs:documentation>Результат проведенной экспертизы</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Положительное заключение" />
-      <xs:enumeration value="Отрицательное заключение" />
+      <xs:enumeration value="Положительное заключение"/>
+      <xs:enumeration value="Отрицательное заключение"/>
     </xs:restriction>
   </xs:simpleType>
 

@@ -1,1006 +1,1200 @@
 {
-  "title" : "Ответ",
-  "type" : "object",
-  "properties" : {
-    "InfoForExpertisePDFull" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "PlannerOrganization" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "UL" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "OGRN" : {
-                    "title" : "ОГРН",
-                    "type" : "string"
+  "title": "Ответ",
+  "type": "object",
+  "properties": {
+    "InfoForExpertisePDFull": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "PlannerOrganization": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "UL": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "OGRN": {
+                    "title": "ОГРН",
+                    "type": "string"
                   },
-                  "Email" : {
-                    "title" : "Адрес электронной почты",
-                    "type" : "string"
+                  "Email": {
+                    "title": "Адрес электронной почты",
+                    "type": "string"
                   },
-                  "Address" : {
-                    "title" : "Адрес",
-                    "type" : "string"
+                  "Address": {
+                    "title": "Адрес",
+                    "type": "string"
                   },
-                  "INN" : {
-                    "title" : "ИНН",
-                    "type" : "string"
+                  "INN": {
+                    "title": "ИНН",
+                    "type": "string"
                   },
-                  "Name" : {
-                    "title" : "Полное наименование",
-                    "type" : "string"
+                  "Name": {
+                    "title": "Полное наименование",
+                    "type": "string"
                   },
-                  "Location" : {
-                    "title" : "Место нахождения",
-                    "type" : "string"
+                  "Location": {
+                    "title": "Место нахождения",
+                    "type": "string"
                   }
                 },
-                "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+                "required": [
+                  "OGRN",
+                  "Email",
+                  "Address",
+                  "INN",
+                  "Name",
+                  "Location"
+                ]
               }
             },
-            "IP" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Email" : {
-                    "title" : "Адрес электронной почты",
-                    "type" : "string"
+            "IP": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Email": {
+                    "title": "Адрес электронной почты",
+                    "type": "string"
                   },
-                  "Address" : {
-                    "title" : "Почтовый адрес",
-                    "type" : "string"
+                  "Address": {
+                    "title": "Почтовый адрес",
+                    "type": "string"
                   },
-                  "FirstName" : {
-                    "title" : "Имя",
-                    "type" : "string"
+                  "FirstName": {
+                    "title": "Имя",
+                    "type": "string"
                   },
-                  "OGRNIP" : {
-                    "title" : "ОГРНИП",
-                    "type" : "string"
+                  "OGRNIP": {
+                    "title": "ОГРНИП",
+                    "type": "string"
                   },
-                  "LastName" : {
-                    "title" : "Фамилия",
-                    "type" : "string"
+                  "LastName": {
+                    "title": "Фамилия",
+                    "type": "string"
                   },
-                  "Patronymic" : {
-                    "title" : "Отчество",
-                    "type" : "string"
+                  "Patronymic": {
+                    "title": "Отчество",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Email", "Address", "FirstName", "OGRNIP", "LastName" ]
+                "required": [
+                  "Email",
+                  "Address",
+                  "FirstName",
+                  "OGRNIP",
+                  "LastName"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "Address" : {
-          "title" : "Адрес (местоположение)",
-          "type" : "string"
+        "Address": {
+          "title": "Адрес (местоположение)",
+          "type": "string"
         },
-        "PrimaryTEPs" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "TEP" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Value" : {
-                    "title" : "Значение ТЭП",
-                    "type" : "string"
+        "PrimaryTEPs": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "TEP": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Value": {
+                    "title": "Значение ТЭП",
+                    "type": "string"
                   },
-                  "Name" : {
-                    "title" : "Наименование ТЭП",
-                    "type" : "string"
+                  "Name": {
+                    "title": "Наименование ТЭП",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Value", "Name" ]
+                "required": [
+                  "Value",
+                  "Name"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "CapitalBuildings" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "CapitalBuilding" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Address" : {
-                    "title" : "Адрес (местоположение)",
-                    "type" : "string"
+        "CapitalBuildings": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "CapitalBuilding": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Address": {
+                    "title": "Адрес (местоположение)",
+                    "type": "string"
                   },
-                  "SecondaryTEPs" : {
-                    "title" : "",
-                    "type" : "object",
-                    "properties" : {
-                      "TEP" : {
-                        "type" : "array",
-                        "items" : {
-                          "title" : "",
-                          "type" : "object",
-                          "properties" : {
-                            "Value" : {
-                              "title" : "Значение ТЭП",
-                              "type" : "string"
+                  "SecondaryTEPs": {
+                    "title": "",
+                    "type": "object",
+                    "properties": {
+                      "TEP": {
+                        "type": "array",
+                        "items": {
+                          "title": "",
+                          "type": "object",
+                          "properties": {
+                            "Value": {
+                              "title": "Значение ТЭП",
+                              "type": "string"
                             },
-                            "Name" : {
-                              "title" : "Наименование ТЭП",
-                              "type" : "string"
+                            "Name": {
+                              "title": "Наименование ТЭП",
+                              "type": "string"
                             }
                           },
-                          "required" : [ "Value", "Name" ]
+                          "required": [
+                            "Value",
+                            "Name"
+                          ]
                         }
                       }
                     },
-                    "required" : [ ]
+                    "required": []
                   },
-                  "Purpose" : {
-                    "title" : "Функциональное назначение объекта",
-                    "type" : "string"
+                  "Purpose": {
+                    "title": "Функциональное назначение объекта",
+                    "type": "string"
                   },
-                  "Name" : {
-                    "title" : "Наименование объекта капитального строительства",
-                    "type" : "string"
+                  "Name": {
+                    "title": "Наименование объекта капитального строительства",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Address", "Purpose", "Name" ]
+                "required": [
+                  "Address",
+                  "Purpose",
+                  "Name"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "Conditions" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "SeismicIntensity" : {
-              "type" : "array",
-              "items" : {
-                "title" : "Интенсивность сейсмических воздействий",
-                "type" : "string"
+        "Conditions": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "SeismicIntensity": {
+              "type": "array",
+              "items": {
+                "title": "Интенсивность сейсмических воздействий",
+                "type": "string"
               }
             },
-            "EngineeringGeologicConditions" : {
-              "type" : "array",
-              "items" : {
-                "title" : "Инженерно–геологические условия",
-                "type" : "string"
+            "EngineeringGeologicConditions": {
+              "type": "array",
+              "items": {
+                "title": "Инженерно–геологические условия",
+                "type": "string"
               }
             },
-            "WindRegion" : {
-              "type" : "array",
-              "items" : {
-                "title" : "Ветровой район",
-                "type" : "string"
+            "WindRegion": {
+              "type": "array",
+              "items": {
+                "title": "Ветровой район",
+                "type": "string"
               }
             },
-            "ClimatRegion" : {
-              "type" : "array",
-              "items" : {
-                "title" : "Климатический район и подрайон",
-                "type" : "string"
+            "ClimatRegion": {
+              "type": "array",
+              "items": {
+                "title": "Климатический район и подрайон",
+                "type": "string"
               }
             },
-            "SnowRegion" : {
-              "type" : "array",
-              "items" : {
-                "title" : "Снеговой район",
-                "type" : "string"
+            "SnowRegion": {
+              "type": "array",
+              "items": {
+                "title": "Снеговой район",
+                "type": "string"
               }
             }
           },
-          "required" : [ "SeismicIntensity", "EngineeringGeologicConditions", "WindRegion", "ClimatRegion", "SnowRegion" ]
+          "required": [
+            "SeismicIntensity",
+            "EngineeringGeologicConditions",
+            "WindRegion",
+            "ClimatRegion",
+            "SnowRegion"
+          ]
         },
-        "ObjectPurpose" : {
-          "title" : "Функциональное назначение объекта",
-          "type" : "string"
+        "ObjectPurpose": {
+          "title": "Функциональное назначение объекта",
+          "type": "string"
         },
-        "EstimatePriceCheck" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "ConclusionNumber" : {
-              "title" : "Номер заключения",
-              "type" : "string"
+        "EstimatePriceCheck": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "ConclusionNumber": {
+              "title": "Номер заключения",
+              "type": "string"
             },
-            "AuthenticityCheckResult" : {
-              "title" : "Результат проверки",
-              "type" : "string",
-              "enum" : [ "Положительный", "Отрицательный" ]
+            "AuthenticityCheckResult": {
+              "title": "Результат проверки",
+              "type": "string",
+              "enum": [
+                "Положительный",
+                "Отрицательный"
+              ]
             },
-            "AuthenticityCheck" : {
-              "title" : "Проверка достоверности",
-              "type" : "string",
-              "enum" : [ "Проводилась", "Не проводилась" ]
+            "AuthenticityCheck": {
+              "title": "Проверка достоверности",
+              "type": "string",
+              "enum": [
+                "Проводилась",
+                "Не проводилась"
+              ]
             },
-            "ConclusionDate" : {
-              "title" : "Дата заключения",
-              "type" : "string",
-              "format" : "date"
+            "ConclusionDate": {
+              "title": "Дата заключения",
+              "type": "string",
+              "format": "date"
             }
           },
-          "required" : [ "AuthenticityCheck" ]
+          "required": [
+            "AuthenticityCheck"
+          ]
         },
-        "CapitalBuildingsEstimatePrice" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "CurrentPrices" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "TotalPrice" : {
-                  "title" : "Общая сметная стоимость, млн. руб.",
-                  "type" : "number",
-                  "format" : "double"
+        "CapitalBuildingsEstimatePrice": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "CurrentPrices": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "TotalPrice": {
+                  "title": "Общая сметная стоимость, млн. руб.",
+                  "type": "number",
+                  "format": "double"
                 },
-                "SpecificPrice" : {
-                  "title" : "Удельная сметная стоимость, млн. руб.",
-                  "type" : "number",
-                  "format" : "double"
+                "SpecificPrice": {
+                  "title": "Удельная сметная стоимость, млн. руб.",
+                  "type": "number",
+                  "format": "double"
                 }
               },
-              "required" : [ "TotalPrice", "SpecificPrice" ]
+              "required": [
+                "TotalPrice",
+                "SpecificPrice"
+              ]
             },
-            "BasePrices" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "TotalPrice" : {
-                  "title" : "Общая сметная стоимость, млн. руб.",
-                  "type" : "number",
-                  "format" : "double"
+            "BasePrices": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "TotalPrice": {
+                  "title": "Общая сметная стоимость, млн. руб.",
+                  "type": "number",
+                  "format": "double"
                 }
               },
-              "required" : [ "TotalPrice" ]
+              "required": [
+                "TotalPrice"
+              ]
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "PreviousExpertiseResults" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Number" : {
-              "title" : "Номер заключения экспертизы",
-              "type" : "string"
+        "PreviousExpertiseResults": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Number": {
+              "title": "Номер заключения экспертизы",
+              "type": "string"
             },
-            "Date" : {
-              "title" : "Дата заключения экспертизы",
-              "type" : "string",
-              "format" : "date"
+            "Date": {
+              "title": "Дата заключения экспертизы",
+              "type": "string",
+              "format": "date"
             }
           },
-          "required" : [ "Number", "Date" ]
+          "required": [
+            "Number",
+            "Date"
+          ]
         },
-        "ExpertiseResultEconomyEfficiencyInfo" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Number" : {
-              "title" : "Номер решения",
-              "type" : "string"
+        "ExpertiseResultEconomyEfficiencyInfo": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Number": {
+              "title": "Номер решения",
+              "type": "string"
             },
-            "Date" : {
-              "title" : "Дата решения",
-              "type" : "string",
-              "format" : "date"
+            "Date": {
+              "title": "Дата решения",
+              "type": "string",
+              "format": "date"
             },
-            "EconomyEfficiencyAcknowledgment" : {
-              "title" : "Признание проектной документации экономически эффективной",
-              "type" : "string",
-              "enum" : [ "Признано", "Не признано" ]
+            "EconomyEfficiencyAcknowledgment": {
+              "title": "Признание проектной документации экономически эффективной",
+              "type": "string",
+              "enum": [
+                "Признано",
+                "Не признано"
+              ]
             }
           },
-          "required" : [ "EconomyEfficiencyAcknowledgment" ]
+          "required": [
+            "EconomyEfficiencyAcknowledgment"
+          ]
         },
-        "RightsOwner" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "PublicFormationName" : {
-              "title" : "Наименование организации (юридического лица)",
-              "type" : "string"
+        "RightsOwner": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "PublicFormationName": {
+              "title": "Наименование организации (юридического лица)",
+              "type": "string"
             },
-            "UL" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "OGRN" : {
-                  "title" : "ОГРН",
-                  "type" : "string"
+            "UL": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "OGRN": {
+                  "title": "ОГРН",
+                  "type": "string"
                 },
-                "Email" : {
-                  "title" : "Адрес электронной почты",
-                  "type" : "string"
+                "Email": {
+                  "title": "Адрес электронной почты",
+                  "type": "string"
                 },
-                "Address" : {
-                  "title" : "Адрес",
-                  "type" : "string"
+                "Address": {
+                  "title": "Адрес",
+                  "type": "string"
                 },
-                "INN" : {
-                  "title" : "ИНН",
-                  "type" : "string"
+                "INN": {
+                  "title": "ИНН",
+                  "type": "string"
                 },
-                "Name" : {
-                  "title" : "Полное наименование",
-                  "type" : "string"
+                "Name": {
+                  "title": "Полное наименование",
+                  "type": "string"
                 },
-                "Location" : {
-                  "title" : "Место нахождения",
-                  "type" : "string"
+                "Location": {
+                  "title": "Место нахождения",
+                  "type": "string"
                 }
               },
-              "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+              "required": [
+                "OGRN",
+                "Email",
+                "Address",
+                "INN",
+                "Name",
+                "Location"
+              ]
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "CapitalBuildingName" : {
-          "title" : "Наименование объекта капитального строительства",
-          "type" : "string"
+        "CapitalBuildingName": {
+          "title": "Наименование объекта капитального строительства",
+          "type": "string"
         },
-        "DeveloperOrganization" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "FL" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "Snils" : {
-                  "title" : "СНИЛС",
-                  "type" : "string"
+        "DeveloperOrganization": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "FL": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "Snils": {
+                  "title": "СНИЛС",
+                  "type": "string"
                 },
-                "Email" : {
-                  "title" : "Адрес электронной почты",
-                  "type" : "string"
+                "Email": {
+                  "title": "Адрес электронной почты",
+                  "type": "string"
                 },
-                "Address" : {
-                  "title" : "Почтовый адрес",
-                  "type" : "string"
+                "Address": {
+                  "title": "Почтовый адрес",
+                  "type": "string"
                 },
-                "FirstName" : {
-                  "title" : "Имя",
-                  "type" : "string"
+                "FirstName": {
+                  "title": "Имя",
+                  "type": "string"
                 },
-                "LastName" : {
-                  "title" : "Фамилия",
-                  "type" : "string"
+                "LastName": {
+                  "title": "Фамилия",
+                  "type": "string"
                 },
-                "Patronymic" : {
-                  "title" : "Отчество",
-                  "type" : "string"
+                "Patronymic": {
+                  "title": "Отчество",
+                  "type": "string"
                 }
               },
-              "required" : [ "Snils", "Email", "Address", "FirstName", "LastName" ]
+              "required": [
+                "Snils",
+                "Email",
+                "Address",
+                "FirstName",
+                "LastName"
+              ]
             },
-            "UL" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "OGRN" : {
-                  "title" : "ОГРН",
-                  "type" : "string"
+            "UL": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "OGRN": {
+                  "title": "ОГРН",
+                  "type": "string"
                 },
-                "Email" : {
-                  "title" : "Адрес электронной почты",
-                  "type" : "string"
+                "Email": {
+                  "title": "Адрес электронной почты",
+                  "type": "string"
                 },
-                "Address" : {
-                  "title" : "Адрес",
-                  "type" : "string"
+                "Address": {
+                  "title": "Адрес",
+                  "type": "string"
                 },
-                "INN" : {
-                  "title" : "ИНН",
-                  "type" : "string"
+                "INN": {
+                  "title": "ИНН",
+                  "type": "string"
                 },
-                "Name" : {
-                  "title" : "Полное наименование",
-                  "type" : "string"
+                "Name": {
+                  "title": "Полное наименование",
+                  "type": "string"
                 },
-                "Location" : {
-                  "title" : "Место нахождения",
-                  "type" : "string"
+                "Location": {
+                  "title": "Место нахождения",
+                  "type": "string"
                 }
               },
-              "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+              "required": [
+                "OGRN",
+                "Email",
+                "Address",
+                "INN",
+                "Name",
+                "Location"
+              ]
             },
-            "IP" : {
-              "title" : "",
-              "type" : "object",
-              "properties" : {
-                "Email" : {
-                  "title" : "Адрес электронной почты",
-                  "type" : "string"
+            "IP": {
+              "title": "",
+              "type": "object",
+              "properties": {
+                "Email": {
+                  "title": "Адрес электронной почты",
+                  "type": "string"
                 },
-                "Address" : {
-                  "title" : "Почтовый адрес",
-                  "type" : "string"
+                "Address": {
+                  "title": "Почтовый адрес",
+                  "type": "string"
                 },
-                "FirstName" : {
-                  "title" : "Имя",
-                  "type" : "string"
+                "FirstName": {
+                  "title": "Имя",
+                  "type": "string"
                 },
-                "OGRNIP" : {
-                  "title" : "ОГРНИП",
-                  "type" : "string"
+                "OGRNIP": {
+                  "title": "ОГРНИП",
+                  "type": "string"
                 },
-                "LastName" : {
-                  "title" : "Фамилия",
-                  "type" : "string"
+                "LastName": {
+                  "title": "Фамилия",
+                  "type": "string"
                 },
-                "Patronymic" : {
-                  "title" : "Отчество",
-                  "type" : "string"
+                "Patronymic": {
+                  "title": "Отчество",
+                  "type": "string"
                 }
               },
-              "required" : [ "Email", "Address", "FirstName", "OGRNIP", "LastName" ]
+              "required": [
+                "Email",
+                "Address",
+                "FirstName",
+                "OGRNIP",
+                "LastName"
+              ]
             }
           },
-          "required" : [ ]
+          "required": []
         }
       },
-      "required" : [ "ObjectPurpose", "Address", "CapitalBuildingName" ]
+      "required": [
+        "ObjectPurpose",
+        "Address",
+        "CapitalBuildingName"
+      ]
     },
-    "RequesterInfo" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "RequestReceiveDate" : {
-          "title" : "Дата поступления запроса",
-          "type" : "string",
-          "format" : "date"
+    "RequesterInfo": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "RequestReceiveDate": {
+          "title": "Дата поступления запроса",
+          "type": "string",
+          "format": "date"
         },
-        "FL" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Snils" : {
-              "title" : "СНИЛС",
-              "type" : "string"
+        "FL": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Snils": {
+              "title": "СНИЛС",
+              "type": "string"
             },
-            "Email" : {
-              "title" : "Адрес электронной почты",
-              "type" : "string"
+            "Email": {
+              "title": "Адрес электронной почты",
+              "type": "string"
             },
-            "Address" : {
-              "title" : "Почтовый адрес",
-              "type" : "string"
+            "Address": {
+              "title": "Почтовый адрес",
+              "type": "string"
             },
-            "FirstName" : {
-              "title" : "Имя",
-              "type" : "string"
+            "FirstName": {
+              "title": "Имя",
+              "type": "string"
             },
-            "LastName" : {
-              "title" : "Фамилия",
-              "type" : "string"
+            "LastName": {
+              "title": "Фамилия",
+              "type": "string"
             },
-            "Patronymic" : {
-              "title" : "Отчество",
-              "type" : "string"
+            "Patronymic": {
+              "title": "Отчество",
+              "type": "string"
             }
           },
-          "required" : [ "Snils", "Email", "Address", "FirstName", "LastName" ]
+          "required": [
+            "Snils",
+            "Email",
+            "Address",
+            "FirstName",
+            "LastName"
+          ]
         },
-        "UL" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "OGRN" : {
-              "title" : "ОГРН",
-              "type" : "string"
+        "UL": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "OGRN": {
+              "title": "ОГРН",
+              "type": "string"
             },
-            "Email" : {
-              "title" : "Адрес электронной почты",
-              "type" : "string"
+            "Email": {
+              "title": "Адрес электронной почты",
+              "type": "string"
             },
-            "Address" : {
-              "title" : "Адрес",
-              "type" : "string"
+            "Address": {
+              "title": "Адрес",
+              "type": "string"
             },
-            "INN" : {
-              "title" : "ИНН",
-              "type" : "string"
+            "INN": {
+              "title": "ИНН",
+              "type": "string"
             },
-            "Name" : {
-              "title" : "Полное наименование",
-              "type" : "string"
+            "Name": {
+              "title": "Полное наименование",
+              "type": "string"
             },
-            "Location" : {
-              "title" : "Место нахождения",
-              "type" : "string"
+            "Location": {
+              "title": "Место нахождения",
+              "type": "string"
             }
           },
-          "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+          "required": [
+            "OGRN",
+            "Email",
+            "Address",
+            "INN",
+            "Name",
+            "Location"
+          ]
         },
-        "IP" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Email" : {
-              "title" : "Адрес электронной почты",
-              "type" : "string"
+        "IP": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Email": {
+              "title": "Адрес электронной почты",
+              "type": "string"
             },
-            "Address" : {
-              "title" : "Почтовый адрес",
-              "type" : "string"
+            "Address": {
+              "title": "Почтовый адрес",
+              "type": "string"
             },
-            "FirstName" : {
-              "title" : "Имя",
-              "type" : "string"
+            "FirstName": {
+              "title": "Имя",
+              "type": "string"
             },
-            "OGRNIP" : {
-              "title" : "ОГРНИП",
-              "type" : "string"
+            "OGRNIP": {
+              "title": "ОГРНИП",
+              "type": "string"
             },
-            "LastName" : {
-              "title" : "Фамилия",
-              "type" : "string"
+            "LastName": {
+              "title": "Фамилия",
+              "type": "string"
             },
-            "Patronymic" : {
-              "title" : "Отчество",
-              "type" : "string"
+            "Patronymic": {
+              "title": "Отчество",
+              "type": "string"
             }
           },
-          "required" : [ "Email", "Address", "FirstName", "OGRNIP", "LastName" ]
+          "required": [
+            "Email",
+            "Address",
+            "FirstName",
+            "OGRNIP",
+            "LastName"
+          ]
         }
       },
-      "required" : [ "RequestReceiveDate" ]
+      "required": [
+        "RequestReceiveDate"
+      ]
     },
-    "PrintoutCreateDate" : {
-      "title" : "Дата формирования выписки",
-      "type" : "string",
-      "format" : "date"
+    "PrintoutCreateDate": {
+      "title": "Дата формирования выписки",
+      "type": "string",
+      "format": "date"
     },
-    "InfoForExpertiseRIIFull" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "RIIDeveloperOrganization" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "FL" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Snils" : {
-                    "title" : "СНИЛС",
-                    "type" : "string"
+    "InfoForExpertiseRIIFull": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "RIIDeveloperOrganization": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "FL": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Snils": {
+                    "title": "СНИЛС",
+                    "type": "string"
                   },
-                  "Email" : {
-                    "title" : "Адрес электронной почты",
-                    "type" : "string"
+                  "Email": {
+                    "title": "Адрес электронной почты",
+                    "type": "string"
                   },
-                  "Address" : {
-                    "title" : "Почтовый адрес",
-                    "type" : "string"
+                  "Address": {
+                    "title": "Почтовый адрес",
+                    "type": "string"
                   },
-                  "FirstName" : {
-                    "title" : "Имя",
-                    "type" : "string"
+                  "FirstName": {
+                    "title": "Имя",
+                    "type": "string"
                   },
-                  "LastName" : {
-                    "title" : "Фамилия",
-                    "type" : "string"
+                  "LastName": {
+                    "title": "Фамилия",
+                    "type": "string"
                   },
-                  "Patronymic" : {
-                    "title" : "Отчество",
-                    "type" : "string"
+                  "Patronymic": {
+                    "title": "Отчество",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Snils", "Email", "Address", "FirstName", "LastName" ]
+                "required": [
+                  "Snils",
+                  "Email",
+                  "Address",
+                  "FirstName",
+                  "LastName"
+                ]
               }
             },
-            "UL" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "OGRN" : {
-                    "title" : "ОГРН",
-                    "type" : "string"
+            "UL": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "OGRN": {
+                    "title": "ОГРН",
+                    "type": "string"
                   },
-                  "Email" : {
-                    "title" : "Адрес электронной почты",
-                    "type" : "string"
+                  "Email": {
+                    "title": "Адрес электронной почты",
+                    "type": "string"
                   },
-                  "Address" : {
-                    "title" : "Адрес",
-                    "type" : "string"
+                  "Address": {
+                    "title": "Адрес",
+                    "type": "string"
                   },
-                  "INN" : {
-                    "title" : "ИНН",
-                    "type" : "string"
+                  "INN": {
+                    "title": "ИНН",
+                    "type": "string"
                   },
-                  "Name" : {
-                    "title" : "Полное наименование",
-                    "type" : "string"
+                  "Name": {
+                    "title": "Полное наименование",
+                    "type": "string"
                   },
-                  "Location" : {
-                    "title" : "Место нахождения",
-                    "type" : "string"
+                  "Location": {
+                    "title": "Место нахождения",
+                    "type": "string"
                   }
                 },
-                "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+                "required": [
+                  "OGRN",
+                  "Email",
+                  "Address",
+                  "INN",
+                  "Name",
+                  "Location"
+                ]
               }
             },
-            "IP" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Email" : {
-                    "title" : "Адрес электронной почты",
-                    "type" : "string"
+            "IP": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Email": {
+                    "title": "Адрес электронной почты",
+                    "type": "string"
                   },
-                  "Address" : {
-                    "title" : "Почтовый адрес",
-                    "type" : "string"
+                  "Address": {
+                    "title": "Почтовый адрес",
+                    "type": "string"
                   },
-                  "FirstName" : {
-                    "title" : "Имя",
-                    "type" : "string"
+                  "FirstName": {
+                    "title": "Имя",
+                    "type": "string"
                   },
-                  "OGRNIP" : {
-                    "title" : "ОГРНИП",
-                    "type" : "string"
+                  "OGRNIP": {
+                    "title": "ОГРНИП",
+                    "type": "string"
                   },
-                  "LastName" : {
-                    "title" : "Фамилия",
-                    "type" : "string"
+                  "LastName": {
+                    "title": "Фамилия",
+                    "type": "string"
                   },
-                  "Patronymic" : {
-                    "title" : "Отчество",
-                    "type" : "string"
+                  "Patronymic": {
+                    "title": "Отчество",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Email", "Address", "FirstName", "OGRNIP", "LastName" ]
+                "required": [
+                  "Email",
+                  "Address",
+                  "FirstName",
+                  "OGRNIP",
+                  "LastName"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "RegionLocation" : {
-          "title" : "Местоположение района",
-          "type" : "string"
+        "RegionLocation": {
+          "title": "Местоположение района",
+          "type": "string"
         },
-        "RIITechnicalReportOrganizations" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "RIITechnicalReportInfo" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "TechnicalReportName" : {
-                    "title" : "Наименование технического отчета",
-                    "type" : "string"
+        "RIITechnicalReportOrganizations": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "RIITechnicalReportInfo": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "TechnicalReportName": {
+                    "title": "Наименование технического отчета",
+                    "type": "string"
                   },
-                  "TechnicalReportDate" : {
-                    "title" : "Дата подготовки технического отчета",
-                    "type" : "string",
-                    "format" : "date"
+                  "TechnicalReportDate": {
+                    "title": "Дата подготовки технического отчета",
+                    "type": "string",
+                    "format": "date"
                   },
-                  "UL" : {
-                    "type" : "array",
-                    "items" : {
-                      "title" : "",
-                      "type" : "object",
-                      "properties" : {
-                        "OGRN" : {
-                          "title" : "ОГРН",
-                          "type" : "string"
+                  "UL": {
+                    "type": "array",
+                    "items": {
+                      "title": "",
+                      "type": "object",
+                      "properties": {
+                        "OGRN": {
+                          "title": "ОГРН",
+                          "type": "string"
                         },
-                        "Email" : {
-                          "title" : "Адрес электронной почты",
-                          "type" : "string"
+                        "Email": {
+                          "title": "Адрес электронной почты",
+                          "type": "string"
                         },
-                        "Address" : {
-                          "title" : "Адрес",
-                          "type" : "string"
+                        "Address": {
+                          "title": "Адрес",
+                          "type": "string"
                         },
-                        "INN" : {
-                          "title" : "ИНН",
-                          "type" : "string"
+                        "INN": {
+                          "title": "ИНН",
+                          "type": "string"
                         },
-                        "Name" : {
-                          "title" : "Полное наименование",
-                          "type" : "string"
+                        "Name": {
+                          "title": "Полное наименование",
+                          "type": "string"
                         },
-                        "Location" : {
-                          "title" : "Место нахождения",
-                          "type" : "string"
+                        "Location": {
+                          "title": "Место нахождения",
+                          "type": "string"
                         }
                       },
-                      "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+                      "required": [
+                        "OGRN",
+                        "Email",
+                        "Address",
+                        "INN",
+                        "Name",
+                        "Location"
+                      ]
                     }
                   },
-                  "IP" : {
-                    "type" : "array",
-                    "items" : {
-                      "title" : "",
-                      "type" : "object",
-                      "properties" : {
-                        "Email" : {
-                          "title" : "Адрес электронной почты",
-                          "type" : "string"
+                  "IP": {
+                    "type": "array",
+                    "items": {
+                      "title": "",
+                      "type": "object",
+                      "properties": {
+                        "Email": {
+                          "title": "Адрес электронной почты",
+                          "type": "string"
                         },
-                        "Address" : {
-                          "title" : "Почтовый адрес",
-                          "type" : "string"
+                        "Address": {
+                          "title": "Почтовый адрес",
+                          "type": "string"
                         },
-                        "FirstName" : {
-                          "title" : "Имя",
-                          "type" : "string"
+                        "FirstName": {
+                          "title": "Имя",
+                          "type": "string"
                         },
-                        "OGRNIP" : {
-                          "title" : "ОГРНИП",
-                          "type" : "string"
+                        "OGRNIP": {
+                          "title": "ОГРНИП",
+                          "type": "string"
                         },
-                        "LastName" : {
-                          "title" : "Фамилия",
-                          "type" : "string"
+                        "LastName": {
+                          "title": "Фамилия",
+                          "type": "string"
                         },
-                        "Patronymic" : {
-                          "title" : "Отчество",
-                          "type" : "string"
+                        "Patronymic": {
+                          "title": "Отчество",
+                          "type": "string"
                         }
                       },
-                      "required" : [ "Email", "Address", "FirstName", "OGRNIP", "LastName" ]
+                      "required": [
+                        "Email",
+                        "Address",
+                        "FirstName",
+                        "OGRNIP",
+                        "LastName"
+                      ]
                     }
                   }
                 },
-                "required" : [ "TechnicalReportName", "TechnicalReportDate" ]
+                "required": [
+                  "TechnicalReportName",
+                  "TechnicalReportDate"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         }
       },
-      "required" : [ "RegionLocation" ]
+      "required": [
+        "RegionLocation"
+      ]
     },
-    "ExpertiseConclusionFull" : {
-      "title" : "",
-      "type" : "object",
-      "properties" : {
-        "ObjectType" : {
-          "title" : "Вид объекта экспертизы",
-          "type" : "string",
-          "enum" : [ "Проектная документация", "Проектная документация и результаты инженерных изысканий", "Результаты инженерных изысканий" ]
+    "ExpertiseConclusionFull": {
+      "title": "",
+      "type": "object",
+      "properties": {
+        "ObjectType": {
+          "title": "Вид объекта экспертизы",
+          "type": "string",
+          "enum": [
+            "Проектная документация",
+            "Проектная документация и результаты инженерных изысканий",
+            "Результаты инженерных изысканий"
+          ]
         },
-        "Number" : {
-          "title" : "Номер заключения экспертизы",
-          "type" : "string"
+        "Number": {
+          "title": "Номер заключения экспертизы",
+          "type": "string"
         },
-        "Experts" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Expert" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "Position" : {
-                    "title" : "Должность",
-                    "type" : "string"
+        "Experts": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Expert": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "Position": {
+                    "title": "Должность",
+                    "type": "string"
                   },
-                  "FirstName" : {
-                    "title" : "Имя",
-                    "type" : "string"
+                  "FirstName": {
+                    "title": "Имя",
+                    "type": "string"
                   },
-                  "Activity" : {
-                    "title" : "Направление деятельности",
-                    "type" : "string"
+                  "Activity": {
+                    "title": "Направление деятельности",
+                    "type": "string"
                   },
-                  "LastName" : {
-                    "title" : "Фамилия",
-                    "type" : "string"
+                  "LastName": {
+                    "title": "Фамилия",
+                    "type": "string"
                   },
-                  "Patronymic" : {
-                    "title" : "Отчество",
-                    "type" : "string"
+                  "Patronymic": {
+                    "title": "Отчество",
+                    "type": "string"
                   }
                 },
-                "required" : [ "Position", "FirstName", "Activity", "LastName" ]
+                "required": [
+                  "Position",
+                  "FirstName",
+                  "Activity",
+                  "LastName"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "BudgetSources" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "BudgetSource" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "BudgetValue" : {
-                    "title" : "Размер финансирования, %",
-                    "type" : "number",
-                    "format" : "double"
+        "BudgetSources": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "BudgetSource": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "BudgetValue": {
+                    "title": "Размер финансирования, %",
+                    "type": "number",
+                    "format": "double"
                   },
-                  "UL" : {
-                    "title" : "",
-                    "type" : "object",
-                    "properties" : {
-                      "OGRN" : {
-                        "title" : "ОГРН",
-                        "type" : "string"
+                  "UL": {
+                    "title": "",
+                    "type": "object",
+                    "properties": {
+                      "OGRN": {
+                        "title": "ОГРН",
+                        "type": "string"
                       },
-                      "Email" : {
-                        "title" : "Адрес электронной почты",
-                        "type" : "string"
+                      "Email": {
+                        "title": "Адрес электронной почты",
+                        "type": "string"
                       },
-                      "Address" : {
-                        "title" : "Адрес",
-                        "type" : "string"
+                      "Address": {
+                        "title": "Адрес",
+                        "type": "string"
                       },
-                      "INN" : {
-                        "title" : "ИНН",
-                        "type" : "string"
+                      "INN": {
+                        "title": "ИНН",
+                        "type": "string"
                       },
-                      "Name" : {
-                        "title" : "Полное наименование",
-                        "type" : "string"
+                      "Name": {
+                        "title": "Полное наименование",
+                        "type": "string"
                       },
-                      "Location" : {
-                        "title" : "Место нахождения",
-                        "type" : "string"
+                      "Location": {
+                        "title": "Место нахождения",
+                        "type": "string"
                       }
                     },
-                    "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+                    "required": [
+                      "OGRN",
+                      "Email",
+                      "Address",
+                      "INN",
+                      "Name",
+                      "Location"
+                    ]
                   },
-                  "BudgetType" : {
-                    "title" : "Вид финансирования",
-                    "type" : "string",
-                    "enum" : [ "Бюджетные средства", "Средства юридических лиц указанных в ч.2 статьи 48.2 ГрК" ]
+                  "BudgetType": {
+                    "title": "Вид финансирования",
+                    "type": "string",
+                    "enum": [
+                      "Бюджетные средства",
+                      "Средства юридических лиц указанных в ч.2 статьи 48.2 ГрК"
+                    ]
                   },
-                  "BudgetLevel" : {
-                    "title" : "Уровень бюджета",
-                    "type" : "string",
-                    "enum" : [ "Федеральный", "Региональный", "Местный" ]
+                  "BudgetLevel": {
+                    "title": "Уровень бюджета",
+                    "type": "string",
+                    "enum": [
+                      "Федеральный",
+                      "Региональный",
+                      "Местный"
+                    ]
                   }
                 },
-                "required" : [ "BudgetType", "BudgetLevel" ]
+                "required": [
+                  "BudgetType",
+                  "BudgetLevel"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "Form" : {
-          "title" : "Форма заключения экспертизы",
-          "type" : "string",
-          "enum" : [ "Государственная экспертиза", "Негосударственная экспертиза" ]
+        "Form": {
+          "title": "Форма заключения экспертизы",
+          "type": "string",
+          "enum": [
+            "Государственная экспертиза",
+            "Негосударственная экспертиза"
+          ]
         },
-        "SpecialMarks" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "SpecialMark" : {
-              "type" : "array",
-              "items" : {
-                "title" : "",
-                "type" : "object",
-                "properties" : {
-                  "IntroductionDate" : {
-                    "title" : "Дата внесения сведений",
-                    "type" : "string",
-                    "format" : "date"
+        "SpecialMarks": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "SpecialMark": {
+              "type": "array",
+              "items": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "IntroductionDate": {
+                    "title": "Дата внесения сведений",
+                    "type": "string",
+                    "format": "date"
                   },
-                  "Text" : {
-                    "title" : "Текст отметки",
-                    "type" : "string"
+                  "Text": {
+                    "title": "Текст отметки",
+                    "type": "string"
                   }
                 },
-                "required" : [ "IntroductionDate", "Text" ]
+                "required": [
+                  "IntroductionDate",
+                  "Text"
+                ]
               }
             }
           },
-          "required" : [ ]
+          "required": []
         },
-        "Approver" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "Position" : {
-              "title" : "Должность",
-              "type" : "string"
+        "Approver": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "Position": {
+              "title": "Должность",
+              "type": "string"
             },
-            "FirstName" : {
-              "title" : "Имя",
-              "type" : "string"
+            "FirstName": {
+              "title": "Имя",
+              "type": "string"
             },
-            "LastName" : {
-              "title" : "Фамилия",
-              "type" : "string"
+            "LastName": {
+              "title": "Фамилия",
+              "type": "string"
             },
-            "Patronymic" : {
-              "title" : "Отчество",
-              "type" : "string"
+            "Patronymic": {
+              "title": "Отчество",
+              "type": "string"
             }
           },
-          "required" : [ "Position", "FirstName", "LastName" ]
+          "required": [
+            "Position",
+            "FirstName",
+            "LastName"
+          ]
         },
-        "ExpertOrganization" : {
-          "title" : "",
-          "type" : "object",
-          "properties" : {
-            "OGRN" : {
-              "title" : "ОГРН",
-              "type" : "string"
+        "ExpertOrganization": {
+          "title": "",
+          "type": "object",
+          "properties": {
+            "OGRN": {
+              "title": "ОГРН",
+              "type": "string"
             },
-            "Email" : {
-              "title" : "Адрес электронной почты",
-              "type" : "string"
+            "Email": {
+              "title": "Адрес электронной почты",
+              "type": "string"
             },
-            "Address" : {
-              "title" : "Адрес",
-              "type" : "string"
+            "Address": {
+              "title": "Адрес",
+              "type": "string"
             },
-            "INN" : {
-              "title" : "ИНН",
-              "type" : "string"
+            "INN": {
+              "title": "ИНН",
+              "type": "string"
             },
-            "Name" : {
-              "title" : "Полное наименование",
-              "type" : "string"
+            "Name": {
+              "title": "Полное наименование",
+              "type": "string"
             },
-            "Location" : {
-              "title" : "Место нахождения",
-              "type" : "string"
+            "Location": {
+              "title": "Место нахождения",
+              "type": "string"
             }
           },
-          "required" : [ "OGRN", "Email", "Address", "INN", "Name", "Location" ]
+          "required": [
+            "OGRN",
+            "Email",
+            "Address",
+            "INN",
+            "Name",
+            "Location"
+          ]
         },
-        "Date" : {
-          "title" : "Дата заключения экспертизы",
-          "type" : "string",
-          "format" : "date"
+        "Date": {
+          "title": "Дата заключения экспертизы",
+          "type": "string",
+          "format": "date"
         },
-        "Result" : {
-          "title" : "Результат проведенной экспертизы",
-          "type" : "string",
-          "enum" : [ "Положительное заключение", "Отрицательное заключение" ]
+        "Result": {
+          "title": "Результат проведенной экспертизы",
+          "type": "string",
+          "enum": [
+            "Положительное заключение",
+            "Отрицательное заключение"
+          ]
         },
-        "ObjectName" : {
-          "title" : "Наименование объекта экспертизы",
-          "type" : "string"
+        "ObjectName": {
+          "title": "Наименование объекта экспертизы",
+          "type": "string"
         }
       },
-      "required" : [ "ObjectType", "Number", "Form", "Date", "Result", "ObjectName" ]
+      "required": [
+        "ObjectType",
+        "Number",
+        "Form",
+        "Date",
+        "Result",
+        "ObjectName"
+      ]
     },
-    "PrintoutNumber" : {
-      "title" : "Номер выписки",
-      "type" : "string"
+    "PrintoutNumber": {
+      "title": "Номер выписки",
+      "type": "string"
     }
   },
-  "required" : [ "PrintoutCreateDate", "PrintoutNumber" ]
+  "required": [
+    "PrintoutCreateDate",
+    "PrintoutNumber"
+  ]
 }

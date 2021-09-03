@@ -129,7 +129,9 @@
       </xs:element>
       <xs:element name="SpecialMarks" type="egrz:SpecialMarksType">
         <xs:annotation>
-          <xs:documentation>1.5 Особые отметки, в том числе сведения о ранее выданных заключениях экспертизы в отношении проектной документации, подготовленной применительно к тому же объекту капитального строительства и (или) результатов инженерных изысканий, выполненных в отношении этого объекта капитального строительства</xs:documentation>
+          <xs:documentation>1.5 Особые отметки, в том числе сведения о ранее выданных заключениях экспертизы в отношении проектной документации, подготовленной применительно к тому же объекту капитального строительства и (или) результатов инженерных изысканий, выполненных в отношении этого объекта
+            капитального строительства
+          </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="BudgetSources" type="egrz:BudgetSourcesType">
@@ -312,7 +314,9 @@
 
   <xs:complexType name="SpecialMarksType">
     <xs:annotation>
-      <xs:documentation>1.5 Особые отметки, в том числе сведения о ранее выданных заключениях экспертизы в отношении проектной документации, подготовленной применительно к тому же объекту капитального строительства и (или) результатов инженерных изысканий, выполненных в отношении этого объекта капитального строительства</xs:documentation>
+      <xs:documentation>1.5 Особые отметки, в том числе сведения о ранее выданных заключениях экспертизы в отношении проектной документации, подготовленной применительно к тому же объекту капитального строительства и (или) результатов инженерных изысканий, выполненных в отношении этого объекта
+        капитального строительства
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="SpecialMark" type="egrz:SpecialMarkType" maxOccurs="unbounded">
@@ -428,7 +432,7 @@
       <xs:documentation>3.1 Сведения об индивидуальных предпринимателях и (или) юридических лицах, подготовивших технический отчет по результатам инженерных изысканий</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="RIITechnicalReportInfo" type="egrz:RIITechnicalReportInfoType" maxOccurs="unbounded" />
+      <xs:element name="RIITechnicalReportInfo" type="egrz:RIITechnicalReportInfoType" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="RIITechnicalReportInfoType">
@@ -618,8 +622,8 @@
       <xs:documentation>Проверка достоверности</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Проводилась" />
-      <xs:enumeration value="Не проводилась" />
+      <xs:enumeration value="Проводилась"/>
+      <xs:enumeration value="Не проводилась"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -628,8 +632,8 @@
       <xs:documentation>Результат проверки</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Положительный" />
-      <xs:enumeration value="Отрицательный" />
+      <xs:enumeration value="Положительный"/>
+      <xs:enumeration value="Отрицательный"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -694,8 +698,8 @@
       <xs:documentation>Признание проектной документации экономически эффективной</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Признано" />
-      <xs:enumeration value="Не признано" />
+      <xs:enumeration value="Признано"/>
+      <xs:enumeration value="Не признано"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -714,8 +718,8 @@
       <xs:documentation>Вид финансирования</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Бюджетные средства" />
-      <xs:enumeration value="Средства юридических лиц указанных в ч.2 статьи 48.2 ГрК" />
+      <xs:enumeration value="Бюджетные средства"/>
+      <xs:enumeration value="Средства юридических лиц указанных в ч.2 статьи 48.2 ГрК"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="BudgetLevelType">
@@ -723,9 +727,9 @@
       <xs:documentation>Уровень бюджета</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Федеральный" />
-      <xs:enumeration value="Региональный" />
-      <xs:enumeration value="Местный" />
+      <xs:enumeration value="Федеральный"/>
+      <xs:enumeration value="Региональный"/>
+      <xs:enumeration value="Местный"/>
     </xs:restriction>
   </xs:simpleType>
 

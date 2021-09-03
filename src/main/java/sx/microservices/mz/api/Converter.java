@@ -20,25 +20,25 @@ import java.io.StringWriter;
 
 public class Converter {
 
-    public Document toDocument(String xml) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setNamespaceAware(true);
-        documentBuilderFactory.setCoalescing(true);
-        documentBuilderFactory.setIgnoringElementContentWhitespace(true);
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        return documentBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
-    }
+  public Document toDocument(String xml) throws ParserConfigurationException, SAXException, IOException {
+    DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+    documentBuilderFactory.setNamespaceAware(true);
+    documentBuilderFactory.setCoalescing(true);
+    documentBuilderFactory.setIgnoringElementContentWhitespace(true);
+    DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+    return documentBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
+  }
 
-    public String toString(Document document) throws TransformerException {
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-        StringWriter sw = new StringWriter();
-        transformer.transform(new DOMSource(document), new StreamResult(sw));
-        return sw.toString();
-    }
+  public String toString(Document document) throws TransformerException {
+    Transformer transformer = TransformerFactory.newInstance().newTransformer();
+    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+    StringWriter sw = new StringWriter();
+    transformer.transform(new DOMSource(document), new StreamResult(sw));
+    return sw.toString();
+  }
 
-    public JSONObject toJson(Document document) throws TransformerException {
-        JSONObject jsonObject = XML.toJSONObject(toString(document));
-        return jsonObject.has("params") ? jsonObject.getJSONObject("params") : jsonObject;
-    }
+  public JSONObject toJson(Document document) throws TransformerException {
+    JSONObject jsonObject = XML.toJSONObject(toString(document));
+    return jsonObject.has("params") ? jsonObject.getJSONObject("params") : jsonObject;
+  }
 }

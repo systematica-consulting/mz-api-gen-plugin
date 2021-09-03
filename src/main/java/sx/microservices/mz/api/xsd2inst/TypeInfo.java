@@ -7,10 +7,10 @@ import java.util.List;
 
 @Data
 public class TypeInfo {
-    private String uuid;
-    private String type;
-    private QName qName;
-    private List<String> enumeration;
-    private String description;
-    private boolean required;
+  private String uuid;
+  private String type;
+  private QName qName;
+  private List<String> enumeration;
+  private String description;
+  private boolean required;
 }

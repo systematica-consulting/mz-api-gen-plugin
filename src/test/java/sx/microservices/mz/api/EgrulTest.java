@@ -57,7 +57,7 @@ public class EgrulTest {
   }
 
   @Test
-  public void fullMapTest() throws Exception{
+  public void fullMapTest() throws Exception {
     Converter converter = new Converter();
     XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
     XslTransformer transformer = new XslTransformer();
@@ -175,7 +175,6 @@ public class EgrulTest {
 
       res += "</" + attrName + ">";
     }
-
 
 
     if (asList) {

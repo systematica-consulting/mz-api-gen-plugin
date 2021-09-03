@@ -14,25 +14,25 @@ import java.util.Set;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SchemaBean {
-    private String title;
-    private Type type;
-    private Format format;
-    @JsonProperty("enum")
-    private List<String> enumeration;
-    private Map<String, SchemaBean> properties;
-    private Set<String> required;
+  private String title;
+  private Type type;
+  private Format format;
+  @JsonProperty("enum")
+  private List<String> enumeration;
+  private Map<String, SchemaBean> properties;
+  private Set<String> required;
 
-    private SchemaBean items;
+  private SchemaBean items;
 
 
-    @Override
-    public String toString() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        try {
-            return objectMapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+  @Override
+  public String toString() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    try {
+      return objectMapper.writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
     }
+  }
 }

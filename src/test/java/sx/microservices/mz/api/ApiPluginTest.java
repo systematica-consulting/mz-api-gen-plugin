@@ -7,19 +7,19 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class ApiPluginTest  {
+public class ApiPluginTest {
 
 
-    @Test
-    public void greetingTest(){
-        Project project = ProjectBuilder.builder().build();
-        project.getPluginManager().apply("mz-api-gen-plugin");
+  @Test
+  public void greetingTest() {
+    Project project = ProjectBuilder.builder().build();
+    project.getPluginManager().apply("mz-api-gen-plugin");
 
-        assertTrue(project.getPluginManager()
-                .hasPlugin("mz-api-gen-plugin"));
+    assertTrue(project.getPluginManager()
+      .hasPlugin("mz-api-gen-plugin"));
 
-        assertNotNull(project.getTasks().getByName("generateApi"));
-    }
+    assertNotNull(project.getTasks().getByName("generateApi"));
+  }
 
 
 }

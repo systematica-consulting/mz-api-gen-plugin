@@ -29,117 +29,117 @@ import java.util.UUID;
 
 public class ApiPlugin implements Plugin<Project> {
 
-    @Override
-    public void apply(Project project) {
-        Config config = project.getExtensions().create("apiGenerator", Config.class);
-        RequestConfig requestConfig = ((ExtensionAware) config).getExtensions().create("request", RequestConfig.class);
-        ResponseConfig responseConfig = ((ExtensionAware) config).getExtensions().create("response", ResponseConfig.class);
-        project.task("generateApi").doLast(task -> {
-            if (responseConfig.isFull()) {
-                SchemaBean schemaBean = generateResponse(responseConfig);
-                print(schemaBean, responseConfig.getOut());
-            }
-            if (requestConfig.isFull()) {
-                SchemaBean schemaBean = generateRequest(requestConfig);
-                print(schemaBean, requestConfig.getOut());
-            }
-        });
-    }
-
-
-    @SneakyThrows
-    public static SchemaBean generateResponse(ResponseConfig config){
-        Converter converter = new Converter();
-        XslTransformer transformer = new XslTransformer();
-        XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
-        JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
-
-        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
-
-        Document transformed = transformer.transform(xmlInstance.getDocument(), config.getTemplate());
-
-        removeJsonAttrs(transformed);
-
-        JSONObject jsonObject = converter.toJson(transformed);
-
-        return jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
-    }
-
-    @SneakyThrows
-    public static SchemaBean generateRequest(RequestConfig config){
-
-        Converter converter = new Converter();
-        JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
-        XslTransformer transformer = new XslTransformer();
-        XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
-
-        byte[] request = Util.getFileContent(config.getRequest());
-
-        Document document = converter.toDocument(new String(request));
-        setGuids(document);
-
-        Document transformed = transformer.transform(document, config.getTemplate());
-
-
-        XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
-
-
-        Map<String, String> requestMap = transformer.transformToMap(transformed);
-
-
-        Map<String, String> instanceMap = transformer.transformToMap(xmlInstance.getDocument());
-
-
-        Map<String, TypeInfo> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
-
-
-        JSONObject jsonObject = converter.toJson(document);
-
-        return jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
-
-    }
-
-    @SneakyThrows
-    private static void print(SchemaBean schema, String path){
-        Files.createDirectories(Paths.get(path).getParent());
-        PrintStream requestStream = new PrintStream(path, StandardCharsets.UTF_8);
-        requestStream.print(schema);
-        requestStream.close();
-    }
-
-    private static Map<String, TypeInfo> defineTypes(Map<String, String> requestMap, Map<String, String> instanceMap, Map<String, TypeInfo> types){
-        Map<String, TypeInfo> result = new HashMap<>();
-        requestMap.forEach((key, value) -> {
-            String instanceGuid = instanceMap.get(key);
-            TypeInfo type = types.get(instanceGuid);
-            if (type != null) {
-                result.put(value, type);
-            }
-        });
-        return result;
-    }
-
-
-    private static void removeJsonAttrs(Document document) throws XPathExpressionException{
-      XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[@_json]");
-      NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-      for (int i = 0; i< nodeList.getLength(); i++){
-        Element element = (Element)nodeList.item(i);
-        element.removeAttribute("_json");
+  @Override
+  public void apply(Project project) {
+    Config config = project.getExtensions().create("apiGenerator", Config.class);
+    RequestConfig requestConfig = ((ExtensionAware) config).getExtensions().create("request", RequestConfig.class);
+    ResponseConfig responseConfig = ((ExtensionAware) config).getExtensions().create("response", ResponseConfig.class);
+    project.task("generateApi").doLast(task -> {
+      if (responseConfig.isFull()) {
+        SchemaBean schemaBean = generateResponse(responseConfig);
+        print(schemaBean, responseConfig.getOut());
       }
+      if (requestConfig.isFull()) {
+        SchemaBean schemaBean = generateRequest(requestConfig);
+        print(schemaBean, requestConfig.getOut());
+      }
+    });
+  }
 
+
+  @SneakyThrows
+  public static SchemaBean generateResponse(ResponseConfig config) {
+    Converter converter = new Converter();
+    XslTransformer transformer = new XslTransformer();
+    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
+    JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
+
+    XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
+
+    Document transformed = transformer.transform(xmlInstance.getDocument(), config.getTemplate());
+
+    removeJsonAttrs(transformed);
+
+    JSONObject jsonObject = converter.toJson(transformed);
+
+    return jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
+  }
+
+  @SneakyThrows
+  public static SchemaBean generateRequest(RequestConfig config) {
+
+    Converter converter = new Converter();
+    JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
+    XslTransformer transformer = new XslTransformer();
+    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
+
+    byte[] request = Util.getFileContent(config.getRequest());
+
+    Document document = converter.toDocument(new String(request));
+    setGuids(document);
+
+    Document transformed = transformer.transform(document, config.getTemplate());
+
+
+    XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
+
+
+    Map<String, String> requestMap = transformer.transformToMap(transformed);
+
+
+    Map<String, String> instanceMap = transformer.transformToMap(xmlInstance.getDocument());
+
+
+    Map<String, TypeInfo> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
+
+
+    JSONObject jsonObject = converter.toJson(document);
+
+    return jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
+
+  }
+
+  @SneakyThrows
+  private static void print(SchemaBean schema, String path) {
+    Files.createDirectories(Paths.get(path).getParent());
+    PrintStream requestStream = new PrintStream(path, StandardCharsets.UTF_8);
+    requestStream.print(schema);
+    requestStream.close();
+  }
+
+  private static Map<String, TypeInfo> defineTypes(Map<String, String> requestMap, Map<String, String> instanceMap, Map<String, TypeInfo> types) {
+    Map<String, TypeInfo> result = new HashMap<>();
+    requestMap.forEach((key, value) -> {
+      String instanceGuid = instanceMap.get(key);
+      TypeInfo type = types.get(instanceGuid);
+      if (type != null) {
+        result.put(value, type);
+      }
+    });
+    return result;
+  }
+
+
+  private static void removeJsonAttrs(Document document) throws XPathExpressionException {
+    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[@_json]");
+    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      Element element = (Element) nodeList.item(i);
+      element.removeAttribute("_json");
     }
 
+  }
 
-    private  static void setGuids(Document document) throws XPathExpressionException {
-        XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[count(./*) = 0]");
-        NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-        for (int i = 0; i< nodeList.getLength(); i++){
-            Node node = nodeList.item(i);
 
-            node.setTextContent(UUID.randomUUID().toString());
-        }
+  private static void setGuids(Document document) throws XPathExpressionException {
+    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[count(./*) = 0]");
+    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      Node node = nodeList.item(i);
+
+      node.setTextContent(UUID.randomUUID().toString());
     }
+  }
 
 
 }

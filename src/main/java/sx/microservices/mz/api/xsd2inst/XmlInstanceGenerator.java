@@ -24,63 +24,63 @@ import java.util.Set;
 
 public class XmlInstanceGenerator {
 
-    private final Converter converter;
+  private final Converter converter;
 
-    public XmlInstanceGenerator(Converter converter) {
-        this.converter = converter;
+  public XmlInstanceGenerator(Converter converter) {
+    this.converter = converter;
+  }
+
+  public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
+
+    Path path = Paths.get(schemaPath);
+    if (!Files.exists(path)) {
+      URL systemResource = ClassLoader.getSystemResource(schemaPath);
+      if (systemResource == null) {
+        throw new FileNotFoundException(schemaPath + " not found");
+      }
+      path = new File(systemResource.getFile()).toPath();
     }
-
-    public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
-
-        Path path = Paths.get(schemaPath);
-        if (!Files.exists(path)){
-            URL systemResource = ClassLoader.getSystemResource(schemaPath);
-            if (systemResource == null){
-                throw new FileNotFoundException(schemaPath + " not found");
-            }
-            path = new File(systemResource.getFile()).toPath();
+    String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
+      .map(p -> {
+        try {
+          return Files.readString(p);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
         }
-        String[] schemas = Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
-                .map(p -> {
-                    try {
-                        return Files.readString(p);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toArray(String[]::new);
+      })
+      .toArray(String[]::new);
 
-        SchemaInstanceGenerator.Xsd2InstOptions options = new SchemaInstanceGenerator.Xsd2InstOptions();
-        options.setNetworkDownloads(false);
-        options.setNopvr(false);
-        options.setNoupa(true);
+    SchemaInstanceGenerator.Xsd2InstOptions options = new SchemaInstanceGenerator.Xsd2InstOptions();
+    options.setNetworkDownloads(false);
+    options.setNopvr(false);
+    options.setNoupa(true);
 
-        XmlInstance xmlInstance = SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
-        Document document = converter.toDocument(xmlInstance.getXml());
-        xmlInstance.setDocument(document);
-        replaceComments(document);
+    XmlInstance xmlInstance = SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
+    Document document = converter.toDocument(xmlInstance.getXml());
+    xmlInstance.setDocument(document);
+    replaceComments(document);
 
-        return xmlInstance;
-    }
+    return xmlInstance;
+  }
 
 
-    private void replaceComments(Document document) throws XPathExpressionException {
-        XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//comment()");
-        NodeList nodeList;
-        do {
-            nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                if (node.getTextContent() != null && node.getTextContent().contains("repetitions:")) {
-                    Node cloneNode = node.getNextSibling().getNextSibling().cloneNode(true);
-                    Node parentNode = node.getParentNode();
-                    parentNode.appendChild(cloneNode);
-                    parentNode.removeChild(node);
-                } else {
-                    Node parentNode = node.getParentNode();
-                    parentNode.removeChild(node);
-                }
-            }
-        }while (nodeList.getLength() != 0);
-    }
+  private void replaceComments(Document document) throws XPathExpressionException {
+    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//comment()");
+    NodeList nodeList;
+    do {
+      nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+      for (int i = 0; i < nodeList.getLength(); i++) {
+        Node node = nodeList.item(i);
+        if (node.getTextContent() != null && node.getTextContent().contains("repetitions:")) {
+          Node cloneNode = node.getNextSibling().getNextSibling().cloneNode(true);
+          Node parentNode = node.getParentNode();
+          parentNode.appendChild(cloneNode);
+          parentNode.removeChild(node);
+        } else {
+          Node parentNode = node.getParentNode();
+          parentNode.removeChild(node);
+        }
+      }
+    } while (nodeList.getLength() != 0);
+  }
 }
