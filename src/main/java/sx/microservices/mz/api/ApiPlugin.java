@@ -1,6 +1,7 @@
 package sx.microservices.mz.api;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
@@ -9,8 +10,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sx.microservices.mz.api.schema.FromXmlSchemaGenerator;
 import sx.microservices.mz.api.schema.JsonSchemaGenerator;
 import sx.microservices.mz.api.schema.SchemaBean;
+import sx.microservices.mz.api.xml.XmlSchema;
+import sx.microservices.mz.api.xml.XmlSchemaGenerator;
 import sx.microservices.mz.api.xsd2inst.TypeInfo;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
 import sx.microservices.mz.api.xsd2inst.XmlInstanceGenerator;
@@ -27,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Slf4j
 public class ApiPlugin implements Plugin<Project> {
 
   @Override
@@ -52,7 +57,6 @@ public class ApiPlugin implements Plugin<Project> {
     Converter converter = new Converter();
     XslTransformer transformer = new XslTransformer();
     XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
-    JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
 
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
@@ -60,9 +64,42 @@ public class ApiPlugin implements Plugin<Project> {
 
     removeJsonAttrs(transformed);
 
-    JSONObject jsonObject = converter.toJson(transformed);
+    XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(xmlInstance.getTypes());
+    XmlSchema xmlSchema = xmlSchemaGenerator.generate(transformed.getDocumentElement());
 
-    return jsonSchemaGenerator.generate(jsonObject, "Ответ", xmlInstance.getTypes());
+    FromXmlSchemaGenerator generator = new FromXmlSchemaGenerator();
+    return generator.generate(xmlSchema);
+
+    /*
+
+    Map<String, String> smevMap = transformer.transformToMap(xmlInstance.getDocument());
+
+    Map<String, String> guidMap = new HashMap<>();
+    smevMap.forEach((k,v) -> guidMap.put(v,k));
+
+    Map<String, String> paramsMap = transformer.transformToMap(transformed);
+
+    Map<String, String> mapping = paramsMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> guidMap.get(e.getValue())));
+
+    HashSet<String> paramsKeys = new HashSet<>(mapping.keySet());
+    paramsKeys.forEach(k -> {
+      while (!k.isEmpty()){
+        k = k.substring(0, k.lastIndexOf("/"));
+        mapping.putIfAbsent(k, "");
+      }
+    });
+
+    int max = mapping.keySet().stream().map(String::length).mapToInt(e -> e).max().orElseThrow();
+
+    Function<String, String> getDelim = s ->{
+      int l = max - s.length();
+      return " ".repeat(l);
+    };
+
+    String collect = mapping.entrySet().stream().sorted(Map.Entry.comparingByKey())
+      .map(e -> e.getKey() +getDelim.apply(e.getKey()) + e.getValue()).collect(Collectors.joining("\n"));
+
+     */
   }
 
   @SneakyThrows

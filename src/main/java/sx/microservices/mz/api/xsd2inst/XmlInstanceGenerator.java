@@ -58,7 +58,7 @@ public class XmlInstanceGenerator {
     XmlInstance xmlInstance = SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
     Document document = converter.toDocument(xmlInstance.getXml());
     xmlInstance.setDocument(document);
-    replaceComments(document);
+    //replaceComments(document);
 
     return xmlInstance;
   }

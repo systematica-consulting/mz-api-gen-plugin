@@ -37,6 +37,7 @@
       "format": "date"
     },
     "guid": {
+      "title": "",
       "type": "string"
     }
   },

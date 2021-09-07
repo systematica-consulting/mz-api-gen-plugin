@@ -9,6 +9,8 @@ enum Type {
 
   public static Type fromXmlType(String type) {
     switch (type) {
+      case "XmlObject":
+        return object;
       case "XmlFloat":
       case "XmlDouble":
       case "XmlDecimal":
@@ -33,5 +35,9 @@ enum Type {
     } else {
       return string;
     }
+  }
+
+  public boolean isSimple(){
+    return this == string || this == number || this == integer || this == _boolean;
   }
 }

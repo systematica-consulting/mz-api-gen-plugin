@@ -1,19 +1,19 @@
 {
-  "title": "Ответ",
+  "title": "Ответ на запрос на получение полной выписки из реестра заключений",
   "type": "object",
   "properties": {
     "InfoForExpertisePDFull": {
-      "title": "",
+      "title": "Подраздел 2. Сведения, содержащиеся в документах, представленных для проведения экспертизы проектной документации",
       "type": "object",
       "properties": {
         "PlannerOrganization": {
-          "title": "",
+          "title": "2.6 Cведения об индивидуальных предпринимателях и (или) юридических лицах, подготовивших проектную документацию",
           "type": "object",
           "properties": {
             "UL": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация об организации (юридическом лице)",
                 "type": "object",
                 "properties": {
                   "OGRN": {
@@ -54,7 +54,7 @@
             "IP": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация об ИП",
                 "type": "object",
                 "properties": {
                   "Email": {
@@ -92,20 +92,23 @@
               }
             }
           },
-          "required": []
+          "required": [
+            "UL",
+            "IP"
+          ]
         },
         "Address": {
           "title": "Адрес (местоположение)",
           "type": "string"
         },
         "PrimaryTEPs": {
-          "title": "",
+          "title": "2.1 Основные проектируемые технико-экономические показатели",
           "type": "object",
           "properties": {
             "TEP": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Технико-экономический показатель",
                 "type": "object",
                 "properties": {
                   "Value": {
@@ -124,16 +127,18 @@
               }
             }
           },
-          "required": []
+          "required": [
+            "TEP"
+          ]
         },
         "CapitalBuildings": {
-          "title": "",
+          "title": "2.2 Сведения об объектах капитального строительства",
           "type": "object",
           "properties": {
             "CapitalBuilding": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Объект капитального строительства",
                 "type": "object",
                 "properties": {
                   "Address": {
@@ -141,13 +146,13 @@
                     "type": "string"
                   },
                   "SecondaryTEPs": {
-                    "title": "",
+                    "title": "Дополнительные проектируемые технико-экономические показатели",
                     "type": "object",
                     "properties": {
                       "TEP": {
                         "type": "array",
                         "items": {
-                          "title": "",
+                          "title": "Технико-экономический показатель",
                           "type": "object",
                           "properties": {
                             "Value": {
@@ -166,7 +171,9 @@
                         }
                       }
                     },
-                    "required": []
+                    "required": [
+                      "TEP"
+                    ]
                   },
                   "Purpose": {
                     "title": "Функциональное назначение объекта",
@@ -179,16 +186,19 @@
                 },
                 "required": [
                   "Address",
+                  "SecondaryTEPs",
                   "Purpose",
                   "Name"
                 ]
               }
             }
           },
-          "required": []
+          "required": [
+            "CapitalBuilding"
+          ]
         },
         "Conditions": {
-          "title": "",
+          "title": "2.4 Сведения о природных и иных условиях территории, на которой планируется осуществлять строительство",
           "type": "object",
           "properties": {
             "SeismicIntensity": {
@@ -240,7 +250,7 @@
           "type": "string"
         },
         "EstimatePriceCheck": {
-          "title": "",
+          "title": "2.3 Сведения о проверке достоверности определения сметной стоимости",
           "type": "object",
           "properties": {
             "ConclusionNumber": {
@@ -274,11 +284,11 @@
           ]
         },
         "CapitalBuildingsEstimatePrice": {
-          "title": "",
+          "title": "2.3 Сметная стоимость объекта капитального строительства",
           "type": "object",
           "properties": {
             "CurrentPrices": {
-              "title": "",
+              "title": "В текущем уровне цен на момент прохождения экспертизы",
               "type": "object",
               "properties": {
                 "TotalPrice": {
@@ -298,7 +308,7 @@
               ]
             },
             "BasePrices": {
-              "title": "",
+              "title": "В базовых ценах 01.01.2001",
               "type": "object",
               "properties": {
                 "TotalPrice": {
@@ -312,10 +322,13 @@
               ]
             }
           },
-          "required": []
+          "required": [
+            "CurrentPrices",
+            "BasePrices"
+          ]
         },
         "PreviousExpertiseResults": {
-          "title": "",
+          "title": "2.7 Cведения об использовании при подготовке проектной документации проектной документации повторного использования, в том числе экономически эффективной проектной документации",
           "type": "object",
           "properties": {
             "Number": {
@@ -334,7 +347,7 @@
           ]
         },
         "ExpertiseResultEconomyEfficiencyInfo": {
-          "title": "",
+          "title": "2.8 Сведения о признании проектной документации экономически эффективной проектной документацией повторного использования в соответствии с решением Министерства строительства и жилищнокоммунального хозяйства Российской Федерации",
           "type": "object",
           "properties": {
             "Number": {
@@ -360,7 +373,7 @@
           ]
         },
         "RightsOwner": {
-          "title": "",
+          "title": "2.9 Сведения о лице, которому принадлежит исключительное право на проектную документацию либо право на ее многократное использование, в том числе для подготовки на ее основе проектной документации",
           "type": "object",
           "properties": {
             "PublicFormationName": {
@@ -368,7 +381,7 @@
               "type": "string"
             },
             "UL": {
-              "title": "",
+              "title": "Информация об организации (юридическом лице)",
               "type": "object",
               "properties": {
                 "OGRN": {
@@ -413,11 +426,11 @@
           "type": "string"
         },
         "DeveloperOrganization": {
-          "title": "",
+          "title": "2.5 Cведения о застройщике (техническом заказчике), обеспечившем подготовку проектной документации",
           "type": "object",
           "properties": {
             "FL": {
-              "title": "",
+              "title": "Информация о ФЛ",
               "type": "object",
               "properties": {
                 "Snils": {
@@ -454,7 +467,7 @@
               ]
             },
             "UL": {
-              "title": "",
+              "title": "Информация об организации (юридическом лице)",
               "type": "object",
               "properties": {
                 "OGRN": {
@@ -492,7 +505,7 @@
               ]
             },
             "IP": {
-              "title": "",
+              "title": "Информация об ИП",
               "type": "object",
               "properties": {
                 "Email": {
@@ -529,17 +542,31 @@
               ]
             }
           },
-          "required": []
+          "required": [
+            "FL",
+            "UL",
+            "IP"
+          ]
         }
       },
       "required": [
-        "ObjectPurpose",
+        "PlannerOrganization",
         "Address",
-        "CapitalBuildingName"
+        "PrimaryTEPs",
+        "CapitalBuildings",
+        "Conditions",
+        "ObjectPurpose",
+        "EstimatePriceCheck",
+        "CapitalBuildingsEstimatePrice",
+        "PreviousExpertiseResults",
+        "ExpertiseResultEconomyEfficiencyInfo",
+        "RightsOwner",
+        "CapitalBuildingName",
+        "DeveloperOrganization"
       ]
     },
     "RequesterInfo": {
-      "title": "",
+      "title": "Сведения о лице, по запросу которого предоставляется выписка",
       "type": "object",
       "properties": {
         "RequestReceiveDate": {
@@ -548,7 +575,7 @@
           "format": "date"
         },
         "FL": {
-          "title": "",
+          "title": "Информация о ФЛ",
           "type": "object",
           "properties": {
             "Snils": {
@@ -585,7 +612,7 @@
           ]
         },
         "UL": {
-          "title": "",
+          "title": "Информация об организации (юридическом лице)",
           "type": "object",
           "properties": {
             "OGRN": {
@@ -623,7 +650,7 @@
           ]
         },
         "IP": {
-          "title": "",
+          "title": "Информация об ИП",
           "type": "object",
           "properties": {
             "Email": {
@@ -661,7 +688,10 @@
         }
       },
       "required": [
-        "RequestReceiveDate"
+        "RequestReceiveDate",
+        "FL",
+        "UL",
+        "IP"
       ]
     },
     "PrintoutCreateDate": {
@@ -670,17 +700,17 @@
       "format": "date"
     },
     "InfoForExpertiseRIIFull": {
-      "title": "",
+      "title": "Подраздел 3. Сведения, содержащиеся в документах, представленных для проведения экспертизы результатов инженерных изысканий",
       "type": "object",
       "properties": {
         "RIIDeveloperOrganization": {
-          "title": "",
+          "title": "3.2 Сведения о застройщике (техническом заказчике), обеспечившем проведение инженерных изысканий",
           "type": "object",
           "properties": {
             "FL": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация о ФЛ",
                 "type": "object",
                 "properties": {
                   "Snils": {
@@ -720,7 +750,7 @@
             "UL": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация об организации (юридическом лице)",
                 "type": "object",
                 "properties": {
                   "OGRN": {
@@ -761,7 +791,7 @@
             "IP": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация об ИП",
                 "type": "object",
                 "properties": {
                   "Email": {
@@ -799,20 +829,24 @@
               }
             }
           },
-          "required": []
+          "required": [
+            "FL",
+            "UL",
+            "IP"
+          ]
         },
         "RegionLocation": {
           "title": "Местоположение района",
           "type": "string"
         },
         "RIITechnicalReportOrganizations": {
-          "title": "",
+          "title": "3.1 Сведения об индивидуальных предпринимателях и (или) юридических лицах, подготовивших технический отчет по результатам инженерных изысканий",
           "type": "object",
           "properties": {
             "RIITechnicalReportInfo": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Сведения об индивидуальных предпринимателях и (или) юридических лицах, подготовивших технический отчет по результатам инженерных изысканий",
                 "type": "object",
                 "properties": {
                   "TechnicalReportName": {
@@ -827,7 +861,7 @@
                   "UL": {
                     "type": "array",
                     "items": {
-                      "title": "",
+                      "title": "Информация об организации (юридическом лице)",
                       "type": "object",
                       "properties": {
                         "OGRN": {
@@ -868,7 +902,7 @@
                   "IP": {
                     "type": "array",
                     "items": {
-                      "title": "",
+                      "title": "Информация об ИП",
                       "type": "object",
                       "properties": {
                         "Email": {
@@ -908,20 +942,26 @@
                 },
                 "required": [
                   "TechnicalReportName",
-                  "TechnicalReportDate"
+                  "TechnicalReportDate",
+                  "UL",
+                  "IP"
                 ]
               }
             }
           },
-          "required": []
+          "required": [
+            "RIITechnicalReportInfo"
+          ]
         }
       },
       "required": [
-        "RegionLocation"
+        "RIIDeveloperOrganization",
+        "RegionLocation",
+        "RIITechnicalReportOrganizations"
       ]
     },
     "ExpertiseConclusionFull": {
-      "title": "",
+      "title": "Подраздел 1. Заключение экспертизы",
       "type": "object",
       "properties": {
         "ObjectType": {
@@ -938,13 +978,13 @@
           "type": "string"
         },
         "Experts": {
-          "title": "",
+          "title": "1.3 Сведения об экспертах, подписавших заключение",
           "type": "object",
           "properties": {
             "Expert": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Информация об эксперте, подписавшем заключение",
                 "type": "object",
                 "properties": {
                   "Position": {
@@ -977,16 +1017,18 @@
               }
             }
           },
-          "required": []
+          "required": [
+            "Expert"
+          ]
         },
         "BudgetSources": {
-          "title": "",
+          "title": "1.6 Источник финансирования",
           "type": "object",
           "properties": {
             "BudgetSource": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "1.6 Источник финансирования",
                 "type": "object",
                 "properties": {
                   "BudgetValue": {
@@ -995,7 +1037,7 @@
                     "format": "double"
                   },
                   "UL": {
-                    "title": "",
+                    "title": "Реквизиты ЮЛ",
                     "type": "object",
                     "properties": {
                       "OGRN": {
@@ -1051,13 +1093,16 @@
                   }
                 },
                 "required": [
+                  "UL",
                   "BudgetType",
                   "BudgetLevel"
                 ]
               }
             }
           },
-          "required": []
+          "required": [
+            "BudgetSource"
+          ]
         },
         "Form": {
           "title": "Форма заключения экспертизы",
@@ -1068,13 +1113,13 @@
           ]
         },
         "SpecialMarks": {
-          "title": "",
+          "title": "1.5 Особые отметки, в том числе сведения о ранее выданных заключениях экспертизы в отношении проектной документации, подготовленной применительно к тому же объекту капитального строительства и (или) результатов инженерных изысканий, выполненных в отношении этого объекта\n            капитального строительства",
           "type": "object",
           "properties": {
             "SpecialMark": {
               "type": "array",
               "items": {
-                "title": "",
+                "title": "Особая отметка",
                 "type": "object",
                 "properties": {
                   "IntroductionDate": {
@@ -1094,10 +1139,12 @@
               }
             }
           },
-          "required": []
+          "required": [
+            "SpecialMark"
+          ]
         },
         "Approver": {
-          "title": "",
+          "title": "1.4 Сведения о лице, утвердившем заключение экспертизы",
           "type": "object",
           "properties": {
             "Position": {
@@ -1124,7 +1171,7 @@
           ]
         },
         "ExpertOrganization": {
-          "title": "",
+          "title": "1.2 Сведения об экспертной организации",
           "type": "object",
           "properties": {
             "OGRN": {
@@ -1182,7 +1229,12 @@
       "required": [
         "ObjectType",
         "Number",
+        "Experts",
+        "BudgetSources",
         "Form",
+        "SpecialMarks",
+        "Approver",
+        "ExpertOrganization",
         "Date",
         "Result",
         "ObjectName"
@@ -1194,7 +1246,11 @@
     }
   },
   "required": [
+    "InfoForExpertisePDFull",
+    "RequesterInfo",
     "PrintoutCreateDate",
+    "InfoForExpertiseRIIFull",
+    "ExpertiseConclusionFull",
     "PrintoutNumber"
   ]
 }

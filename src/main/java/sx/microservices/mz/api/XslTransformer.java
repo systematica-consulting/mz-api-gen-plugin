@@ -51,6 +51,9 @@ public class XslTransformer {
       String[] parts = s.split("=");
       if (parts.length == 2) {
         result.put(parts[0], parts[1]);
+      }else {
+        //todo
+        System.out.println("ds");
       }
     });
 

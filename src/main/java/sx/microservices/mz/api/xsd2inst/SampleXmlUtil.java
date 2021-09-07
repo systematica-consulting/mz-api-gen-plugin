@@ -847,14 +847,55 @@ public class SampleXmlUtil {
     if (elementType.isSimpleType() || elementType.isURType() ||
       elementType.getContentType() == SchemaType.SIMPLE_CONTENT) {
       String uuid = xmlc.getDomNode().getFirstChild().getNodeValue();
-      putType(uuid, elementType, element);
+      putType(uuid, elementType, element, xmlc);
+    }else {
+      putElementInfo(elementType, element, xmlc);
     }
 
     xmlc.toNextToken();
 
   }
 
-  private void putType(String uuid, SchemaType elementType, SchemaAnnotated element) {
+  private void putElementInfo(SchemaType elementType, SchemaLocalElement element, XmlCursor cursor){
+    String uuid = UUID.randomUUID().toString();
+    boolean required = element.getMinOccurs().intValue() > 0;
+    boolean list = element.getMaxOccurs() == null || element.getMaxOccurs().intValue() > 1;
+
+    String description = retrieveDescription(element);
+    if (description == null) {
+      description = retrieveDescription(elementType);
+    }
+
+    TypeInfo typeInfo = new TypeInfo();
+    typeInfo.setUuid(uuid);
+    typeInfo.setRequired(required);
+    typeInfo.setList(list);
+    typeInfo.setType("XmlObject");
+    typeInfo.setDescription(description);
+    typeInfo.setElementAddress(getElementAddress(cursor));
+
+    types.put(uuid, typeInfo);
+  }
+
+  private String getElementAddress(XmlCursor cursor){
+    StringBuilder result = new StringBuilder();
+    if (!cursor.isAttr()){
+      Node node = cursor.getDomNode();
+      do {
+        result
+          .insert(0, node.getNodeName())
+          .insert(0, "/");
+        node = node.getParentNode();
+      }while (node.getLocalName() != null);
+    }else {
+      //todo attributes
+      System.out.println("d");
+    }
+    return result.toString();
+  }
+
+
+  private void putType(String uuid, SchemaType elementType, SchemaAnnotated element, XmlCursor cursor) {
     String type;
     SchemaType primitiveType = elementType.getPrimitiveType();
     if (primitiveType == null) { // всякие unions
@@ -892,11 +933,14 @@ public class SampleXmlUtil {
     SchemaField field = (SchemaField) element;
 
     boolean required = field.getMinOccurs().intValue() > 0;
+    boolean list = field.getMaxOccurs() == null || field.getMaxOccurs().intValue() > 1;
 
     typeInfo.setUuid(uuid);
     typeInfo.setDescription(description);
     typeInfo.setType(type);
     typeInfo.setRequired(required);
+    typeInfo.setList(list);
+    typeInfo.setElementAddress(getElementAddress(cursor));
     types.put(uuid, typeInfo);
   }
 
@@ -969,7 +1013,7 @@ public class SampleXmlUtil {
       String defaultValue = attr.getDefaultText();
       String uuid = sampleDataForSimpleType(attr.getType());
       xmlc.insertAttributeWithValue(attr.getName(), uuid);
-      putType(uuid, attr.getType(), attr);
+      putType(uuid, attr.getType(), attr, xmlc);
     }
   }
 

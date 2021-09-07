@@ -9,8 +9,9 @@ import java.util.List;
 public class TypeInfo {
   private String uuid;
   private String type;
-  private QName qName;
+  private String elementAddress;
   private List<String> enumeration;
   private String description;
   private boolean required;
+  private boolean list;
 }
