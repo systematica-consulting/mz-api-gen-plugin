@@ -20,7 +20,7 @@ public class XmlSchema {
     if (children == null){
       children = new HashMap<>();
     }
-    children.put(name, schema);
+    children.putIfAbsent(name, schema);
   }
 
 

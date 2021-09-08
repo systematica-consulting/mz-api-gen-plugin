@@ -1,15 +1,15 @@
 {
-  "title": "Запрос",
+  "title": "Запрос на получение полной выписки из реестра заключений",
   "type": "object",
   "properties": {
     "SignedExpertiseDocuments": {
-      "title": "",
+      "title": "Подписанные вложения в виде документов, подписанных УКЭП, подтверждающие право на получения сведений",
       "type": "object",
       "properties": {
         "DetachedSignAttachment": {
           "type": "array",
           "items": {
-            "title": "",
+            "title": "Вложение с открепленной ЭЦП",
             "type": "object",
             "properties": {
               "Signature": {
@@ -25,7 +25,9 @@
           }
         }
       },
-      "required": []
+      "required": [
+        "DetachedSignAttachment"
+      ]
     },
     "ExpertiseResultNumber": {
       "title": "Номер заключения экспертизы",
@@ -42,6 +44,7 @@
     }
   },
   "required": [
+    "SignedExpertiseDocuments",
     "ExpertiseResultNumber",
     "ExpertiseResultDate"
   ]

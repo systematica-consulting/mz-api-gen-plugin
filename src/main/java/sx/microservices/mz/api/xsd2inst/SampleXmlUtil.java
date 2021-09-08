@@ -872,24 +872,22 @@ public class SampleXmlUtil {
     typeInfo.setList(list);
     typeInfo.setType("XmlObject");
     typeInfo.setDescription(description);
-    typeInfo.setElementAddress(getElementAddress(cursor));
+    typeInfo.setElementAddress(getElementAddress(cursor, element));
 
     types.put(uuid, typeInfo);
   }
 
-  private String getElementAddress(XmlCursor cursor){
+  private String getElementAddress(XmlCursor cursor, SchemaField element){
     StringBuilder result = new StringBuilder();
-    if (!cursor.isAttr()){
-      Node node = cursor.getDomNode();
-      do {
-        result
-          .insert(0, node.getNodeName())
-          .insert(0, "/");
-        node = node.getParentNode();
-      }while (node.getLocalName() != null);
-    }else {
-      //todo attributes
-      System.out.println("d");
+    Node node = cursor.getDomNode();
+    do {
+      result
+        .insert(0, node.getNodeName())
+        .insert(0, "/");
+      node = node.getParentNode();
+    }while (node.getLocalName() != null);
+    if (element.isAttribute()){
+      result.append("/@").append(element.getName());
     }
     return result.toString();
   }
@@ -940,7 +938,7 @@ public class SampleXmlUtil {
     typeInfo.setType(type);
     typeInfo.setRequired(required);
     typeInfo.setList(list);
-    typeInfo.setElementAddress(getElementAddress(cursor));
+    typeInfo.setElementAddress(getElementAddress(cursor, field));
     types.put(uuid, typeInfo);
   }
 

@@ -5,12 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
-import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sx.microservices.mz.api.schema.FromXmlSchemaGenerator;
 import sx.microservices.mz.api.schema.JsonSchemaGenerator;
 import sx.microservices.mz.api.schema.SchemaBean;
 import sx.microservices.mz.api.xml.XmlSchema;
@@ -30,6 +28,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ApiPlugin implements Plugin<Project> {
@@ -67,7 +66,7 @@ public class ApiPlugin implements Plugin<Project> {
     XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(xmlInstance.getTypes());
     XmlSchema xmlSchema = xmlSchemaGenerator.generate(transformed.getDocumentElement());
 
-    FromXmlSchemaGenerator generator = new FromXmlSchemaGenerator();
+    JsonSchemaGenerator generator = new JsonSchemaGenerator();
     return generator.generate(xmlSchema);
 
     /*
@@ -120,7 +119,6 @@ public class ApiPlugin implements Plugin<Project> {
 
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
-
     Map<String, String> requestMap = transformer.transformToMap(transformed);
 
 
@@ -129,12 +127,17 @@ public class ApiPlugin implements Plugin<Project> {
 
     Map<String, TypeInfo> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
 
+    Map<String, TypeInfo> addressTypeMap = xmlInstance.getTypes().values().stream().collect(Collectors.toMap(TypeInfo::getElementAddress, t -> t));
 
-    JSONObject jsonObject = converter.toJson(document);
+    XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(types, addressTypeMap);
+    XmlSchema xmlSchema = xmlSchemaGenerator.generate(document.getDocumentElement());
 
-    return jsonSchemaGenerator.generate(jsonObject, "Запрос", types);
+
+    JsonSchemaGenerator generator = new JsonSchemaGenerator();
+    return generator.generate(xmlSchema);
 
   }
+
 
   @SneakyThrows
   private static void print(SchemaBean schema, String path) {
