@@ -1,5 +1,4 @@
 {
-  "title": "Ответ",
   "type": "object",
   "properties": {
     "FamilyName": {
@@ -15,29 +14,26 @@
       "format": "double"
     },
     "messageId": {
+      "title": "Идентификатор запроса в системе СМЭВ",
       "type": "string"
     },
     "Payments": {
-      "title": "",
       "type": "object",
       "properties": {
         "Payment": {
           "type": "array",
           "items": {
-            "title": "",
             "type": "object",
             "properties": {
               "Type": {
                 "type": "string"
               },
               "Payments": {
-                "title": "",
                 "type": "object",
                 "properties": {
                   "Payment": {
                     "type": "array",
                     "items": {
-                      "title": "",
                       "type": "object",
                       "properties": {
                         "Type": {
@@ -70,12 +66,15 @@
             },
             "required": [
               "Type",
+              "Payments",
               "Sum"
             ]
           }
         }
       },
-      "required": []
+      "required": [
+        "Payment"
+      ]
     },
     "ActualDate": {
       "type": "string",

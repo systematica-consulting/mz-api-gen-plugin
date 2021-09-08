@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 import sx.microservices.mz.api.xsd2inst.TypeInfo;
 
 import java.util.*;
@@ -63,7 +62,7 @@ public class XmlSchemaGenerator {
     }
     if (count == 0){
       String guid = element.getTextContent();
-      xmlSchema.setTypeGuid(guid);
+      xmlSchema.setElementValue(guid);
       xmlSchema.setType(guidTypeMap.get(guid));
     }
 
@@ -93,26 +92,64 @@ public class XmlSchemaGenerator {
       String address = findCommonAddress(addresses);
 
       TypeInfo typeInfo = addressTypeMap.get(address);
-      //может быть такое, что не нашли тип, тогда тип - Object
       schema.setType(typeInfo);
     }else if (schema.getType() == null && schema.getChildren() == null){
       TypeInfo typeInfo = functions
         .stream()
-        .map(f -> f.apply(schema.getTypeGuid()))
+        .map(f -> f.apply(schema.getElementValue()))
         .filter(guidTypeMap::containsKey)
         .map(guidTypeMap::get)
         .findFirst()
         .orElse(null);
       if (typeInfo == null){
-        log.warn("Not founded type for {}", schema.getElementAddress());
-        typeInfo = new TypeInfo();
-        typeInfo.setType("XmlString");
-        typeInfo.setDescription("");
+        typeInfo = getTypeFromElementName(schema.getElementName());
+        if (typeInfo == null) {
+          log.warn("Not founded type for {}", schema.getElementAddress());
+          typeInfo = new TypeInfo();
+          typeInfo.setType(getTypeFromValue(schema.getElementValue()));
+          typeInfo.setDescription("");
+        }
       }
 
       schema.setType(typeInfo);
     }
     return schema.getType();
+  }
+
+
+  /**
+   * experimental feature
+   * @param name имя элемента
+   * @return тип
+   */
+  private TypeInfo getTypeFromElementName(String name){
+    if (name.equals("messageId")) {
+      TypeInfo typeInfo = new TypeInfo();
+      typeInfo.setType("XmlString");
+      typeInfo.setDescription("Идентификатор запроса в системе СМЭВ");
+      return typeInfo;
+    }
+    return null;
+  }
+
+
+  /**
+   * @param value text xml элемента
+   * @return тип xml элемента
+   */
+  private String getTypeFromValue(String value){
+    if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
+      return "XmlBoolean";
+    }else if (value.matches("\\d+")){
+      return "XmlLong";
+    }else {
+      try{
+        Double.parseDouble(value);
+        return "XmlDouble";
+      }catch (NumberFormatException e){
+        return "XmlString";
+      }
+    }
   }
 
 

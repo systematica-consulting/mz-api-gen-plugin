@@ -25,17 +25,6 @@ enum Type {
     }
   }
 
-  public static Type fromValue(Object value) {
-    if (value instanceof Float || value instanceof Double) {
-      return number;
-    } else if (value instanceof Boolean) {
-      return _boolean;
-    } else if (value instanceof Integer || value instanceof Byte || value instanceof Short) {
-      return integer;
-    } else {
-      return string;
-    }
-  }
 
   public boolean isSimple(){
     return this == string || this == number || this == integer || this == _boolean;

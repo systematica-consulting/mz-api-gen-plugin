@@ -27,18 +27,7 @@ public class ImportChargesTest {
     SchemaBean request = ApiPlugin.generateRequest(requestConfig);
     SchemaBean response = ApiPlugin.generateResponse(responseConfig);
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
-    JsonNode requestNode = objectMapper.readTree(request.toString());
-    byte[] reqExpected = Util.getFileContent(requestConfig.getOut());
-    JsonNode expectedRequest = objectMapper.readTree(reqExpected);
-
-    assertEquals(expectedRequest, requestNode);
-
-    JsonNode responseNode = objectMapper.readTree(response.toString());
-    byte[] respExpected = Util.getFileContent(responseConfig.getOut());
-    JsonNode expectedResponse = objectMapper.readTree(respExpected);
-
-    assertEquals(expectedResponse, responseNode);
+    TestUtil.assertEquals(requestConfig.getOut(), request, true);
+    TestUtil.assertEquals(responseConfig.getOut(), response, true);
   }
 }

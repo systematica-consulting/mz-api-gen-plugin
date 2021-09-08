@@ -1,18 +1,19 @@
 {
-  "title": "Ответ",
+  "title": "Ответ Федеральной налоговой службы на запрос о представлении сведений о доходах физических лиц, выплаченных налоговыми агентами",
   "type": "object",
   "properties": {
     "messageId": {
+      "title": "Идентификатор запроса в системе СМЭВ",
       "type": "string"
     },
     "DohFLNA": {
-      "title": "",
+      "title": "Сведения о доходах физического лица",
       "type": "object",
       "properties": {
         "fs3FNSDohflnaDohFLNA": {
           "type": "array",
           "items": {
-            "title": "",
+            "title": "Сведения о доходах физического лица по справкам 2-НДФЛ по налоговому агенту и из налоговой декларации по налогу на прибыль организаций",
             "type": "object",
             "properties": {
               "SvNAFLFIOPatronymic": {
@@ -24,7 +25,7 @@
                 "type": "string"
               },
               "INNFL": {
-                "title": "ИНН  физического лица",
+                "title": "ИНН физического лица",
                 "type": "string"
               },
               "FirstName": {
@@ -52,13 +53,13 @@
                 "type": "string"
               },
               "SvedDoh2NDFL": {
-                "title": "",
+                "title": "Сведения о доходах физического лица по справкам 2-НДФЛ по налоговому агенту и из налоговой декларации по налогу на прибыль организаций",
                 "type": "object",
                 "properties": {
                   "fs3FNSDohflnaSvedDoh2NDFL": {
                     "type": "array",
                     "items": {
-                      "title": "",
+                      "title": "Сведения о доходах физического лица по справкам 2-НДФЛ",
                       "type": "object",
                       "properties": {
                         "NalBaza": {
@@ -67,13 +68,13 @@
                           "format": "double"
                         },
                         "SvSumDoh": {
-                          "title": "",
+                          "title": "Доходы, облагаемые по ставке",
                           "type": "object",
                           "properties": {
                             "fs3FNSDohflnaSvSumDoh": {
                               "type": "array",
                               "items": {
-                                "title": "",
+                                "title": "Сведения о суммах дохода по месяцам и кодам дохода",
                                 "type": "object",
                                 "properties": {
                                   "KodDohod": {
@@ -112,7 +113,9 @@
                               }
                             }
                           },
-                          "required": []
+                          "required": [
+                            "fs3FNSDohflnaSvSumDoh"
+                          ]
                         },
                         "SumDohObsh": {
                           "title": "Общая сумма дохода",
@@ -133,16 +136,18 @@
                     }
                   }
                 },
-                "required": []
+                "required": [
+                  "fs3FNSDohflnaSvedDoh2NDFL"
+                ]
               },
               "SvedDohNDPrib": {
-                "title": "",
-                "type": "object",
-                "properties": {
-                  "fs3FNSDohflnaSvedDohNDPrib": {
-                    "type": "array",
-                    "items": {
-                      "title": "",
+                "type": "array",
+                "items": {
+                  "title": "Сведения о доходах физического лица из налоговой декларации по налогу на прибыль организаций",
+                  "type": "object",
+                  "properties": {
+                    "fs3FNSDohflnaSvedDohNDPrib": {
+                      "title": "Общие суммы дохода по итогам налогового периода",
                       "type": "object",
                       "properties": {
                         "NalBaza": {
@@ -167,9 +172,9 @@
                         "Stavka"
                       ]
                     }
-                  }
-                },
-                "required": []
+                  },
+                  "required": []
+                }
               },
               "SvNAFLFIOFirstName": {
                 "title": "Имя",
@@ -198,29 +203,34 @@
               "FirstName",
               "INNYUL",
               "SvNAFLINNFL",
-              "SvNAFLFIOFirstName",
               "SvNAFLFIOFamilyName",
               "KPP",
-              "SeriesNumber",
               "NaimOrg",
+              "SvedDoh2NDFL",
+              "SvedDohNDPrib",
+              "SvNAFLFIOFirstName",
+              "SeriesNumber",
               "DocumentCode",
               "DataRozhd"
             ]
           }
         }
       },
-      "required": []
+      "required": [
+        "fs3FNSDohflnaDohFLNA"
+      ]
     },
     "IdZapros": {
       "title": "Идентификатор запроса, сформированный запрашивающей стороной",
       "type": "string"
     },
     "OtchetGod": {
-      "title": "Отчетный налоговый периодГод в формате ГГГГ",
+      "title": "Отчетный налоговый период. Год в формате ГГГГ",
       "type": "string"
     }
   },
   "required": [
+    "DohFLNA",
     "OtchetGod"
   ]
 }

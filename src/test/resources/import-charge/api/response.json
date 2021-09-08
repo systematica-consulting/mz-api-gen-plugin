@@ -1,11 +1,13 @@
 {
-  "title": "Ответ",
+  "title": "Ответ на запрос приема необходимой для уплаты информации (начисления)",
   "type": "object",
   "properties": {
     "respSenderId": {
+      "title": "",
       "type": "string"
     },
     "respId": {
+      "title": "",
       "type": "string"
     },
     "packageId": {
@@ -13,32 +15,37 @@
       "type": "string"
     },
     "resultCode": {
+      "title": "",
       "type": "string"
     },
     "messageId": {
+      "title": "Идентификатор запроса в системе СМЭВ",
       "type": "string"
     },
     "resultDesc": {
+      "title": "",
       "type": "string"
     },
     "respTimestamp": {
+      "title": "",
       "type": "string"
     },
     "packageProcessResult": {
-      "title": "",
+      "title": "Ответ на запрос приема необходимой для уплаты информации (начисления)",
       "type": "object",
       "properties": {
         "gg116EntityProcessResult": {
           "type": "array",
           "items": {
-            "title": "",
+            "title": "Результат обработки сущности в пакете",
             "type": "object",
             "properties": {
               "charge": {
+                "title": "",
                 "type": "string"
               },
               "resultCode": {
-                "title": "Код результата обработки: \n0 — если запрос успешно принят или код ошибки в случае отказа в приеме к обработке документа",
+                "title": "Код результата обработки: 0 — если запрос успешно принят или код ошибки в случае отказа в приеме к обработке документа",
                 "type": "string"
               },
               "resultDesc": {
@@ -53,10 +60,13 @@
           }
         }
       },
-      "required": []
+      "required": [
+        "gg116EntityProcessResult"
+      ]
     }
   },
   "required": [
-    "packageId"
+    "packageId",
+    "packageProcessResult"
   ]
 }

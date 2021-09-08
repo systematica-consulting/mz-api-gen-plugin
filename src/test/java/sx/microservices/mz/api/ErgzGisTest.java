@@ -30,31 +30,9 @@ public class ErgzGisTest {
     SchemaBean request = ApiPlugin.generateRequest(requestConfig);
     SchemaBean response = ApiPlugin.generateResponse(responseConfig);
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
-    JsonNode requestNode = objectMapper.readTree(request.toString());
-
-
-    assertEquals(requestConfig.getOut(), requestNode, true);
-
-    JsonNode responseNode = objectMapper.readTree(response.toString());
-
-    assertEquals(responseConfig.getOut(), responseNode, true);
+    TestUtil.assertEquals(requestConfig.getOut(), request, true);
+    TestUtil.assertEquals(responseConfig.getOut(), response, true);
   }
 
-  public void assertEquals(String expectedPath, JsonNode actual, boolean overwrite) throws IOException {
-    ObjectMapper objectMapper = new ObjectMapper();
-    byte[] expected_bytes = Util.getFileContent(expectedPath);
-    JsonNode expected = objectMapper.readTree(expected_bytes);
-    try{
-      Assert.assertEquals(expected, actual);
-    }catch (AssertionError e){
-      if (overwrite){
-        Util.writeFile(expectedPath, actual.toPrettyString().getBytes());
-      }else {
-        throw e;
-      }
-    }
 
-  }
 }

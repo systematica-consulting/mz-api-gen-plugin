@@ -35,6 +35,7 @@ import javax.xml.namespace.QName;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SampleXmlUtil {
   private final boolean _soapEnc;
@@ -961,7 +962,12 @@ public class SampleXmlUtil {
         }
       }
     });
-    return sb.length() != 0 ? sb.toString() : null;
+    String result = sb.toString();
+    if (result.isBlank()){
+      return null;
+    }
+    result = Arrays.stream(result.split("\n")).map(String::strip).collect(Collectors.joining(" "));
+    return result;
   }
 
   private static String formatQName(XmlCursor xmlc, QName qName) {

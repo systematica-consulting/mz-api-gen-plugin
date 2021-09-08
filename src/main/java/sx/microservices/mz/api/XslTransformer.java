@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class XslTransformer {
 
@@ -36,7 +37,8 @@ public class XslTransformer {
 
   public Map<String, String> transformToMap(Document document) throws IOException, TransformerException {
     TransformerFactory factory = TransformerFactory.newInstance();
-    InputStream inputStream = getClass().getClassLoader().getResource("toMapTemplate.xsl").openStream();
+    InputStream inputStream = Objects.requireNonNull(getClass().getClassLoader().getResource("toMapTemplate.xsl"))
+      .openStream();
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     try (inputStream) {
       Source xslt = new StreamSource(inputStream);
@@ -51,9 +53,6 @@ public class XslTransformer {
       String[] parts = s.split("=");
       if (parts.length == 2) {
         result.put(parts[0], parts[1]);
-      }else {
-        //todo
-        System.out.println("ds");
       }
     });
 

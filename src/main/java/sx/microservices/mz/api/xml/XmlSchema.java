@@ -10,7 +10,7 @@ import java.util.Map;
 @Data
 public class XmlSchema {
   private TypeInfo type;
-  private String typeGuid;
+  private String elementValue;
   private String elementAddress;
   private String elementName;
   private Map<String, XmlSchema> children;

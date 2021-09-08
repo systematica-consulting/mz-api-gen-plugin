@@ -1,5 +1,5 @@
 {
-  "title": "Запрос",
+  "title": "Запрос в Федеральную налоговую службу о представлении сведений о доходах физических лиц, выплаченных налоговыми агентами",
   "type": "object",
   "properties": {
     "SNILS": {
@@ -19,7 +19,7 @@
       "type": "string"
     },
     "reqOtchetGod": {
-      "title": "Отчетный налоговый периодГод в формате ГГГГ",
+      "title": "Отчетный налоговый период. Год в формате ГГГГ",
       "type": "string"
     },
     "guid": {
@@ -35,7 +35,7 @@
       "type": "string"
     },
     "DocumentCode": {
-      "title": "",
+      "title": "Сведения о документе, удостоверяющем личность физического лица",
       "type": "object",
       "properties": {
         "code": {
@@ -58,6 +58,7 @@
     "FirstName",
     "reqOtchetGod",
     "SeriesNumber",
+    "DocumentCode",
     "DataRozhd"
   ]
 }

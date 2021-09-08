@@ -120,11 +120,7 @@ public class ApiPlugin implements Plugin<Project> {
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
     Map<String, String> requestMap = transformer.transformToMap(transformed);
-
-
     Map<String, String> instanceMap = transformer.transformToMap(xmlInstance.getDocument());
-
-
     Map<String, TypeInfo> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
 
     Map<String, TypeInfo> addressTypeMap = xmlInstance.getTypes().values().stream().collect(Collectors.toMap(TypeInfo::getElementAddress, t -> t));
