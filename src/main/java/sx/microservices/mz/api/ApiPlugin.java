@@ -40,10 +40,12 @@ public class ApiPlugin implements Plugin<Project> {
     ResponseConfig responseConfig = ((ExtensionAware) config).getExtensions().create("response", ResponseConfig.class);
     project.task("generateApi").doLast(task -> {
       if (responseConfig.isFull()) {
+        log.warn("\nGenerating response API..");
         SchemaBean schemaBean = generateResponse(responseConfig);
         print(schemaBean, responseConfig.getOut());
       }
       if (requestConfig.isFull()) {
+        log.warn("\nGenerating request API..");
         SchemaBean schemaBean = generateRequest(requestConfig);
         print(schemaBean, requestConfig.getOut());
       }
