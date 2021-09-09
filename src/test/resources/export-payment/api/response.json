@@ -366,7 +366,7 @@
       "type": "string"
     },
     "messageId": {
-      "title": "",
+      "title": "Идентификатор запроса в системе СМЭВ",
       "type": "string"
     },
     "resultDesc": {

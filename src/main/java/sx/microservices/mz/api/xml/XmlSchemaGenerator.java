@@ -1,27 +1,21 @@
 package sx.microservices.mz.api.xml;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import sx.microservices.mz.api.Converter;
 import sx.microservices.mz.api.XslTransformer;
-import sx.microservices.mz.api.xsd2inst.XmlType;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
+import sx.microservices.mz.api.xsd2inst.XmlType;
+
 import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class XmlSchemaGenerator {
-
+abstract class XmlSchemaGenerator {
   private static final List<UnaryOperator<String>> functions = new ArrayList<>();
-
   static {
     UnaryOperator<String> formatDate = s -> {
       if (s.length() >= 10) {
@@ -34,46 +28,20 @@ public class XmlSchemaGenerator {
   }
 
 
-  private final Map<String, XmlType> guidTypeMap;
-  private final Map<String, XmlType> addressTypeMap;
-  private final XslTransformer transformer;
-  private final String xml;
-  private final Converter converter= new Converter();
+  protected final Map<String, XmlType> addressTypeMap;
+  protected final Map<String, XmlType> guidTypeMap;
+  protected final Converter converter = new Converter();
+  protected final XslTransformer transformer;
+  protected final String xml;
 
-  public XmlSchemaGenerator(XmlInstance xmlInstance, XslTransformer transformer) {
-    this.xml = xmlInstance.getXml();
+  public XmlSchemaGenerator(XslTransformer transformer, XmlInstance xmlInstance) {
     this.transformer = transformer;
     this.guidTypeMap = xmlInstance.getTypes();
+    this.xml = xmlInstance.getXml();
     this.addressTypeMap = guidTypeMap.values().stream().collect(Collectors.toMap(XmlType::getElementAddress, t -> t));
   }
 
-  public XmlSchemaGenerator(Map<String, XmlType> guidTypeMap, Map<String, XmlType> addressTypeMap, XslTransformer transformer) {
-    this.xml = "";
-    this.transformer = transformer;
-    this.guidTypeMap = guidTypeMap;
-    this.addressTypeMap = addressTypeMap;
-  }
-
-  public XmlSchema generateResponse() {
-    Document document = converter.toDocument(xml);
-    Document transformed = transformer.transform(document);
-    removeJsonAttrs(transformed);
-
-    XmlSchema schema = _generate(transformed.getDocumentElement());
-    fillObjectsTypes(schema);
-
-    document = converter.toDocument(xml);
-    replaceComments(document);
-    transformed = transformer.transform(document);
-    removeJsonAttrs(transformed);
-    Set<String> arrayNodes = findArrayNodes(transformed);
-    setArrayType(schema, arrayNodes);
-
-
-    return schema;
-  }
-
-  private XmlSchema _generate(Element element) {
+  protected XmlSchema _generate(Element element) {
     XmlSchema xmlSchema = new XmlSchema();
     xmlSchema.setElementName(element.getLocalName());
     xmlSchema.setElementAddress(getElementAddress(element));
@@ -93,12 +61,17 @@ public class XmlSchemaGenerator {
 
       XmlType oldType = findSimpleType(xmlSchema);
 
-      XmlType type = new XmlType();
+      XmlType type;
       if (oldType == null){
-        log.warn("Not founded type for {}", xmlSchema.getElementAddress());
-        type.setType(getTypeFromValue(xmlSchema.getElementValue()));
-        type.setDescription("");
+        type = createTypeFromElementName(element.getLocalName());
+        if (type == null) {
+          log.warn("Not founded type for {}", xmlSchema.getElementAddress());
+          type = new XmlType();
+          type.setType(getTypeFromValue(xmlSchema.getElementValue()));
+          type.setDescription("");
+        }
       }else {
+        type = new XmlType();
         type.setType(oldType.getType());
         type.setDescription(oldType.getDescription());
         type.setElementAddress(oldType.getElementAddress());
@@ -110,17 +83,7 @@ public class XmlSchemaGenerator {
     return xmlSchema;
   }
 
-  private String getElementAddress(Element element) {
-    StringBuilder sb = new StringBuilder();
-    Node curr = element;
-    while (curr.getLocalName() != null) {
-      sb.insert(0, curr.getLocalName()).insert(0, "/");
-      curr = curr.getParentNode();
-    }
-    return sb.toString();
-  }
-
-  private XmlType fillObjectsTypes(XmlSchema schema) {
+  protected XmlType fillObjectsTypes(XmlSchema schema) {
     if (schema.getType() == null && schema.getChildren() != null) {
       Set<XmlType> childrenTypes = new HashSet<>();
       schema.getChildren().forEach((k, v) -> childrenTypes.add(fillObjectsTypes(v)));
@@ -145,118 +108,6 @@ public class XmlSchemaGenerator {
     return schema.getType();
   }
 
-  private XmlType findSimpleType(XmlSchema schema){
-    XmlType type = guidTypeMap.get(schema.getElementValue());
-    return type != null ? type : functions
-      .stream()
-      .map(f -> f.apply(schema.getElementValue()))
-      .filter(guidTypeMap::containsKey)
-      .map(guidTypeMap::get)
-      .findFirst()
-      .orElse(null);
-  }
-
-
-  @SneakyThrows
-  private void removeJsonAttrs(Document document) {
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[@_json]");
-    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-    for (int i = 0; i < nodeList.getLength(); i++) {
-      Element element = (Element) nodeList.item(i);
-      element.removeAttribute("_json");
-    }
-  }
-
-  @SneakyThrows
-  private Set<String> findArrayNodes(Document document){
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[1]");
-    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-    Set<String> result = new HashSet<>();
-    for (int i = 0; i< nodeList.getLength(); i++){
-      Element element = (Element) nodeList.item(i);
-
-      Node sib = element;
-      Set<String> elementNames = new HashSet<>();
-      do {
-        if (sib instanceof Element){
-          if (elementNames.contains(sib.getLocalName())){
-            result.add(getElementAddress((Element) sib));
-          }
-          elementNames.add(sib.getLocalName());
-        }
-      } while ((sib = sib.getNextSibling()) != null);
-    }
-    return result;
-  }
-
-  private void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
-    if (arrayNodes.contains(xmlSchema.getElementAddress())){
-      xmlSchema.getType().setList(true);
-    }
-    if (xmlSchema.getChildren() != null){
-      xmlSchema.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));
-    }
-  }
-
-  @SneakyThrows
-  private void replaceComments(Document document){
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//comment()");
-    NodeList nodeList;
-    do {
-      nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-      for (int i = 0; i < nodeList.getLength(); i++) {
-        Node node = nodeList.item(i);
-        if (node.getTextContent() != null && node.getTextContent().contains("repetitions:")) {
-          Node cloneNode = node.getNextSibling().getNextSibling().cloneNode(true);
-          Node parentNode = node.getParentNode();
-          parentNode.appendChild(cloneNode);
-          parentNode.removeChild(node);
-        } else {
-          Node parentNode = node.getParentNode();
-          parentNode.removeChild(node);
-        }
-      }
-    } while (nodeList.getLength() != 0);
-  }
-
-
-  /**
-   * experimental feature
-   *
-   * @param name имя элемента
-   * @return тип
-   */
-  private XmlType getTypeFromElementName(String name) {
-    if (name.equals("messageId")) {
-      XmlType xmlType = new XmlType();
-      xmlType.setType("XmlString");
-      xmlType.setDescription("Идентификатор запроса в системе СМЭВ");
-      return xmlType;
-    }
-    return null;
-  }
-
-
-  /**
-   * @param value text xml элемента
-   * @return тип xml элемента
-   */
-  private String getTypeFromValue(String value) {
-    if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
-      return "XmlBoolean";
-    } else if (value.matches("\\d+")) {
-      return "XmlLong";
-    } else {
-      try {
-        Double.parseDouble(value);
-        return "XmlDouble";
-      } catch (NumberFormatException e) {
-        return "XmlString";
-      }
-    }
-  }
-
-
   /**
    * @param addresses адреса
    * @return общий префикс
@@ -279,6 +130,62 @@ public class XmlSchemaGenerator {
       founded = true;
     }
     return result;
+  }
+
+  protected String getElementAddress(Element element) {
+    StringBuilder sb = new StringBuilder();
+    Node curr = element;
+    while (curr.getLocalName() != null) {
+      sb.insert(0, curr.getLocalName()).insert(0, "/");
+      curr = curr.getParentNode();
+    }
+    return sb.toString();
+  }
+
+  /**
+   * experimental feature
+   *
+   * @param name имя элемента
+   * @return тип
+   */
+  private XmlType createTypeFromElementName(String name) {
+    if (name.equals("messageId")) {
+      XmlType xmlType = new XmlType();
+      xmlType.setType("XmlString");
+      xmlType.setDescription("Идентификатор запроса в системе СМЭВ");
+      return xmlType;
+    }
+    return null;
+  }
+
+  private XmlType findSimpleType(XmlSchema schema){
+    XmlType type = guidTypeMap.get(schema.getElementValue());
+    return type != null ? type : functions
+      .stream()
+      .map(f -> f.apply(schema.getElementValue()))
+      .filter(guidTypeMap::containsKey)
+      .map(guidTypeMap::get)
+      .findFirst()
+      .orElse(null);
+  }
+
+  /**
+   * @param value text xml элемента
+   * @return тип xml элемента
+   */
+  private String getTypeFromValue(String value) {
+    if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+      return "XmlBoolean";
+    } else if (value.matches("\\d+")) {
+      return "XmlLong";
+    } else {
+      try {
+        Double.parseDouble(value);
+        return "XmlDouble";
+      } catch (NumberFormatException e) {
+        return "XmlString";
+      }
+    }
   }
 
 }

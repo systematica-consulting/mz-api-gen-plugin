@@ -1,1 +1,61 @@
-{ }
+{
+  "title" : "Запрос на предоставление информации об уплате",
+  "type" : "object",
+  "properties" : {
+    "date" : {
+      "title" : "Дата и время формирования запроса",
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "supplierBillIdList" : {
+      "title" : "УИН",
+      "type" : "object",
+      "properties" : {
+        "supplierBillId" : {
+          "title" : "УИН",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "pageNumber" : {
+      "title" : "Номер страницы предоставления информации  Вся выборка по запросу разбивается на страницы размером pageLength, начиная с первого элемента. Последняя страница может быть меньше, чем pageLength. В ответ на запрос возвращается только страница, номер которой равен pageNumber.",
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "pageLength" : {
+      "title" : "Количество элементов на странице предоставления информации",
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "kind" : {
+      "title" : "Тип запроса на предоставление информации об уплате",
+      "type" : "string",
+      "enum" : [ "PAYMENT", "PAYMENTMODIFIED", "PAYMENTUNMATCHED", "PAYMENTCANCELLED", "PAYMENTMAINCHARGE" ]
+    },
+    "guid" : {
+      "title" : "",
+      "type" : "string"
+    },
+    "participant" : {
+      "title" : "Запрос на предоставление информации об уплате",
+      "type" : "object",
+      "properties" : {
+        "senderId" : {
+          "title" : "УРН участника-отправителя запроса",
+          "type" : "string"
+        },
+        "originatorId" : {
+          "title" : "УРН участника косвенного взаимодействия, сформировавшего запрос",
+          "type" : "string"
+        },
+        "senderRole" : {
+          "title" : "Полномочие участника-отправителя сообщения, с которым происходит обращение к ГИС ГМП",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    }
+  },
+  "required" : [ ]
+}

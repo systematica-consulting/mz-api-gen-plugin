@@ -14,7 +14,7 @@
       "format": "double"
     },
     "messageId": {
-      "title": "",
+      "title": "Идентификатор запроса в системе СМЭВ",
       "type": "string"
     },
     "Payments": {
