@@ -50,34 +50,6 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     }
   }
 
-  @SneakyThrows
-  private Set<String> findArrayNodes(Document document){
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[1]");
-    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-    Set<String> result = new HashSet<>();
-    for (int i = 0; i< nodeList.getLength(); i++){
-      Node sib = nodeList.item(i);
-      Set<String> elementNames = new HashSet<>();
-      do {
-        if (sib instanceof Element){
-          if (elementNames.contains(sib.getLocalName())){
-            result.add(getElementAddress((Element) sib));
-          }
-          elementNames.add(sib.getLocalName());
-        }
-      } while ((sib = sib.getNextSibling()) != null);
-    }
-    return result;
-  }
-
-  private void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
-    if (arrayNodes.contains(xmlSchema.getElementAddress())){
-      xmlSchema.getType().setList(true);
-    }
-    if (xmlSchema.getChildren() != null){
-      xmlSchema.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));
-    }
-  }
 
   @SneakyThrows
   private void duplicateArrayNodes(Document document){

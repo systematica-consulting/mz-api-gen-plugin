@@ -12,6 +12,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class RequestSchemaGenerator extends XmlSchemaGenerator{
@@ -30,9 +31,10 @@ public class RequestSchemaGenerator extends XmlSchemaGenerator{
     Map<String, XmlType> types = defineTypes(requestMap, instanceMap, guidTypeMap);
     guidTypeMap.putAll(types);
 
-
     XmlSchema schema = _generate(document.getDocumentElement());
     fillObjectsTypes(schema);
+    Set<String> arrayNodes = findArrayNodes(document);
+    setArrayType(schema, arrayNodes);
 
     return schema;
   }

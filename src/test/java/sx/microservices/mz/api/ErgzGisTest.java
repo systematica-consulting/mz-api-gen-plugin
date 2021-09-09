@@ -24,10 +24,10 @@ public class ErgzGisTest {
     requestConfig.setSchema("ergz-gis/schema/fullprintout.xsd");
     requestConfig.setOut("ergz-gis/api/request.json");
 
-    //SchemaBean request = ApiPlugin.generateRequest(requestConfig);
+    SchemaBean request = ApiPlugin.generateRequest(requestConfig);
     SchemaBean response = ApiPlugin.generateResponse(responseConfig);
 
-    //TestUtil.assertEquals(requestConfig.getOut(), request, true);
+    TestUtil.assertEquals(requestConfig.getOut(), request, true);
     TestUtil.assertEquals(responseConfig.getOut(), response, true);
   }
 

@@ -1,6 +1,8 @@
 package sx.microservices.mz.api.schema;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -8,6 +10,9 @@ import sx.microservices.mz.api.Converter;
 import sx.microservices.mz.api.XslTransformer;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
 
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
@@ -105,6 +110,35 @@ abstract class XmlSchemaGenerator {
     assert schema.getType() != null;
 
     return schema.getType();
+  }
+
+  @SneakyThrows
+  protected Set<String> findArrayNodes(Document document){
+    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[1]");
+    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+    Set<String> result = new HashSet<>();
+    for (int i = 0; i< nodeList.getLength(); i++){
+      Node sib = nodeList.item(i);
+      Set<String> elementNames = new HashSet<>();
+      do {
+        if (sib instanceof Element){
+          if (elementNames.contains(sib.getLocalName())){
+            result.add(getElementAddress((Element) sib));
+          }
+          elementNames.add(sib.getLocalName());
+        }
+      } while ((sib = sib.getNextSibling()) != null);
+    }
+    return result;
+  }
+
+  protected void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
+    if (arrayNodes.contains(xmlSchema.getElementAddress())){
+      xmlSchema.getType().setList(true);
+    }
+    if (xmlSchema.getChildren() != null){
+      xmlSchema.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));
+    }
   }
 
   /**

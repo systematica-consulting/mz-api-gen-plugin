@@ -12,8 +12,11 @@
       "type" : "object",
       "properties" : {
         "supplierBillId" : {
-          "title" : "УИН",
-          "type" : "string"
+          "type" : "array",
+          "items" : {
+            "title" : "УИН",
+            "type" : "string"
+          }
         }
       },
       "required" : [ ]
