@@ -1,6 +1,8 @@
 package sx.microservices.mz.api;
 
 import org.junit.Test;
+import sx.microservices.mz.api.config.RequestConfig;
+import sx.microservices.mz.api.config.ResponseConfig;
 import sx.microservices.mz.api.json.SchemaBean;
 
 import static org.junit.Assert.assertEquals;

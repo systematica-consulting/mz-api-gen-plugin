@@ -1,4 +1,4 @@
-package sx.microservices.mz.api;
+package sx.microservices.mz.api.config;
 
 import lombok.Data;
 

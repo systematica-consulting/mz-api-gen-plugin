@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
+import sx.microservices.mz.api.config.Config;
+import sx.microservices.mz.api.config.RequestConfig;
+import sx.microservices.mz.api.config.ResponseConfig;
 import sx.microservices.mz.api.json.JsonSchemaGenerator;
 import sx.microservices.mz.api.json.SchemaBean;
 import sx.microservices.mz.api.schema.RequestSchemaGenerator;
@@ -62,7 +65,7 @@ public class ApiPlugin implements Plugin<Project> {
     XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
-    byte[] request = Util.getFileContent(config.getRequest());
+    byte[] request = FileUtils.getFileContent(config.getRequest());
 
     XslTransformer transformer = new XslTransformer(config.getTemplate());
 

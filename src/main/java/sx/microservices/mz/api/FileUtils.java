@@ -5,7 +5,7 @@ import lombok.SneakyThrows;
 import java.io.*;
 import java.net.URL;
 
-public class Util {
+public class FileUtils {
 
   @SneakyThrows
   public static InputStream getFileInputStream(String path) {

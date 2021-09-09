@@ -11,14 +11,14 @@ public class TestUtil {
 
   public static void assertEquals(String expectedPath, SchemaBean actualBean, boolean overwrite) throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
-    byte[] expected_bytes = Util.getFileContent(expectedPath);
+    byte[] expected_bytes = FileUtils.getFileContent(expectedPath);
     JsonNode expected = objectMapper.readTree(expected_bytes);
     JsonNode actual = objectMapper.readTree(actualBean.toString());
     try{
       Assert.assertEquals(expected, actual);
     }catch (AssertionError e){
       if (overwrite){
-        Util.writeFile(expectedPath, actual.toPrettyString().getBytes());
+        FileUtils.writeFile(expectedPath, actual.toPrettyString().getBytes());
       }else {
         throw e;
       }

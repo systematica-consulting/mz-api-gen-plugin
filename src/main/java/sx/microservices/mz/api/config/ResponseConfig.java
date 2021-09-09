@@ -1,9 +1,9 @@
-package sx.microservices.mz.api;
+package sx.microservices.mz.api.config;
 
 import lombok.Data;
 
 @Data
-class ResponseConfig {
+public class ResponseConfig {
   private String template;
   private String element;
   private String schema;
