@@ -1,5 +1,6 @@
 package sx.microservices.mz.api;
 
+import lombok.SneakyThrows;
 import org.json.JSONObject;
 import org.json.XML;
 import org.w3c.dom.Document;
@@ -20,7 +21,8 @@ import java.io.StringWriter;
 
 public class Converter {
 
-  public Document toDocument(String xml) throws ParserConfigurationException, SAXException, IOException {
+  @SneakyThrows
+  public Document toDocument(String xml) {
     DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
     documentBuilderFactory.setNamespaceAware(true);
     documentBuilderFactory.setCoalescing(true);
@@ -29,7 +31,8 @@ public class Converter {
     return documentBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
   }
 
-  public String toString(Document document) throws TransformerException {
+  @SneakyThrows
+  public String toString(Document document) {
     Transformer transformer = TransformerFactory.newInstance().newTransformer();
     transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
     StringWriter sw = new StringWriter();
@@ -37,7 +40,7 @@ public class Converter {
     return sw.toString();
   }
 
-  public JSONObject toJson(Document document) throws TransformerException {
+  public JSONObject toJson(Document document) {
     JSONObject jsonObject = XML.toJSONObject(toString(document));
     return jsonObject.has("params") ? jsonObject.getJSONObject("params") : jsonObject;
   }

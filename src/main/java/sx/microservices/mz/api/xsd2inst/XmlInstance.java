@@ -1,27 +1,16 @@
 package sx.microservices.mz.api.xsd2inst;
 
-import org.w3c.dom.Document;
-
 import java.util.Map;
 
 public class XmlInstance {
-  private Document document;
   private String xml;
-  private Map<String, TypeInfo> types;
+  private Map<String, XmlType> types;
 
-  public Document getDocument() {
-    return document;
-  }
-
-  public void setDocument(Document document) {
-    this.document = document;
-  }
-
-  public Map<String, TypeInfo> getTypes() {
+  public Map<String, XmlType> getTypes() {
     return types;
   }
 
-  public void setTypes(Map<String, TypeInfo> types) {
+  public void setTypes(Map<String, XmlType> types) {
     this.types = types;
   }
 

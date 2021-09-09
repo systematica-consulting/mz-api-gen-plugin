@@ -24,13 +24,7 @@ import java.util.Set;
 
 public class XmlInstanceGenerator {
 
-  private final Converter converter;
-
-  public XmlInstanceGenerator(Converter converter) {
-    this.converter = converter;
-  }
-
-  public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException, SAXException, ParserConfigurationException, XPathExpressionException {
+  public XmlInstance createInstance(String schemaPath, String elementName) throws IOException, XmlException {
 
     Path path = Paths.get(schemaPath);
     if (!Files.exists(path)) {
@@ -55,32 +49,7 @@ public class XmlInstanceGenerator {
     options.setNopvr(false);
     options.setNoupa(true);
 
-    XmlInstance xmlInstance = SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
-    Document document = converter.toDocument(xmlInstance.getXml());
-    xmlInstance.setDocument(document);
-    //replaceComments(document);
-
-    return xmlInstance;
+    return SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
   }
 
-
-  private void replaceComments(Document document) throws XPathExpressionException {
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//comment()");
-    NodeList nodeList;
-    do {
-      nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-      for (int i = 0; i < nodeList.getLength(); i++) {
-        Node node = nodeList.item(i);
-        if (node.getTextContent() != null && node.getTextContent().contains("repetitions:")) {
-          Node cloneNode = node.getNextSibling().getNextSibling().cloneNode(true);
-          Node parentNode = node.getParentNode();
-          parentNode.appendChild(cloneNode);
-          parentNode.removeChild(node);
-        } else {
-          Node parentNode = node.getParentNode();
-          parentNode.removeChild(node);
-        }
-      }
-    } while (nodeList.getLength() != 0);
-  }
 }

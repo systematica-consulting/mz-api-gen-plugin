@@ -11,7 +11,7 @@
       "type": "string"
     },
     "paymentInfos": {
-      "title": "Ответ на запрос предоставления информации об уплате",
+      "title": "Извещение о приеме к исполнению распоряжения (платеж)",
       "type": "object",
       "properties": {
         "gg116PaymentInfo": {
@@ -63,19 +63,14 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "BIK"
-                        ]
+                        "required": []
                       },
                       "systemIdentifier": {
                         "title": "УИП, присвоенный участником, принявшим платеж",
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "bank",
-                      "systemIdentifier"
-                    ]
+                    "required": []
                   },
                   "partialAccDocNo": {
                     "title": "Поле номер 3. Для частичного платежа поле номер 40: Номер платежного документа",
@@ -103,7 +98,7 @@
                     "type": "string"
                   },
                   "additionalData": {
-                    "title": "Извещение о приеме к исполнению распоряжения (платеж)",
+                    "title": "Поле номер 202: Дополнительные поля",
                     "type": "object",
                     "properties": {
                       "gg116AdditionalData": {
@@ -121,10 +116,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "name",
-                            "value"
-                          ]
+                          "required": []
                         }
                       }
                     },
@@ -211,9 +203,7 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "BIK"
-                    ]
+                    "required": []
                   },
                   "payeeINN": {
                     "title": "Поле номер 61: ИНН организации",
@@ -326,37 +316,14 @@
                         ]
                       }
                     },
-                    "required": [
-                      "taxPeriod",
-                      "purpose",
-                      "taxDocNumber",
-                      "taxDocDate",
-                      "status"
-                    ]
+                    "required": []
                   },
                   "payeeAccount": {
                     "title": "Поле номер 17: Номер банковского счета",
                     "type": "string"
                   }
                 },
-                "required": [
-                  "accDocDate",
-                  "narrative",
-                  "payerId",
-                  "paymentIdData",
-                  "transKind",
-                  "partialAccDocDate",
-                  "payeeName",
-                  "partialPaytTransKind",
-                  "payeeBank",
-                  "payerName",
-                  "payeeINN",
-                  "changeStatus",
-                  "additionalData",
-                  "payeeKPP",
-                  "paymentDate",
-                  "payeeAccount"
-                ]
+                "required": []
               },
               "changeStatusInfo": {
                 "type": "object",
@@ -381,21 +348,14 @@
                     "format": "date-time"
                   }
                 },
-                "required": [
-                  "meaning"
-                ]
+                "required": []
               }
             },
-            "required": [
-              "payment",
-              "changeStatusInfo"
-            ]
+            "required": []
           }
         }
       },
-      "required": [
-        "gg116PaymentInfo"
-      ]
+      "required": []
     },
     "hasMore": {
       "title": "Признак конца выборки: false - достигнут конец выборки; true - после последнего предоставленного элемента в выборке имеются другие.",
@@ -406,7 +366,7 @@
       "type": "string"
     },
     "messageId": {
-      "title": "Идентификатор запроса в системе СМЭВ",
+      "title": "",
       "type": "string"
     },
     "resultDesc": {
@@ -419,11 +379,5 @@
       "format": "date-time"
     }
   },
-  "required": [
-    "respSenderId",
-    "respId",
-    "paymentInfos",
-    "hasMore",
-    "respTimestamp"
-  ]
+  "required": []
 }

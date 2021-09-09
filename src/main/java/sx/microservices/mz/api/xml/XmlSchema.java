@@ -1,7 +1,7 @@
 package sx.microservices.mz.api.xml;
 
 import lombok.Data;
-import sx.microservices.mz.api.xsd2inst.TypeInfo;
+import sx.microservices.mz.api.xsd2inst.XmlType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 public class XmlSchema {
-  private TypeInfo type;
+  private XmlType type;
   private String elementValue;
   private String elementAddress;
   private String elementName;

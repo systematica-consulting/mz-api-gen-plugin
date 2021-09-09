@@ -14,7 +14,7 @@
       "format": "double"
     },
     "messageId": {
-      "title": "Идентификатор запроса в системе СМЭВ",
+      "title": "",
       "type": "string"
     },
     "Payments": {
@@ -47,10 +47,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "Type",
-                        "Sum"
-                      ]
+                      "required": []
                     }
                   }
                 },
@@ -64,17 +61,11 @@
                 "type": "string"
               }
             },
-            "required": [
-              "Type",
-              "Payments",
-              "Sum"
-            ]
+            "required": []
           }
         }
       },
-      "required": [
-        "Payment"
-      ]
+      "required": []
     },
     "ActualDate": {
       "type": "string",
@@ -112,16 +103,5 @@
       "format": "date"
     }
   },
-  "required": [
-    "Snils",
-    "AppDate",
-    "FamilyName",
-    "FirstName",
-    "TotalPaymentsSum",
-    "ActualDate",
-    "Gender",
-    "ExistData",
-    "NumberOfPayments",
-    "BirthDate"
-  ]
+  "required": []
 }

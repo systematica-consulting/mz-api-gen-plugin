@@ -6,14 +6,13 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import sx.microservices.mz.api.schema.JsonSchemaGenerator;
 import sx.microservices.mz.api.schema.SchemaBean;
 import sx.microservices.mz.api.xml.XmlSchema;
 import sx.microservices.mz.api.xml.XmlSchemaGenerator;
-import sx.microservices.mz.api.xsd2inst.TypeInfo;
+import sx.microservices.mz.api.xsd2inst.XmlType;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
 import sx.microservices.mz.api.xsd2inst.XmlInstanceGenerator;
 
@@ -55,18 +54,14 @@ public class ApiPlugin implements Plugin<Project> {
 
   @SneakyThrows
   public static SchemaBean generateResponse(ResponseConfig config) {
-    Converter converter = new Converter();
-    XslTransformer transformer = new XslTransformer();
-    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
 
+    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
-    Document transformed = transformer.transform(xmlInstance.getDocument(), config.getTemplate());
+    XslTransformer transformer = new XslTransformer(config.getTemplate());
 
-    removeJsonAttrs(transformed);
-
-    XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(xmlInstance.getTypes());
-    XmlSchema xmlSchema = xmlSchemaGenerator.generate(transformed.getDocumentElement());
+    XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(xmlInstance, transformer);
+    XmlSchema xmlSchema = xmlSchemaGenerator.generateResponse();
 
     JsonSchemaGenerator generator = new JsonSchemaGenerator();
     return generator.generate(xmlSchema);
@@ -106,33 +101,30 @@ public class ApiPlugin implements Plugin<Project> {
   @SneakyThrows
   public static SchemaBean generateRequest(RequestConfig config) {
 
-    Converter converter = new Converter();
-    JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator();
-    XslTransformer transformer = new XslTransformer();
-    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator(converter);
-
     byte[] request = Util.getFileContent(config.getRequest());
 
+    Converter converter = new Converter();
     Document document = converter.toDocument(new String(request));
     setGuids(document);
 
-    Document transformed = transformer.transform(document, config.getTemplate());
+    XslTransformer transformer = new XslTransformer(config.getTemplate());
+    Document transformed = transformer.transform(document);
 
-
+    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
     Map<String, String> requestMap = transformer.transformToMap(transformed);
-    Map<String, String> instanceMap = transformer.transformToMap(xmlInstance.getDocument());
-    Map<String, TypeInfo> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
+    Map<String, String> instanceMap = transformer.transformToMap(converter.toDocument(xmlInstance.getXml()));
+    Map<String, XmlType> types = defineTypes(requestMap, instanceMap, xmlInstance.getTypes());
 
-    Map<String, TypeInfo> addressTypeMap = xmlInstance.getTypes().values().stream().collect(Collectors.toMap(TypeInfo::getElementAddress, t -> t));
+    Map<String, XmlType> addressTypeMap = xmlInstance.getTypes().values().stream().collect(Collectors.toMap(XmlType::getElementAddress, t -> t));
 
-    XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(types, addressTypeMap);
-    XmlSchema xmlSchema = xmlSchemaGenerator.generate(document.getDocumentElement());
+    //XmlSchemaGenerator xmlSchemaGenerator = new XmlSchemaGenerator(types, addressTypeMap);
+    //XmlSchema xmlSchema = xmlSchemaGenerator.generate(document.getDocumentElement());
 
 
-    JsonSchemaGenerator generator = new JsonSchemaGenerator();
-    return generator.generate(xmlSchema);
+    //JsonSchemaGenerator generator = new JsonSchemaGenerator();
+    return new SchemaBean();//generator.generate(xmlSchema);
 
   }
 
@@ -145,11 +137,11 @@ public class ApiPlugin implements Plugin<Project> {
     requestStream.close();
   }
 
-  private static Map<String, TypeInfo> defineTypes(Map<String, String> requestMap, Map<String, String> instanceMap, Map<String, TypeInfo> types) {
-    Map<String, TypeInfo> result = new HashMap<>();
+  private static Map<String, XmlType> defineTypes(Map<String, String> requestMap, Map<String, String> instanceMap, Map<String, XmlType> types) {
+    Map<String, XmlType> result = new HashMap<>();
     requestMap.forEach((key, value) -> {
       String instanceGuid = instanceMap.get(key);
-      TypeInfo type = types.get(instanceGuid);
+      XmlType type = types.get(instanceGuid);
       if (type != null) {
         result.put(value, type);
       }
@@ -158,15 +150,7 @@ public class ApiPlugin implements Plugin<Project> {
   }
 
 
-  private static void removeJsonAttrs(Document document) throws XPathExpressionException {
-    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[@_json]");
-    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
-    for (int i = 0; i < nodeList.getLength(); i++) {
-      Element element = (Element) nodeList.item(i);
-      element.removeAttribute("_json");
-    }
 
-  }
 
 
   private static void setGuids(Document document) throws XPathExpressionException {

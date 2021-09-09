@@ -1,5 +1,6 @@
 package sx.microservices.mz.api;
 
+import lombok.SneakyThrows;
 import org.w3c.dom.Document;
 
 import javax.xml.transform.Source;
@@ -20,7 +21,14 @@ import java.util.Objects;
 
 public class XslTransformer {
 
-  public Document transform(Document document, String templatePath) throws IOException, TransformerException {
+  private final String templatePath;
+
+  public XslTransformer(String templatePath) {
+    this.templatePath = templatePath;
+  }
+
+  @SneakyThrows
+  public Document transform(Document document)  {
     TransformerFactory factory = TransformerFactory.newInstance();
 
     InputStream inputStream = Util.getFileInputStream(templatePath);
@@ -35,7 +43,8 @@ public class XslTransformer {
     }
   }
 
-  public Map<String, String> transformToMap(Document document) throws IOException, TransformerException {
+  @SneakyThrows
+  public Map<String, String> transformToMap(Document document)  {
     TransformerFactory factory = TransformerFactory.newInstance();
     InputStream inputStream = Objects.requireNonNull(getClass().getClassLoader().getResource("toMapTemplate.xsl"))
       .openStream();

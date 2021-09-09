@@ -41,7 +41,7 @@ public class SampleXmlUtil {
   private final boolean _soapEnc;
   private static final int MAX_ELEMENTS = 1000;
   private int _nElements;
-  private final Map<String, TypeInfo> types = new HashMap<>();
+  private final Map<String, XmlType> types = new HashMap<>();
 
   private SampleXmlUtil(boolean soapEnc) {
     _soapEnc = soapEnc;
@@ -54,7 +54,7 @@ public class SampleXmlUtil {
     cursor.toNextToken();
     // Using the type and the cursor, call the utility method to get a
     // sample XML payload for that Schema element
-    Map<String, TypeInfo> types = new SampleXmlUtil(false).createSampleForType(sType, cursor);
+    Map<String, XmlType> types = new SampleXmlUtil(false).createSampleForType(sType, cursor);
     // Cursor now contains the sample payload
     // Pretty print the result.  Note that the cursor is positioned at the
     // end of the doc so we use the original xml object that the cursor was
@@ -79,7 +79,7 @@ public class SampleXmlUtil {
    * After:
    * <theElement><lots of stuff/>^</theElement>
    */
-  private Map<String, TypeInfo> createSampleForType(SchemaType stype, XmlCursor xmlc) {
+  private Map<String, XmlType> createSampleForType(SchemaType stype, XmlCursor xmlc) {
     if (_typeStack.contains(stype)) {
       return this.types;
     }
@@ -867,15 +867,15 @@ public class SampleXmlUtil {
       description = retrieveDescription(elementType);
     }
 
-    TypeInfo typeInfo = new TypeInfo();
-    typeInfo.setUuid(uuid);
-    typeInfo.setRequired(required);
-    typeInfo.setList(list);
-    typeInfo.setType("XmlObject");
-    typeInfo.setDescription(description);
-    typeInfo.setElementAddress(getElementAddress(cursor, element));
+    XmlType xmlType = new XmlType();
+    xmlType.setUuid(uuid);
+    xmlType.setRequired(required);
+    xmlType.setList(list);
+    xmlType.setType("XmlObject");
+    xmlType.setDescription(description);
+    xmlType.setElementAddress(getElementAddress(cursor, element));
 
-    types.put(uuid, typeInfo);
+    types.put(uuid, xmlType);
   }
 
   private String getElementAddress(XmlCursor cursor, SchemaField element){
@@ -920,13 +920,13 @@ public class SampleXmlUtil {
       description = retrieveDescription(elementType);
     }
 
-    TypeInfo typeInfo = new TypeInfo();
+    XmlType xmlType = new XmlType();
 
     if (elementType.getEnumerationValues() != null && elementType.getEnumerationValues().length != 0) {
       XmlAnySimpleType[] values = elementType.getEnumerationValues();
       List<String> vals = new ArrayList<>();
       Arrays.stream(values).forEach(v -> vals.add(v.getStringValue()));
-      typeInfo.setEnumeration(vals);
+      xmlType.setEnumeration(vals);
     }
 
     SchemaField field = (SchemaField) element;
@@ -934,13 +934,13 @@ public class SampleXmlUtil {
     boolean required = field.getMinOccurs().intValue() > 0;
     boolean list = field.getMaxOccurs() == null || field.getMaxOccurs().intValue() > 1;
 
-    typeInfo.setUuid(uuid);
-    typeInfo.setDescription(description);
-    typeInfo.setType(type);
-    typeInfo.setRequired(required);
-    typeInfo.setList(list);
-    typeInfo.setElementAddress(getElementAddress(cursor, field));
-    types.put(uuid, typeInfo);
+    xmlType.setUuid(uuid);
+    xmlType.setDescription(description);
+    xmlType.setType(type);
+    xmlType.setRequired(required);
+    xmlType.setList(list);
+    xmlType.setElementAddress(getElementAddress(cursor, field));
+    types.put(uuid, xmlType);
   }
 
   private String retrieveDescription(SchemaAnnotated element) {

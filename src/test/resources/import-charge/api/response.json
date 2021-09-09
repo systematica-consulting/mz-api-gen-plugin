@@ -19,7 +19,7 @@
       "type": "string"
     },
     "messageId": {
-      "title": "Идентификатор запроса в системе СМЭВ",
+      "title": "",
       "type": "string"
     },
     "resultDesc": {
@@ -31,7 +31,7 @@
       "type": "string"
     },
     "packageProcessResult": {
-      "title": "Ответ на запрос приема необходимой для уплаты информации (начисления)",
+      "title": "Результат обработки сущности в пакете",
       "type": "object",
       "properties": {
         "gg116EntityProcessResult": {
@@ -53,20 +53,12 @@
                 "type": "string"
               }
             },
-            "required": [
-              "resultCode",
-              "resultDesc"
-            ]
+            "required": []
           }
         }
       },
-      "required": [
-        "gg116EntityProcessResult"
-      ]
+      "required": []
     }
   },
-  "required": [
-    "packageId",
-    "packageProcessResult"
-  ]
+  "required": []
 }

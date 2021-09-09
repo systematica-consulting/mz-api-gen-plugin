@@ -6,7 +6,7 @@ import javax.xml.namespace.QName;
 import java.util.List;
 
 @Data
-public class TypeInfo {
+public class XmlType {
   private String uuid;
   private String type;
   private String elementAddress;

@@ -3,11 +3,11 @@
   "type": "object",
   "properties": {
     "messageId": {
-      "title": "Идентификатор запроса в системе СМЭВ",
+      "title": "",
       "type": "string"
     },
     "DohFLNA": {
-      "title": "Сведения о доходах физического лица",
+      "title": "Сведения о доходах физического лица по справкам 2-НДФЛ по налоговому агенту и из налоговой декларации по налогу на прибыль организаций",
       "type": "object",
       "properties": {
         "fs3FNSDohflnaDohFLNA": {
@@ -53,7 +53,7 @@
                 "type": "string"
               },
               "SvedDoh2NDFL": {
-                "title": "Сведения о доходах физического лица по справкам 2-НДФЛ по налоговому агенту и из налоговой декларации по налогу на прибыль организаций",
+                "title": "Сведения о доходах физического лица по справкам 2-НДФЛ",
                 "type": "object",
                 "properties": {
                   "fs3FNSDohflnaSvedDoh2NDFL": {
@@ -68,7 +68,7 @@
                           "format": "double"
                         },
                         "SvSumDoh": {
-                          "title": "Доходы, облагаемые по ставке",
+                          "title": "Сведения о суммах дохода по месяцам и кодам дохода",
                           "type": "object",
                           "properties": {
                             "fs3FNSDohflnaSvSumDoh": {
@@ -105,17 +105,11 @@
                                     "format": "double"
                                   }
                                 },
-                                "required": [
-                                  "KodDohod",
-                                  "Mesyac",
-                                  "SumDohod"
-                                ]
+                                "required": []
                               }
                             }
                           },
-                          "required": [
-                            "fs3FNSDohflnaSvSumDoh"
-                          ]
+                          "required": []
                         },
                         "SumDohObsh": {
                           "title": "Общая сумма дохода",
@@ -128,25 +122,19 @@
                           "format": "int32"
                         }
                       },
-                      "required": [
-                        "NalBaza",
-                        "SumDohObsh",
-                        "Stavka"
-                      ]
+                      "required": []
                     }
                   }
                 },
-                "required": [
-                  "fs3FNSDohflnaSvedDoh2NDFL"
-                ]
+                "required": []
               },
               "SvedDohNDPrib": {
-                "type": "array",
-                "items": {
-                  "title": "Сведения о доходах физического лица из налоговой декларации по налогу на прибыль организаций",
-                  "type": "object",
-                  "properties": {
-                    "fs3FNSDohflnaSvedDohNDPrib": {
+                "title": "Общие суммы дохода по итогам налогового периода",
+                "type": "object",
+                "properties": {
+                  "fs3FNSDohflnaSvedDohNDPrib": {
+                    "type": "array",
+                    "items": {
                       "title": "Общие суммы дохода по итогам налогового периода",
                       "type": "object",
                       "properties": {
@@ -166,15 +154,11 @@
                           "format": "int32"
                         }
                       },
-                      "required": [
-                        "NalBaza",
-                        "SumDohObsh",
-                        "Stavka"
-                      ]
+                      "required": []
                     }
-                  },
-                  "required": []
-                }
+                  }
+                },
+                "required": []
               },
               "SvNAFLFIOFirstName": {
                 "title": "Имя",
@@ -198,27 +182,11 @@
                 "format": "date"
               }
             },
-            "required": [
-              "FamilyName",
-              "FirstName",
-              "INNYUL",
-              "SvNAFLINNFL",
-              "SvNAFLFIOFamilyName",
-              "KPP",
-              "NaimOrg",
-              "SvedDoh2NDFL",
-              "SvedDohNDPrib",
-              "SvNAFLFIOFirstName",
-              "SeriesNumber",
-              "DocumentCode",
-              "DataRozhd"
-            ]
+            "required": []
           }
         }
       },
-      "required": [
-        "fs3FNSDohflnaDohFLNA"
-      ]
+      "required": []
     },
     "IdZapros": {
       "title": "Идентификатор запроса, сформированный запрашивающей стороной",
@@ -229,8 +197,5 @@
       "type": "string"
     }
   },
-  "required": [
-    "DohFLNA",
-    "OtchetGod"
-  ]
+  "required": []
 }
