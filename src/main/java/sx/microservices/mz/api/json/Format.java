@@ -1,4 +1,4 @@
-package sx.microservices.mz.api.schema;
+package sx.microservices.mz.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

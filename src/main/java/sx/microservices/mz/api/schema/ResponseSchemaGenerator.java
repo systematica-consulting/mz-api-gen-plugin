@@ -1,4 +1,4 @@
-package sx.microservices.mz.api.xml;
+package sx.microservices.mz.api.schema;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

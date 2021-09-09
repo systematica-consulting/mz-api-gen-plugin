@@ -1,4 +1,4 @@
-package sx.microservices.mz.api.xml;
+package sx.microservices.mz.api.schema;
 
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Element;
@@ -7,7 +7,6 @@ import org.w3c.dom.NodeList;
 import sx.microservices.mz.api.Converter;
 import sx.microservices.mz.api.XslTransformer;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
-import sx.microservices.mz.api.xsd2inst.XmlType;
 
 import java.util.*;
 import java.util.function.UnaryOperator;

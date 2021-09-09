@@ -1,6 +1,6 @@
-package sx.microservices.mz.api.schema;
+package sx.microservices.mz.api.json;
 
-import sx.microservices.mz.api.xml.XmlSchema;
+import sx.microservices.mz.api.schema.XmlSchema;
 
 import java.util.HashMap;
 import java.util.HashSet;

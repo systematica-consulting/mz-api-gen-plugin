@@ -30,6 +30,7 @@ import org.apache.xmlbeans.soap.SOAPArrayType;
 import org.apache.xmlbeans.soap.SchemaWSDLArrayType;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sx.microservices.mz.api.schema.XmlType;
 
 import javax.xml.namespace.QName;
 import java.math.BigDecimal;

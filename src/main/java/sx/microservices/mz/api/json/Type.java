@@ -1,8 +1,6 @@
-package sx.microservices.mz.api.schema;
+package sx.microservices.mz.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.io.ByteArrayOutputStream;
 
 enum Type {
   string, array, object, number, integer, @JsonProperty("boolean") _boolean;

@@ -1,5 +1,7 @@
 package sx.microservices.mz.api.xsd2inst;
 
+import sx.microservices.mz.api.schema.XmlType;
+
 import java.util.Map;
 
 public class XmlInstance {

@@ -1,4 +1,4 @@
-package sx.microservices.mz.api.xsd2inst;
+package sx.microservices.mz.api.schema;
 
 import lombok.Data;
 

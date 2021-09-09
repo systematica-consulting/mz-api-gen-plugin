@@ -1,7 +1,6 @@
-package sx.microservices.mz.api.xml;
+package sx.microservices.mz.api.schema;
 
 import lombok.Data;
-import sx.microservices.mz.api.xsd2inst.XmlType;
 
 import java.util.HashMap;
 import java.util.Map;

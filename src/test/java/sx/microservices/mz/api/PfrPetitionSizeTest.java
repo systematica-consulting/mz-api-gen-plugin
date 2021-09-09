@@ -1,9 +1,7 @@
 package sx.microservices.mz.api;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import sx.microservices.mz.api.schema.SchemaBean;
+import sx.microservices.mz.api.json.SchemaBean;
 
 import static org.junit.Assert.assertEquals;
 

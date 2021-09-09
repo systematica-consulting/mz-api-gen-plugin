@@ -1,13 +1,11 @@
-package sx.microservices.mz.api.xml;
+package sx.microservices.mz.api.schema;
 
 import lombok.SneakyThrows;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import sx.microservices.mz.api.Converter;
 import sx.microservices.mz.api.XslTransformer;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
-import sx.microservices.mz.api.xsd2inst.XmlType;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -15,7 +13,6 @@ import javax.xml.xpath.XPathFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class RequestSchemaGenerator extends XmlSchemaGenerator{
 
