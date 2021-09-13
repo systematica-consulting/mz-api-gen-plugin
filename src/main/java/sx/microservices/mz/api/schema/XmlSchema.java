@@ -19,7 +19,6 @@ public class XmlSchema {
     if (children == null){
       children = new HashMap<>();
     }
-    children.putIfAbsent(name, schema);
     children.compute(name, (n, s) -> {
       if (s == null){
         return schema;
