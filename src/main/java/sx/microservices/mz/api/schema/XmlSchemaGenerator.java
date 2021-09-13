@@ -7,7 +7,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import sx.microservices.mz.api.Converter;
-import sx.microservices.mz.api.XslTransformer;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
 
 import javax.xml.xpath.XPathConstants;
@@ -35,11 +34,11 @@ abstract class XmlSchemaGenerator {
   protected final Map<String, XmlType> addressTypeMap;
   protected final Map<String, XmlType> guidTypeMap;
   protected final Converter converter = new Converter();
-  protected final XslTransformer transformer;
   protected final String xml;
+  protected final String templatePath;
 
-  public XmlSchemaGenerator(XslTransformer transformer, XmlInstance xmlInstance) {
-    this.transformer = transformer;
+  public XmlSchemaGenerator(XmlInstance xmlInstance, String templatePath) {
+    this.templatePath = templatePath;
     this.guidTypeMap = xmlInstance.getTypes();
     this.xml = xmlInstance.getXml();
     this.addressTypeMap = guidTypeMap.values().stream().collect(Collectors.toMap(XmlType::getElementAddress, t -> t));
@@ -100,10 +99,13 @@ abstract class XmlSchemaGenerator {
       String address = findCommonAddress(addresses);
 
       XmlType oldType = addressTypeMap.get(address);
+
       XmlType type = new XmlType();
       type.setType("XmlObject");
-      type.setDescription(oldType.getDescription());
-      type.setElementAddress(oldType.getElementAddress());
+      if (oldType != null){
+        type.setDescription(oldType.getDescription());
+        type.setElementAddress(oldType.getElementAddress());
+      }
       schema.setType(type);
 
     }
@@ -146,7 +148,7 @@ abstract class XmlSchemaGenerator {
    * @return общий префикс
    */
   private String findCommonAddress(List<String> addresses) {
-    if (addresses.isEmpty()) return "";
+    if (addresses.isEmpty()) return null;
     if (addresses.size() == 1) {
       return addresses.get(0);
     }

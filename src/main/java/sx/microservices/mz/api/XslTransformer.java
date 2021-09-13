@@ -10,6 +10,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -19,17 +20,21 @@ import java.util.Objects;
 
 public class XslTransformer {
 
-  private final String templatePath;
+  private final byte[] template;
 
   public XslTransformer(String templatePath) {
-    this.templatePath = templatePath;
+    template = FileUtils.getFileContent(templatePath);
+  }
+
+  public XslTransformer(byte[] template){
+    this.template = template;
   }
 
   @SneakyThrows
   public Document transform(Document document)  {
     TransformerFactory factory = TransformerFactory.newInstance();
 
-    InputStream inputStream = FileUtils.getFileInputStream(templatePath);
+    InputStream inputStream = new ByteArrayInputStream(template);
     try (inputStream) {
       Source xslt = new StreamSource(inputStream);
       Source data = new DOMSource(document);

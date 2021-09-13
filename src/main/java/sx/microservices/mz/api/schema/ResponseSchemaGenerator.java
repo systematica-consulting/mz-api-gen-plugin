@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sx.microservices.mz.api.FileUtils;
 import sx.microservices.mz.api.XslTransformer;
 import sx.microservices.mz.api.xsd2inst.XmlInstance;
 import javax.xml.xpath.XPathConstants;
@@ -16,12 +17,15 @@ import java.util.*;
 @Slf4j
 public class ResponseSchemaGenerator extends XmlSchemaGenerator {
 
-  public ResponseSchemaGenerator(XmlInstance xmlInstance, XslTransformer transformer) {
-    super(transformer, xmlInstance);
+  public ResponseSchemaGenerator(XmlInstance xmlInstance, String templatePath) {
+    super(xmlInstance, templatePath);
   }
 
 
   public XmlSchema generate() {
+    byte[] fullTemplate = createFullTemplate(templatePath);
+
+    XslTransformer transformer = new XslTransformer(templatePath);
     Document document = converter.toDocument(xml);
     Document transformed = transformer.transform(document);
     removeJsonAttrs(transformed);
@@ -37,6 +41,36 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     setArrayType(schema, arrayNodes);
 
     return schema;
+  }
+
+  private byte[] createFullTemplate(String templatePath) {
+    byte[] templateContent = FileUtils.getFileContent(templatePath);
+    Document document = converter.toDocument(new String(templateContent));
+    removeUnkosherNodes(document);
+    return new byte[0];
+  }
+
+  /**
+   * Удалить все if, when node из шаблона, смерджить их контент, если он задублируется.
+   * Чтобы преобразование было полным
+   * @param document doc
+   */
+  @SneakyThrows
+  private void removeUnkosherNodes(Document document) {
+    XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[name()='xsl:choose' or name()='xsl:when' or name()='xsl:otherwise'] ");
+    NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
+    for (int i = 0; i< nodeList.getLength(); i++){
+      Element element = (Element)nodeList.item(i);
+      if (element.getLocalName().equals("when")){
+        document.renameNode(element, element.getNamespaceURI(), "xsl:if");
+      }
+      if (element.getLocalName().equals("choose") || element.getLocalName().equals("otherwise")){
+        document.renameNode(element, element.getNamespaceURI(), "xsl:if");
+        element.setAttribute("test", "true");
+      }
+
+    }
+    document.normalizeDocument();
   }
 
 

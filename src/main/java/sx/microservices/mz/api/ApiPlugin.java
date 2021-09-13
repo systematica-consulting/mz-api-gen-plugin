@@ -49,9 +49,7 @@ public class ApiPlugin implements Plugin<Project> {
     XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
     XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
 
-    XslTransformer transformer = new XslTransformer(config.getTemplate());
-
-    ResponseSchemaGenerator responseSchemaGenerator = new ResponseSchemaGenerator(xmlInstance, transformer);
+    ResponseSchemaGenerator responseSchemaGenerator = new ResponseSchemaGenerator(xmlInstance, config.getTemplate());
     XmlSchema xmlSchema = responseSchemaGenerator.generate();
 
     JsonSchemaGenerator generator = new JsonSchemaGenerator();
@@ -67,9 +65,7 @@ public class ApiPlugin implements Plugin<Project> {
 
     byte[] request = FileUtils.getFileContent(config.getRequest());
 
-    XslTransformer transformer = new XslTransformer(config.getTemplate());
-
-    RequestSchemaGenerator xmlSchemaGenerator = new RequestSchemaGenerator(xmlInstance, transformer);
+    RequestSchemaGenerator xmlSchemaGenerator = new RequestSchemaGenerator(xmlInstance, config.getTemplate());
     XmlSchema xmlSchema = xmlSchemaGenerator.generate(request);
 
     JsonSchemaGenerator generator = new JsonSchemaGenerator();

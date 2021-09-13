@@ -1,0 +1,16 @@
+{
+  "title" : "Запрос на получение публичной выписки из реестра заключений",
+  "type" : "object",
+  "properties" : {
+    "expertiseResultNumber" : {
+      "title" : "Номер заключения экспертизы",
+      "type" : "string"
+    },
+    "expertiseResultDate" : {
+      "title" : "Дата заключения экспертизы",
+      "type" : "string",
+      "format" : "date"
+    }
+  },
+  "required" : [ ]
+}

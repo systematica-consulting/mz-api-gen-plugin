@@ -1,0 +1,215 @@
+{
+  "title" : "Ответ на запрос на получение публичной выписки из реестра заключений",
+  "type" : "object",
+  "properties" : {
+    "PrintOutNumber" : {
+      "title" : "Номер родительского сообщения",
+      "type" : "string"
+    },
+    "ExpertiseResultNumber" : {
+      "title" : "Номер заключения экспертизы",
+      "type" : "string"
+    },
+    "SubjectRFNumber" : {
+      "title" : "Код субъекта РФ",
+      "type" : "string"
+    },
+    "BuildingAddress" : {
+      "title" : "Адрес (местоположение) объекта капитального строительства",
+      "type" : "string"
+    },
+    "WorkType" : {
+      "title" : "Вид работ",
+      "type" : "string"
+    },
+    "ExpertiseResultDate" : {
+      "title" : "Дата заключения экспертизы",
+      "type" : "string",
+      "format" : "date"
+    },
+    "RightsInfo" : {
+      "title" : "Сообщение об отсутсвии данных",
+      "type" : "object",
+      "properties" : {
+        "NoRights" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "messageId" : {
+      "title" : "Идентификатор запроса в системе СМЭВ",
+      "type" : "string"
+    },
+    "ReestrDate" : {
+      "title" : "Дата включения сведений в реестр",
+      "type" : "string",
+      "format" : "date"
+    },
+    "ObjectName" : {
+      "title" : "Наименование объекта капитального строительства",
+      "type" : "string"
+    },
+    "Result" : {
+      "title" : "Результат проведенной экспертизы",
+      "type" : "string"
+    },
+    "PreviousExpertisesInfo" : {
+      "title" : "Сведения об использовании экономически эффективной проектной документации",
+      "type" : "object",
+      "properties" : {
+        "PreviousExpertises" : {
+          "title" : "Сведения об использовании экономически эффективной проектной документации",
+          "type" : "object",
+          "properties" : {
+            "PreviousExpertise" : {
+              "type" : "array",
+              "items" : {
+                "title" : "Сведения об использовании экономически эффективной проектной документации",
+                "type" : "object",
+                "properties" : {
+                  "Number" : {
+                    "title" : "Номер заключения экспертизы",
+                    "type" : "string"
+                  },
+                  "Date" : {
+                    "title" : "Дата заключения экспертизы",
+                    "type" : "string",
+                    "format" : "date"
+                  }
+                },
+                "required" : [ ]
+              }
+            }
+          },
+          "required" : [ ]
+        }
+      },
+      "required" : [ ]
+    },
+    "DocumentationType" : {
+      "title" : "Сведения об объекте экспертизы",
+      "type" : "string"
+    },
+    "Type" : {
+      "title" : "Форма экспертизы",
+      "type" : "string"
+    },
+    "DeveloperOrganizationInfo" : {
+      "title" : "Сообщение об отсутсвии данных",
+      "type" : "object",
+      "properties" : {
+        "TechnicalEmployers" : {
+          "type" : "object",
+          "properties" : {
+            "Organization" : {
+              "type" : "array",
+              "items" : {
+                "title" : "",
+                "type" : "string"
+              }
+            }
+          },
+          "required" : [ ]
+        },
+        "NoDeveloperOrganizations" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "ExpertiseResultEconomyEfficiencyInfo" : {
+      "title" : "Сообщение об отсутсвии данных",
+      "type" : "object",
+      "properties" : {
+        "NoExpertiseResultEconomyEfficiencyInfo" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "ExpertOrganization" : {
+      "title" : "Сведения об экспертной организации",
+      "type" : "object",
+      "properties" : {
+        "OGRNInfo" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "object",
+          "properties" : {
+            "NoOGRN" : {
+              "title" : "Сообщение об отсутсвии данных",
+              "type" : "string"
+            }
+          },
+          "required" : [ ]
+        },
+        "Type" : {
+          "title" : "",
+          "type" : "string"
+        },
+        "Email" : {
+          "title" : "Адрес электронной почты",
+          "type" : "string"
+        },
+        "Address" : {
+          "title" : "Адрес",
+          "type" : "string"
+        },
+        "Phone" : {
+          "title" : "Телефон",
+          "type" : "string"
+        },
+        "KPPInfo" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "object",
+          "properties" : {
+            "NoKPP" : {
+              "title" : "Сообщение об отсутсвии данных",
+              "type" : "string"
+            }
+          },
+          "required" : [ ]
+        },
+        "INNInfo" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "object",
+          "properties" : {
+            "NoINN" : {
+              "title" : "Сообщение об отсутсвии данных",
+              "type" : "string"
+            }
+          },
+          "required" : [ ]
+        },
+        "Name" : {
+          "title" : "Полное наименование",
+          "type" : "string"
+        },
+        "Location" : {
+          "title" : "Место нахождения",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "PlannerOrganizationInfo" : {
+      "title" : "Сообщение об отсутсвии данных",
+      "type" : "object",
+      "properties" : {
+        "NoOrganizations" : {
+          "title" : "Сообщение об отсутсвии данных",
+          "type" : "string"
+        }
+      },
+      "required" : [ ]
+    },
+    "SubjectRFName" : {
+      "title" : "Наименование субъекта РФ",
+      "type" : "string"
+    }
+  },
+  "required" : [ ]
+}

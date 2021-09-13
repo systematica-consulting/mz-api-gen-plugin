@@ -17,11 +17,12 @@ import java.util.UUID;
 
 public class RequestSchemaGenerator extends XmlSchemaGenerator{
 
-  public RequestSchemaGenerator(XmlInstance xmlInstance, XslTransformer transformer) {
-    super(transformer, xmlInstance);
+  public RequestSchemaGenerator(XmlInstance xmlInstance, String templatePath) {
+    super(xmlInstance, templatePath);
   }
 
   public XmlSchema generate(byte[] request) {
+    XslTransformer transformer = new XslTransformer(templatePath);
     Document document = converter.toDocument(new String(request));
     setGuids(document);
     Document transformed = transformer.transform(document);
