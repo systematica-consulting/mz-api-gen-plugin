@@ -20,6 +20,16 @@ public class XmlSchema {
       children = new HashMap<>();
     }
     children.putIfAbsent(name, schema);
+    children.compute(name, (n, s) -> {
+      if (s == null){
+        return schema;
+      }else {
+        if (schema.children != null) {
+          schema.children.forEach(s::putChild);
+        }
+        return s;
+      }
+    });
   }
 
 

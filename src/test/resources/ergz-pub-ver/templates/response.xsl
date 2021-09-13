@@ -201,22 +201,22 @@
                 <Organization>
                   <xsl:attribute name="_json">asList</xsl:attribute>
                   <xsl:choose>
-                    <xsl:when test="name()='FL'">
+                    <xsl:when test="local-name()='FL'">
                       <xsl:call-template name="fl">
                         <xsl:with-param name="data" select="."/>
-                        <xsl:with-param name="type" select="name()"/>
+                        <xsl:with-param name="type" select="local-name()"/>
                       </xsl:call-template>
                     </xsl:when>
-                    <xsl:when test="name()='IP'">
+                    <xsl:when test="local-name()='IP'">
                       <xsl:call-template name="fl">
                         <xsl:with-param name="data" select="."/>
-                        <xsl:with-param name="type" select="name()"/>
+                        <xsl:with-param name="type" select="local-name()"/>
                       </xsl:call-template>
                     </xsl:when>
-                    <xsl:when test="name()='UL'">
+                    <xsl:when test="local-name()='UL'">
                       <xsl:call-template name="organization">
                         <xsl:with-param name="data" select="."/>
-                        <xsl:with-param name="type" select="name()"/>
+                        <xsl:with-param name="type" select="local-name()"/>
                       </xsl:call-template>
                     </xsl:when>
                   </xsl:choose>
@@ -232,22 +232,22 @@
             <Organization>
               <xsl:attribute name="_json">asList</xsl:attribute>
               <xsl:choose>
-                <xsl:when test="name()='FL'">
+                <xsl:when test="local-name()='FL'">
                   <xsl:call-template name="fl">
                     <xsl:with-param name="data" select="."/>
-                    <xsl:with-param name="type" select="name()"/>
+                    <xsl:with-param name="type" select="local-name()"/>
                   </xsl:call-template>
                 </xsl:when>
-                <xsl:when test="name()='IP'">
+                <xsl:when test="local-name()='IP'">
                   <xsl:call-template name="fl">
                     <xsl:with-param name="data" select="."/>
-                    <xsl:with-param name="type" select="name()"/>
+                    <xsl:with-param name="type" select="local-name()"/>
                   </xsl:call-template>
                 </xsl:when>
-                <xsl:when test="name()='UL'">
+                <xsl:when test="local-name()='UL'">
                   <xsl:call-template name="organization">
                     <xsl:with-param name="data" select="."/>
-                    <xsl:with-param name="type" select="name()"/>
+                    <xsl:with-param name="type" select="local-name()"/>
                   </xsl:call-template>
                 </xsl:when>
               </xsl:choose>
@@ -351,16 +351,16 @@
               <Organization>
                 <xsl:attribute name="_json">asList</xsl:attribute>
                 <xsl:choose>
-                  <xsl:when test="name()='IP'">
+                  <xsl:when test="local-name()='IP'">
                     <xsl:call-template name="fl">
                       <xsl:with-param name="data" select="."/>
-                      <xsl:with-param name="type" select="name()"/>
+                      <xsl:with-param name="type" select="local-name()"/>
                     </xsl:call-template>
                   </xsl:when>
-                  <xsl:when test="name()='UL'">
+                  <xsl:when test="local-name()='UL'">
                     <xsl:call-template name="organization">
                       <xsl:with-param name="data" select="."/>
-                      <xsl:with-param name="type" select="name()"/>
+                      <xsl:with-param name="type" select="local-name()"/>
                     </xsl:call-template>
                   </xsl:when>
                 </xsl:choose>

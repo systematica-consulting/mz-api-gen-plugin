@@ -136,7 +136,14 @@ abstract class XmlSchemaGenerator {
 
   protected void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
     if (arrayNodes.contains(xmlSchema.getElementAddress())){
-      xmlSchema.getType().setList(true);
+      if (xmlSchema.getType().getType().equals("XmlObject")) {
+        xmlSchema.getType().setList(true);
+      }else {
+        XmlType xmlType = addressTypeMap.get(xmlSchema.getType().getElementAddress());
+        if (xmlType == null || xmlType.isList()){
+          xmlSchema.getType().setList(true);
+        }
+      }
     }
     if (xmlSchema.getChildren() != null){
       xmlSchema.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));

@@ -12,6 +12,7 @@ import sx.microservices.mz.api.xsd2inst.XmlInstance;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Slf4j
@@ -23,14 +24,19 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
 
 
   public XmlSchema generate() {
-    byte[] fullTemplate = createFullTemplate(templatePath);
+    byte[] whenTemplate = createWhenTemplate(templatePath);
 
-    XslTransformer transformer = new XslTransformer(templatePath);
+    XslTransformer transformer = new XslTransformer(whenTemplate);
     Document document = converter.toDocument(xml);
     Document transformed = transformer.transform(document);
     removeJsonAttrs(transformed);
 
     XmlSchema schema = _generate(transformed.getDocumentElement());
+
+
+
+
+
     fillObjectsTypes(schema);
 
     document = converter.toDocument(xml);
@@ -43,20 +49,16 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     return schema;
   }
 
-  private byte[] createFullTemplate(String templatePath) {
+  private byte[] createWhenTemplate(String templatePath) {
     byte[] templateContent = FileUtils.getFileContent(templatePath);
     Document document = converter.toDocument(new String(templateContent));
-    removeUnkosherNodes(document);
-    return new byte[0];
+    replaceChooseNodes(document);
+    return converter.toString(document).getBytes(StandardCharsets.UTF_8);
   }
 
-  /**
-   * Удалить все if, when node из шаблона, смерджить их контент, если он задублируется.
-   * Чтобы преобразование было полным
-   * @param document doc
-   */
+
   @SneakyThrows
-  private void removeUnkosherNodes(Document document) {
+  private void replaceChooseNodes(Document document) {
     XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[name()='xsl:choose' or name()='xsl:when' or name()='xsl:otherwise'] ");
     NodeList nodeList = (NodeList) xpath.evaluate(document, XPathConstants.NODESET);
     for (int i = 0; i< nodeList.getLength(); i++){
@@ -64,9 +66,24 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
       if (element.getLocalName().equals("when")){
         document.renameNode(element, element.getNamespaceURI(), "xsl:if");
       }
-      if (element.getLocalName().equals("choose") || element.getLocalName().equals("otherwise")){
+      if (element.getLocalName().equals("choose") ){
         document.renameNode(element, element.getNamespaceURI(), "xsl:if");
-        element.setAttribute("test", "true");
+        element.setAttribute("test", "boolean(1)");
+      }
+      if (element.getLocalName().equals("otherwise")){
+        document.renameNode(element, element.getNamespaceURI(), "xsl:if");
+        boolean containElements = false;
+        NodeList childNodes = element.getChildNodes();
+        for (int j = 0; j< childNodes.getLength(); j ++){//ппц
+          if (childNodes.item(j) instanceof Element && !"xsl:value-of".equals(childNodes.item(j).getNodeName())){
+            containElements = true;
+          }
+        }
+        if (containElements){
+          element.setAttribute("test", "boolean(1)");
+        }else {
+          element.setAttribute("test", "boolean(0)");
+        }
       }
 
     }

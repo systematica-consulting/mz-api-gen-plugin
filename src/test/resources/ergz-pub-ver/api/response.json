@@ -28,9 +28,100 @@
       "format" : "date"
     },
     "RightsInfo" : {
-      "title" : "Сообщение об отсутсвии данных",
+      "title" : "Информация о блоке \"Исключительное право на проектную документацию повторного использования либо права на ее многократное использование (в том числе для подготовки на ее основе проектной документации)\"",
       "type" : "object",
       "properties" : {
+        "Rights" : {
+          "title" : "Исключительное право на проектную документацию повторного использования либо права на ее многократное использование (в том числе для подготовки на ее основе проектной документации)",
+          "type" : "object",
+          "properties" : {
+            "Owner" : {
+              "title" : "Сведения об организации",
+              "type" : "object",
+              "properties" : {
+                "OGRNInfo" : {
+                  "title" : "Информация об ОГРН",
+                  "type" : "object",
+                  "properties" : {
+                    "OGRN" : {
+                      "title" : "ОГРН",
+                      "type" : "string"
+                    },
+                    "NoOGRN" : {
+                      "title" : "Сообщение об отсутсвии данных",
+                      "type" : "string"
+                    }
+                  },
+                  "required" : [ ]
+                },
+                "Type" : {
+                  "title" : "",
+                  "type" : "string"
+                },
+                "Email" : {
+                  "title" : "Адрес электронной почты",
+                  "type" : "string"
+                },
+                "Address" : {
+                  "title" : "Адрес",
+                  "type" : "string"
+                },
+                "Phone" : {
+                  "title" : "Телефон",
+                  "type" : "string"
+                },
+                "KPPInfo" : {
+                  "title" : "Информация о КПП",
+                  "type" : "object",
+                  "properties" : {
+                    "NoKPP" : {
+                      "title" : "Сообщение об отсутсвии данных",
+                      "type" : "string"
+                    },
+                    "KPP" : {
+                      "title" : "КПП",
+                      "type" : "string"
+                    }
+                  },
+                  "required" : [ ]
+                },
+                "INNInfo" : {
+                  "title" : "Информация об ИНН",
+                  "type" : "object",
+                  "properties" : {
+                    "NoINN" : {
+                      "title" : "Сообщение об отсутсвии данных",
+                      "type" : "string"
+                    },
+                    "INN" : {
+                      "title" : "ИНН",
+                      "type" : "string"
+                    }
+                  },
+                  "required" : [ ]
+                },
+                "Name" : {
+                  "title" : "Полное наименование",
+                  "type" : "string"
+                },
+                "Location" : {
+                  "title" : "Место нахождения",
+                  "type" : "string"
+                }
+              },
+              "required" : [ ]
+            },
+            "PublicFormationName" : {
+              "title" : "Наименование публичного образования",
+              "type" : "string"
+            },
+            "RightsDocumentInfo" : {
+              "title" : "Сведения о документе",
+              "type" : "string"
+            }
+          },
+          "required" : [ ]
+        },
         "NoRights" : {
           "title" : "Сообщение об отсутсвии данных",
           "type" : "string"
@@ -97,17 +188,282 @@
       "type" : "string"
     },
     "DeveloperOrganizationInfo" : {
-      "title" : "Сообщение об отсутсвии данных",
+      "title" : "Информация о блоке \"Сведения о застройщике (техническом заказчике), обеспечившем подготовку проектной документации\"",
       "type" : "object",
       "properties" : {
         "TechnicalEmployers" : {
+          "title" : "Сведения об организациях (ЮЛ/ФЛ/ИП)",
           "type" : "object",
           "properties" : {
             "Organization" : {
               "type" : "array",
               "items" : {
-                "title" : "",
-                "type" : "string"
+                "title" : "Сведения об организациях (ЮЛ/ФЛ/ИП)",
+                "type" : "object",
+                "properties" : {
+                  "Email" : {
+                    "title" : "Адрес электронной почты",
+                    "type" : "string"
+                  },
+                  "Address" : {
+                    "title" : "Адрес",
+                    "type" : "string"
+                  },
+                  "FirstName" : {
+                    "title" : "Имя",
+                    "type" : "string"
+                  },
+                  "PatronymicInfo" : {
+                    "title" : "Информация об отчестве",
+                    "type" : "object",
+                    "properties" : {
+                      "NoPatronymic" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "Patronymic" : {
+                        "title" : "Отчество",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "OGRNIPInfo" : {
+                    "title" : "Информация об ОГРНИП",
+                    "type" : "object",
+                    "properties" : {
+                      "NoOGRNIP" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "OGRNIP" : {
+                        "title" : "ОГРНИП",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Name" : {
+                    "title" : "Полное наименование",
+                    "type" : "string"
+                  },
+                  "OGRNInfo" : {
+                    "title" : "Информация об ОГРН",
+                    "type" : "object",
+                    "properties" : {
+                      "OGRN" : {
+                        "title" : "ОГРН",
+                        "type" : "string"
+                      },
+                      "NoOGRN" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Type" : {
+                    "title" : "",
+                    "type" : "string"
+                  },
+                  "SNILSInfo" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "object",
+                    "properties" : {
+                      "NoSNILS" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "SNILS" : {
+                        "title" : "",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Phone" : {
+                    "title" : "Телефон",
+                    "type" : "string"
+                  },
+                  "KPPInfo" : {
+                    "title" : "Информация о КПП",
+                    "type" : "object",
+                    "properties" : {
+                      "NoKPP" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "KPP" : {
+                        "title" : "КПП",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "INNInfo" : {
+                    "title" : "Информация об ИНН",
+                    "type" : "object",
+                    "properties" : {
+                      "NoINN" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "INN" : {
+                        "title" : "ИНН",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "LastName" : {
+                    "title" : "Фамилия",
+                    "type" : "string"
+                  },
+                  "Location" : {
+                    "title" : "Место нахождения",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              }
+            }
+          },
+          "required" : [ ]
+        },
+        "DeveloperOrganizations" : {
+          "title" : "Сведения об организациях (ЮЛ/ФЛ/ИП)",
+          "type" : "object",
+          "properties" : {
+            "Organization" : {
+              "type" : "array",
+              "items" : {
+                "title" : "Сведения об организациях (ЮЛ/ФЛ/ИП)",
+                "type" : "object",
+                "properties" : {
+                  "Email" : {
+                    "title" : "Адрес электронной почты",
+                    "type" : "string"
+                  },
+                  "Address" : {
+                    "title" : "Адрес",
+                    "type" : "string"
+                  },
+                  "FirstName" : {
+                    "title" : "Имя",
+                    "type" : "string"
+                  },
+                  "PatronymicInfo" : {
+                    "title" : "Информация об отчестве",
+                    "type" : "object",
+                    "properties" : {
+                      "NoPatronymic" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "Patronymic" : {
+                        "title" : "Отчество",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "OGRNIPInfo" : {
+                    "title" : "Информация об ОГРНИП",
+                    "type" : "object",
+                    "properties" : {
+                      "NoOGRNIP" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "OGRNIP" : {
+                        "title" : "ОГРНИП",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Name" : {
+                    "title" : "Полное наименование",
+                    "type" : "string"
+                  },
+                  "OGRNInfo" : {
+                    "title" : "Информация об ОГРН",
+                    "type" : "object",
+                    "properties" : {
+                      "OGRN" : {
+                        "title" : "ОГРН",
+                        "type" : "string"
+                      },
+                      "NoOGRN" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Type" : {
+                    "title" : "",
+                    "type" : "string"
+                  },
+                  "SNILSInfo" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "object",
+                    "properties" : {
+                      "NoSNILS" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "SNILS" : {
+                        "title" : "",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "Phone" : {
+                    "title" : "Телефон",
+                    "type" : "string"
+                  },
+                  "KPPInfo" : {
+                    "title" : "Информация о КПП",
+                    "type" : "object",
+                    "properties" : {
+                      "NoKPP" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "KPP" : {
+                        "title" : "КПП",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "INNInfo" : {
+                    "title" : "Информация об ИНН",
+                    "type" : "object",
+                    "properties" : {
+                      "NoINN" : {
+                        "title" : "Сообщение об отсутсвии данных",
+                        "type" : "string"
+                      },
+                      "INN" : {
+                        "title" : "ИНН",
+                        "type" : "string"
+                      }
+                    },
+                    "required" : [ ]
+                  },
+                  "LastName" : {
+                    "title" : "Фамилия",
+                    "type" : "string"
+                  },
+                  "Location" : {
+                    "title" : "Место нахождения",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
               }
             }
           },
@@ -121,9 +477,25 @@
       "required" : [ ]
     },
     "ExpertiseResultEconomyEfficiencyInfo" : {
-      "title" : "Сообщение об отсутсвии данных",
+      "title" : "Информация о блоке \"Сведения о признании проектной документации экономически эффективной проектной документацией повторного использования в соответствии с решением Министерства строительства и жилищно-коммунального хозяйства Российской Федерации\"",
       "type" : "object",
       "properties" : {
+        "ExpertiseResultEconomyEfficiency" : {
+          "title" : "Сведения о признании проектной документации экономически эффективной проектной документацией повторного использования в соответствии с решением Министерства строительства и жилищно-коммунального хозяйства Российской Федерации",
+          "type" : "object",
+          "properties" : {
+            "Number" : {
+              "title" : "Номер решения",
+              "type" : "string"
+            },
+            "Date" : {
+              "title" : "Дата решения",
+              "type" : "string",
+              "format" : "date"
+            }
+          },
+          "required" : [ ]
+        },
         "NoExpertiseResultEconomyEfficiencyInfo" : {
           "title" : "Сообщение об отсутсвии данных",
           "type" : "string"
@@ -136,9 +508,13 @@
       "type" : "object",
       "properties" : {
         "OGRNInfo" : {
-          "title" : "Сообщение об отсутсвии данных",
+          "title" : "Информация об ОГРН",
           "type" : "object",
           "properties" : {
+            "OGRN" : {
+              "title" : "ОГРН",
+              "type" : "string"
+            },
             "NoOGRN" : {
               "title" : "Сообщение об отсутсвии данных",
               "type" : "string"
@@ -163,22 +539,30 @@
           "type" : "string"
         },
         "KPPInfo" : {
-          "title" : "Сообщение об отсутсвии данных",
+          "title" : "Информация о КПП",
           "type" : "object",
           "properties" : {
             "NoKPP" : {
               "title" : "Сообщение об отсутсвии данных",
+              "type" : "string"
+            },
+            "KPP" : {
+              "title" : "КПП",
               "type" : "string"
             }
           },
           "required" : [ ]
         },
         "INNInfo" : {
-          "title" : "Сообщение об отсутсвии данных",
+          "title" : "Информация об ИНН",
           "type" : "object",
           "properties" : {
             "NoINN" : {
               "title" : "Сообщение об отсутсвии данных",
+              "type" : "string"
+            },
+            "INN" : {
+              "title" : "ИНН",
               "type" : "string"
             }
           },
@@ -196,12 +580,139 @@
       "required" : [ ]
     },
     "PlannerOrganizationInfo" : {
-      "title" : "Сообщение об отсутсвии данных",
+      "title" : "Информация о блоке \"Cведения об индивидуальных предпринимателях и (или) юридических лицах, подготовивших проектную документацию\"",
       "type" : "object",
       "properties" : {
         "NoOrganizations" : {
           "title" : "Сообщение об отсутсвии данных",
           "type" : "string"
+        },
+        "Organization" : {
+          "type" : "array",
+          "items" : {
+            "title" : "Список cведений о ЮЛ",
+            "type" : "object",
+            "properties" : {
+              "Email" : {
+                "title" : "Адрес электронной почты",
+                "type" : "string"
+              },
+              "Address" : {
+                "title" : "Адрес",
+                "type" : "string"
+              },
+              "FirstName" : {
+                "title" : "Имя",
+                "type" : "string"
+              },
+              "PatronymicInfo" : {
+                "title" : "Информация об отчестве",
+                "type" : "object",
+                "properties" : {
+                  "NoPatronymic" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "string"
+                  },
+                  "Patronymic" : {
+                    "title" : "Отчество",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "OGRNIPInfo" : {
+                "title" : "Информация об ОГРНИП",
+                "type" : "object",
+                "properties" : {
+                  "NoOGRNIP" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "string"
+                  },
+                  "OGRNIP" : {
+                    "title" : "ОГРНИП",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "Name" : {
+                "title" : "Полное наименование",
+                "type" : "string"
+              },
+              "OGRNInfo" : {
+                "title" : "Информация об ОГРН",
+                "type" : "object",
+                "properties" : {
+                  "OGRN" : {
+                    "title" : "ОГРН",
+                    "type" : "string"
+                  },
+                  "NoOGRN" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "Type" : {
+                "title" : "",
+                "type" : "string"
+              },
+              "SNILSInfo" : {
+                "type" : "object",
+                "properties" : {
+                  "SNILS" : {
+                    "title" : "",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "Phone" : {
+                "title" : "Телефон",
+                "type" : "string"
+              },
+              "KPPInfo" : {
+                "title" : "Информация о КПП",
+                "type" : "object",
+                "properties" : {
+                  "NoKPP" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "string"
+                  },
+                  "KPP" : {
+                    "title" : "КПП",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "INNInfo" : {
+                "title" : "Информация об ИНН",
+                "type" : "object",
+                "properties" : {
+                  "NoINN" : {
+                    "title" : "Сообщение об отсутсвии данных",
+                    "type" : "string"
+                  },
+                  "INN" : {
+                    "title" : "ИНН",
+                    "type" : "string"
+                  }
+                },
+                "required" : [ ]
+              },
+              "LastName" : {
+                "title" : "Фамилия",
+                "type" : "string"
+              },
+              "Location" : {
+                "title" : "Место нахождения",
+                "type" : "string"
+              }
+            },
+            "required" : [ ]
+          }
         }
       },
       "required" : [ ]
