@@ -33,6 +33,13 @@ abstract class XmlSchemaGenerator {
 
   protected final Map<String, XmlType> addressTypeMap;
   protected final Map<String, XmlType> guidTypeMap;
+
+  /**
+   * Так как при генерации xml instance генерируются все варианты choose, что невозможно в реальном сценарии,
+   * некоторые элементы могут представиться массивами, хотя на самом деле ими не являются.
+   * Это поле содержит такие элементы
+   */
+  protected Set<String> noArrayElements = new HashSet<>();
   protected final Set<String> foundedGuids = new HashSet<>();
   protected final Set<String> notFoundedTypes = new HashSet<>();
   protected final Converter converter = new Converter();
@@ -138,13 +145,8 @@ abstract class XmlSchemaGenerator {
 
   protected void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
     if (arrayNodes.contains(xmlSchema.getElementAddress())){
-      if (xmlSchema.getType().getType().equals("XmlObject")) {
+      if (!noArrayElements.contains(xmlSchema.getElementAddress()) || xmlSchema.getChildren() != null){
         xmlSchema.getType().setList(true);
-      }else {
-        XmlType xmlType = addressTypeMap.get(xmlSchema.getType().getElementAddress());
-        if (xmlType == null || xmlType.isList()){
-          xmlSchema.getType().setList(true);
-        }
       }
     }
     if (xmlSchema.getChildren() != null){

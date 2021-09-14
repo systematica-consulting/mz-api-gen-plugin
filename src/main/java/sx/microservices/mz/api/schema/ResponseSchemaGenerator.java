@@ -31,6 +31,7 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     Document document = converter.toDocument(xml);
     Document transformed = transformer.transform(document);
     removeJsonAttrs(transformed);
+    noArrayElements = findArrayNodes(transformed);
 
     XmlSchema schema = _generate(transformed.getDocumentElement());
 
