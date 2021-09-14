@@ -10,10 +10,7 @@ import sx.microservices.mz.api.xsd2inst.XmlInstance;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class RequestSchemaGenerator extends XmlSchemaGenerator{
 
@@ -30,12 +27,18 @@ public class RequestSchemaGenerator extends XmlSchemaGenerator{
     Map<String, String> requestMap = transformer.transformToMap(transformed);
     Map<String, String> instanceMap = transformer.transformToMap(converter.toDocument(xml));
     Map<String, XmlType> types = defineTypes(requestMap, instanceMap, guidTypeMap);
+    guidTypeMap.clear();
     guidTypeMap.putAll(types);
 
     XmlSchema schema = _generate(document.getDocumentElement());
     fillObjectsTypes(schema);
     Set<String> arrayNodes = findArrayNodes(document);
     setArrayType(schema, arrayNodes);
+
+    if (!notFoundedTypes.isEmpty()) {
+      System.out.println("\nNot founded type for:");
+      notFoundedTypes.stream().sorted(Comparator.comparing(s -> s)).forEach(System.out::println);
+    }
 
     return schema;
   }

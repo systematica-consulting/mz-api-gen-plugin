@@ -14,6 +14,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ResponseSchemaGenerator extends XmlSchemaGenerator {
@@ -33,10 +34,6 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
 
     XmlSchema schema = _generate(transformed.getDocumentElement());
 
-
-
-
-
     fillObjectsTypes(schema);
 
     document = converter.toDocument(xml);
@@ -45,6 +42,20 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     removeJsonAttrs(transformed);
     Set<String> arrayNodes = findArrayNodes(transformed);
     setArrayType(schema, arrayNodes);
+
+
+    if (!notFoundedTypes.isEmpty()) {
+      System.out.println("\nNot founded type for:");
+      notFoundedTypes.stream().sorted(Comparator.comparing(s -> s)).forEach(System.out::println);
+    }
+
+    List<String> noMatch = guidTypeMap.entrySet().stream().filter(e -> !e.getValue().getType().equals("XmlObject") && !foundedGuids.contains(e.getKey()))
+      .map(e -> e.getValue().getElementAddress())
+      .sorted(Comparator.comparing(s -> s)).collect(Collectors.toList());
+    if (!noMatch.isEmpty()){
+      System.out.println("\nNo match for:");
+      noMatch.forEach(System.out::println);
+    }
 
     return schema;
   }

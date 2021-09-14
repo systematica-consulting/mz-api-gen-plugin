@@ -33,6 +33,8 @@ abstract class XmlSchemaGenerator {
 
   protected final Map<String, XmlType> addressTypeMap;
   protected final Map<String, XmlType> guidTypeMap;
+  protected final Set<String> foundedGuids = new HashSet<>();
+  protected final Set<String> notFoundedTypes = new HashSet<>();
   protected final Converter converter = new Converter();
   protected final String xml;
   protected final String templatePath;
@@ -68,7 +70,7 @@ abstract class XmlSchemaGenerator {
       if (oldType == null){
         type = createTypeFromElementName(element.getLocalName());
         if (type == null) {
-          log.warn("Not founded type for {}", xmlSchema.getElementAddress());
+          notFoundedTypes.add(xmlSchema.getElementAddress());
           type = new XmlType();
           type.setType(getTypeFromValue(xmlSchema.getElementValue()));
           type.setDescription("");
@@ -202,13 +204,18 @@ abstract class XmlSchemaGenerator {
 
   private XmlType findSimpleType(XmlSchema schema){
     XmlType type = guidTypeMap.get(schema.getElementValue());
-    return type != null ? type : functions
+    type =  type != null ? type : functions
       .stream()
       .map(f -> f.apply(schema.getElementValue()))
       .filter(guidTypeMap::containsKey)
       .map(guidTypeMap::get)
       .findFirst()
       .orElse(null);
+
+    if (type != null){
+      foundedGuids.add(schema.getElementValue());
+    }
+    return type;
   }
 
   /**
