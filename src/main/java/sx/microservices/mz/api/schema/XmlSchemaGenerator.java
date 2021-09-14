@@ -225,17 +225,11 @@ abstract class XmlSchemaGenerator {
    * @return тип xml элемента
    */
   private String getTypeFromValue(String value) {
+    //лучше не рисковать и не придумывать другие типы
     if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
       return "XmlBoolean";
-    } else if (value.matches("\\d+")) {
-      return "XmlLong";
-    } else {
-      try {
-        Double.parseDouble(value);
-        return "XmlDouble";
-      } catch (NumberFormatException e) {
-        return "XmlString";
-      }
+    } else  {
+      return "XmlString";
     }
   }
 
