@@ -1,34 +1,29 @@
-# Плагин gradle, генерирующий схему типизации преобразований xml -> json для имплементацией МЗ
+# mz-api-gen-plugin
 
-## Назначение
+Plugin to generate JSON schema from xsd schema and xsl template
 
-Используется библиотекой mz-library для корректного преобразования из xml в json с учётом xsd схемы, зарегистрированной
-в СМЭВ
+Usage
+====================
 
-## Описание
-
-Плагин создаёт отдельный gradle task (other -> generateApi), при запуске которого анализируется схема данных СМЭВ и
-шаблона преобразования в самой имплементации. На их основе формируется схема преобразования из xml в json с учётом типов
-данных.
-
-Так как в XML не указаны типы, нередко происходило искажение данных, например ОКВЭД могли быть интерпретированы как
-дробные числа, несмотря на то, что в СМЭВ ОКВЭД - это строка. При таком преобразовании, могла происходить потеря
-значащих лидирующих нулей и др. нежелательные изменения.
-
-Данный плагин позволяет производить конвертацию между форматами с учётом схемы СМЭВ.
-
-### Основные функции
-
-* Чтение xsd схемы запроса (должны быть в каждом импле)
-* Чтение xslt схемы имплементации
-* Генерирование на основе схем производной схемы для конвертера xml -> json
-
-## Ссылки
-
-* [Описание сервиса в базе знаний](https://)
-
-## Контакты
-
-Разработчик: @imatveev
-
-Аналитик: @omikhaleva
+````
+  plugins {
+    id "ru.systematica_consulting.mz.api-gen-plugin" version "1.0"
+  }
+  
+  apiGenerator{
+    request{
+      request = "$projectDir/src/test/resources/sample_request.xml"
+      template = "$projectDir/src/main/resources/templates/request.xsl"
+      element = "SomeRequest" //element of xsd schema 
+      schema = "$projectDir/src/main/resources/schema/schema.xsd" 
+      out = "$projectDir/src/main/resources/api/request.json"
+    }
+    response{
+      template = "$projectDir/src/main/resources/templates/response.xsl"
+      element = "SomeResponse" //element of xsd schema
+      schema= "$projectDir/src/main/resources/schema/schema.xsd"
+      out = "$projectDir/src/main/resources/api/response.json"
+    }
+}
+  
+  ````

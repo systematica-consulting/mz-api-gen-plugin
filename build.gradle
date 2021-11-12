@@ -1,10 +1,12 @@
 plugins {
   id 'maven'
   id 'java-gradle-plugin'
+  id 'maven-publish'
+  id 'com.gradle.plugin-publish' version '0.16.0'
 }
 
-group 'sx.microservices'
-version '1.0-SNAPSHOT'
+group 'ru.systematica_consulting.mz'
+version '1.0'
 
 repositories {
   mavenCentral()
@@ -12,16 +14,24 @@ repositories {
 
 gradlePlugin {
   plugins {
-    simplePlugin {
-      id = 'mz-api-gen-plugin'
-      implementationClass = 'sx.microservices.mz.api.ApiPlugin'
+    apiPlugin {
+      id = 'ru.systematica_consulting.mz.api-gen-plugin'
+      implementationClass = 'ru.systematica_consulting.mz.api.ApiPlugin'
+      displayName = 'Plugin to generate JSON schema from xsd and xslt'
+      description = 'Plugin to generate JSON schema from xsd and xslt'
     }
   }
 }
 
+pluginBundle {
+  website = 'https://github.com/systematica-consulting/mz-api-gen-plugin'
+  vcsUrl = 'https://github.com/systematica-consulting/mz-api-gen-plugin'
+  tags = ['systematica-consulting', "jsonshema", "xsd", "xslt"]
+}
+
 dependencies {
-  compileOnly 'org.projectlombok:lombok:1.18.12'
-  annotationProcessor 'org.projectlombok:lombok:1.18.12'
+  compileOnly 'org.projectlombok:lombok:1.18.22'
+  annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
   implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '5.0.1'
   implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
@@ -30,9 +40,6 @@ dependencies {
   implementation group: 'com.ibm.icu', name: 'icu4j', version: '69.1'
 
   implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: '2.14.1'
-
-
-
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }
