@@ -5,7 +5,7 @@ plugins {
   id 'com.gradle.plugin-publish' version '0.16.0'
 }
 
-group 'ru.systematica_consulting.mz'
+group 'ru.systematica-consulting'
 version '1.0'
 
 repositories {
@@ -15,7 +15,7 @@ repositories {
 gradlePlugin {
   plugins {
     apiPlugin {
-      id = 'ru.systematica_consulting.mz.api-gen-plugin'
+      id = 'ru.systematica-consulting.mz-api-gen-plugin'
       implementationClass = 'ru.systematica_consulting.mz.api.ApiPlugin'
       displayName = 'Plugin to generate JSON schema from xsd and xslt'
       description = 'Plugin to generate JSON schema from xsd and xslt'

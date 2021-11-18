@@ -13,10 +13,10 @@ public class ApiPluginTest {
   @Test
   public void greetingTest() {
     Project project = ProjectBuilder.builder().build();
-    project.getPluginManager().apply("ru.systematica_consulting.mz.api-gen-plugin");
+    project.getPluginManager().apply("ru.systematica-consulting.mz-api-gen-plugin");
 
     assertTrue(project.getPluginManager()
-      .hasPlugin("ru.systematica_consulting.mz.api-gen-plugin"));
+      .hasPlugin("ru.systematica-consulting.mz-api-gen-plugin"));
 
     assertNotNull(project.getTasks().getByName("generateApi"));
   }
