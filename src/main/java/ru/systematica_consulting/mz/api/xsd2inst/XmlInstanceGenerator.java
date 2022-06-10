@@ -32,12 +32,7 @@ public class XmlInstanceGenerator {
       })
       .toArray(String[]::new);
 
-    SchemaInstanceGenerator.Xsd2InstOptions options = new SchemaInstanceGenerator.Xsd2InstOptions();
-    options.setNetworkDownloads(false);
-    options.setNopvr(false);
-    options.setNoupa(true);
-
-    return SchemaInstanceGenerator.xsd2inst(schemas, elementName, options);
+    return SchemaInstanceGenerator.xsd2inst(schemas, elementName);
   }
 
 }
