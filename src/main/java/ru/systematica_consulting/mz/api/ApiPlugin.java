@@ -11,10 +11,9 @@ import ru.systematica_consulting.mz.api.config.ResponseConfig;
 import ru.systematica_consulting.mz.api.json.JsonSchemaGenerator;
 import ru.systematica_consulting.mz.api.json.SchemaBean;
 import ru.systematica_consulting.mz.api.schema.RequestSchemaGenerator;
-import ru.systematica_consulting.mz.api.schema.XmlSchema;
 import ru.systematica_consulting.mz.api.schema.ResponseSchemaGenerator;
-import ru.systematica_consulting.mz.api.xsd2inst.XmlInstance;
-import ru.systematica_consulting.mz.api.xsd2inst.XmlInstanceGenerator;
+import ru.systematica_consulting.mz.api.schema.XmlSchema;
+
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -45,41 +44,26 @@ public class ApiPlugin implements Plugin<Project> {
 
   @SneakyThrows
   public static SchemaBean generateResponse(ResponseConfig config) {
-
-    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
-    XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
-
-    ResponseSchemaGenerator responseSchemaGenerator = new ResponseSchemaGenerator(xmlInstance, config.getTemplate());
-    XmlSchema xmlSchema = responseSchemaGenerator.generate();
-
-    JsonSchemaGenerator generator = new JsonSchemaGenerator();
-    return generator.generate(xmlSchema);
-
+    XmlSchema xmlSchema = new ResponseSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
+      .generate();
+    return new JsonSchemaGenerator().generate(xmlSchema);
   }
 
   @SneakyThrows
   public static SchemaBean generateRequest(RequestConfig config) {
-
-    XmlInstanceGenerator xmlInstanceGenerator = new XmlInstanceGenerator();
-    XmlInstance xmlInstance = xmlInstanceGenerator.createInstance(config.getSchema(), config.getElement());
-
     byte[] request = FileUtils.getFileContent(config.getRequest());
-
-    RequestSchemaGenerator xmlSchemaGenerator = new RequestSchemaGenerator(xmlInstance, config.getTemplate());
-    XmlSchema xmlSchema = xmlSchemaGenerator.generate(request);
-
-    JsonSchemaGenerator generator = new JsonSchemaGenerator();
-    return generator.generate(xmlSchema);
-
+    XmlSchema xmlSchema = new RequestSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
+      .generate(request);
+    return new JsonSchemaGenerator().generate(xmlSchema);
   }
 
 
   @SneakyThrows
   private static void print(SchemaBean schema, String path) {
     Files.createDirectories(Paths.get(path).getParent());
-    PrintStream requestStream = new PrintStream(path, StandardCharsets.UTF_8);
-    requestStream.print(schema);
-    requestStream.close();
+    PrintStream printStream = new PrintStream(path, StandardCharsets.UTF_8);
+    printStream.print(schema);
+    printStream.close();
   }
 
 

@@ -2,25 +2,30 @@ package ru.systematica_consulting.mz.api.schema;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.xmlbeans.XmlException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import ru.systematica_consulting.mz.api.FileUtils;
 import ru.systematica_consulting.mz.api.XslTransformer;
-import ru.systematica_consulting.mz.api.xsd2inst.XmlInstance;
+import ru.systematica_consulting.mz.api.xsd2inst.XmlInstanceGenerator;
+
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
 public class ResponseSchemaGenerator extends XmlSchemaGenerator {
 
-  public ResponseSchemaGenerator(XmlInstance xmlInstance, String templatePath) {
-    super(xmlInstance, templatePath);
+  public ResponseSchemaGenerator(String schemaPath, String element, String templatePath) throws IOException, XmlException {
+    super(new XmlInstanceGenerator().createInstance(schemaPath, element), templatePath);
   }
 
 
@@ -33,9 +38,7 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     removeJsonAttrs(transformed);
     noArrayElements = findArrayNodes(transformed);
 
-    XmlSchema schema = _generate(transformed.getDocumentElement());
-
-    fillObjectsTypes(schema);
+    XmlSchema schema = generate(transformed.getDocumentElement());
 
     document = converter.toDocument(xml);
     duplicateArrayNodes(document);

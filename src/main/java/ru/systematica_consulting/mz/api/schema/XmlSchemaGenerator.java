@@ -17,8 +17,9 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 @Slf4j
-abstract class XmlSchemaGenerator {
+public abstract class XmlSchemaGenerator {
   private static final List<UnaryOperator<String>> functions = new ArrayList<>();
+
   static {
     UnaryOperator<String> formatDate = s -> {
       if (s.length() >= 10) {
@@ -53,7 +54,13 @@ abstract class XmlSchemaGenerator {
     this.addressTypeMap = guidTypeMap.values().stream().collect(Collectors.toMap(XmlType::getElementAddress, t -> t));
   }
 
-  protected XmlSchema _generate(Element element) {
+  protected XmlSchema generate(Element element) {
+    XmlSchema xmlSchema = _generate(element);
+    fillObjectsTypes(xmlSchema);
+    return xmlSchema;
+  }
+
+  private XmlSchema _generate(Element element) {
     XmlSchema xmlSchema = new XmlSchema();
     xmlSchema.setElementName(element.getLocalName());
     xmlSchema.setElementAddress(getElementAddress(element));
@@ -95,7 +102,7 @@ abstract class XmlSchemaGenerator {
     return xmlSchema;
   }
 
-  protected XmlType fillObjectsTypes(XmlSchema schema) {
+  private XmlType fillObjectsTypes(XmlSchema schema) {
     if (schema.getType() == null && schema.getChildren() != null) {
       Set<XmlType> childrenTypes = new HashSet<>();
       schema.getChildren().forEach((k, v) -> childrenTypes.add(fillObjectsTypes(v)));

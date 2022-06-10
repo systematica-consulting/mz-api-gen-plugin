@@ -1,21 +1,23 @@
 package ru.systematica_consulting.mz.api.schema;
 
 import lombok.SneakyThrows;
+import org.apache.xmlbeans.XmlException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import ru.systematica_consulting.mz.api.XslTransformer;
-import ru.systematica_consulting.mz.api.xsd2inst.XmlInstance;
+import ru.systematica_consulting.mz.api.xsd2inst.XmlInstanceGenerator;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
 import java.util.*;
 
-public class RequestSchemaGenerator extends XmlSchemaGenerator{
+public class RequestSchemaGenerator extends XmlSchemaGenerator {
 
-  public RequestSchemaGenerator(XmlInstance xmlInstance, String templatePath) {
-    super(xmlInstance, templatePath);
+  public RequestSchemaGenerator(String schemaPath, String element, String templatePath) throws IOException, XmlException {
+    super(new XmlInstanceGenerator().createInstance(schemaPath, element), templatePath);
   }
 
   public XmlSchema generate(byte[] request) {
@@ -30,8 +32,7 @@ public class RequestSchemaGenerator extends XmlSchemaGenerator{
     guidTypeMap.clear();
     guidTypeMap.putAll(types);
 
-    XmlSchema schema = _generate(document.getDocumentElement());
-    fillObjectsTypes(schema);
+    XmlSchema schema = generate(document.getDocumentElement());
     Set<String> arrayNodes = findArrayNodes(document);
     setArrayType(schema, arrayNodes);
 
