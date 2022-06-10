@@ -97,13 +97,9 @@ class SampleXmlUtil {
   }
 
   private void processSimpleType(SchemaType stype, XmlCursor xmlc) {
-    String sample = sampleDataForSimpleType(stype);
-    xmlc.insertChars(sample);
+    xmlc.insertChars(UUID.randomUUID().toString());
   }
 
-  private String sampleDataForSimpleType(SchemaType sType) {
-    return UUID.randomUUID().toString();
-  }
 
   // a bit from the Aenid
   private static final String[] WORDS = {
@@ -353,7 +349,7 @@ class SampleXmlUtil {
   private void processAttributes(SchemaType stype, XmlCursor xmlc) {
     SchemaLocalAttribute[] attributes = stype.getAttributeModel().getAttributes();
     for (SchemaLocalAttribute attr : attributes) {
-      String uuid = sampleDataForSimpleType(attr.getType());
+      String uuid = UUID.randomUUID().toString();
       xmlc.insertAttributeWithValue(attr.getName(), uuid);
       putType(uuid, attr.getType(), attr, xmlc);
     }
