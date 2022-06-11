@@ -15,17 +15,14 @@ class SampleXmlUtil {
   private int _nElements;
   private final Map<String, XmlType> types = new HashMap<>();
 
-  private SampleXmlUtil() {
-  }
-
-  public static XmlInstance createSampleForType(SchemaType sType) {
+  public XmlInstance createSampleForType(SchemaType sType) {
     XmlObject object = XmlObject.Factory.newInstance();
     XmlCursor cursor = object.newCursor();
     // Skip the document node
     cursor.toNextToken();
     // Using the type and the cursor, call the utility method to get a
     // sample XML payload for that Schema element
-    Map<String, XmlType> types = new SampleXmlUtil().createSampleForType(sType, cursor);
+    createSampleForType(sType, cursor);
     // Cursor now contains the sample payload
     // Pretty print the result.  Note that the cursor is positioned at the
     // end of the doc so we use the original xml object that the cursor was
@@ -43,40 +40,26 @@ class SampleXmlUtil {
 
   Random _picker = new Random(1);
 
-  /**
-   * Cursor position
-   * Before:
-   * <theElement>^</theElement>
-   * After:
-   * <theElement><lots of stuff/>^</theElement>
-   */
-  private Map<String, XmlType> createSampleForType(SchemaType stype, XmlCursor xmlc) {
+
+  private void createSampleForType(SchemaType stype, XmlCursor xmlc) {
     if (_typeStack.contains(stype)) {
-      return this.types;
+      return;
     }
 
     _typeStack.add(stype);
 
     try {
-      if (stype.isSimpleType() || stype.isURType()) {
-        processSimpleType(stype, xmlc);
-        return this.types;
+      if (stype.getContentType() == SchemaType.SIMPLE_CONTENT || stype.isSimpleType() || stype.isURType()) {
+        xmlc.insertChars(UUID.randomUUID().toString());
+        return;
       }
 
-      // complex Type
-      // <theElement>^</theElement>
       processAttributes(stype, xmlc);
 
-      // <theElement attri1="string">^</theElement>
       switch (stype.getContentType()) {
         case SchemaType.NOT_COMPLEX_TYPE:
         case SchemaType.EMPTY_CONTENT:
-          // noop
           break;
-        case SchemaType.SIMPLE_CONTENT: {
-          processSimpleType(stype, xmlc);
-        }
-        break;
         case SchemaType.MIXED_CONTENT:
           xmlc.insertChars(pick(WORDS) + " ");
           if (stype.getContentModel() != null) {
@@ -93,13 +76,7 @@ class SampleXmlUtil {
     } finally {
       _typeStack.remove(_typeStack.size() - 1);
     }
-    return this.types;
   }
-
-  private void processSimpleType(SchemaType stype, XmlCursor xmlc) {
-    xmlc.insertChars(UUID.randomUUID().toString());
-  }
-
 
   // a bit from the Aenid
   private static final String[] WORDS = {
@@ -127,9 +104,6 @@ class SampleXmlUtil {
     "et", "premere", "et", "laxas", "sciret", "dare", "iussus", "habenas",
   };
 
-
-  private static final String[] DNS1 = new String[]{"corp", "your", "my", "sample", "company", "test", "any"};
-  private static final String[] DNS2 = new String[]{"com", "org", "com", "gov", "org", "com", "org", "com", "edu"};
 
   private int pick(int n) {
     return _picker.nextInt(n);
@@ -207,15 +181,10 @@ class SampleXmlUtil {
   }
 
   private void processElement(SchemaParticle sp, XmlCursor xmlc, boolean mixed) {
-    // cast as schema local element
     SchemaLocalElement element = (SchemaLocalElement) sp;
-    /// ^  -> <elemenname></elem>^
     xmlc.insertElement(element.getName().getLocalPart(), element.getName().getNamespaceURI());
-
     _nElements++;
-    /// -> <elem>^</elem>
     xmlc.toPrevToken();
-    // -> <elem>stuff^</elem>
 
     SchemaType elementType = element.getType();
     createSampleForType(elementType, xmlc);

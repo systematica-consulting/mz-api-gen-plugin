@@ -70,7 +70,7 @@ public class XmlInstanceGenerator {
     }
 
     // Now generate it
-    return SampleXmlUtil.createSampleForType(elem);
+    return new SampleXmlUtil().createSampleForType(elem);
   }
 
 }
