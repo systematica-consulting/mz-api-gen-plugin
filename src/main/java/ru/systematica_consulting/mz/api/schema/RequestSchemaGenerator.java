@@ -20,7 +20,7 @@ public class RequestSchemaGenerator extends XmlSchemaGenerator {
     super(new XmlInstanceGenerator().createInstance(schemaPath, element), templatePath);
   }
 
-  public XmlSchema generate(byte[] request) {
+  public XmlElement generate(byte[] request) {
     XslTransformer transformer = new XslTransformer(templatePath);
     Document document = converter.toDocument(new String(request));
     setGuids(document);
@@ -32,7 +32,7 @@ public class RequestSchemaGenerator extends XmlSchemaGenerator {
     guidTypeMap.clear();
     guidTypeMap.putAll(types);
 
-    XmlSchema schema = generate(document.getDocumentElement());
+    XmlElement schema = generate(document.getDocumentElement());
     Set<String> arrayNodes = findArrayNodes(document);
     setArrayType(schema, arrayNodes);
 

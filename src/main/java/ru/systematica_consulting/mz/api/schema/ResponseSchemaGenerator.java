@@ -29,7 +29,7 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
   }
 
 
-  public XmlSchema generate() {
+  public XmlElement generate() {
     byte[] whenTemplate = createWhenTemplate(templatePath);
 
     XslTransformer transformer = new XslTransformer(whenTemplate);
@@ -38,7 +38,7 @@ public class ResponseSchemaGenerator extends XmlSchemaGenerator {
     removeJsonAttrs(transformed);
     noArrayElements = findArrayNodes(transformed);
 
-    XmlSchema schema = generate(transformed.getDocumentElement());
+    XmlElement schema = generate(transformed.getDocumentElement());
 
     document = converter.toDocument(xml);
     duplicateArrayNodes(document);

@@ -1,6 +1,6 @@
 package ru.systematica_consulting.mz.api.json;
 
-import ru.systematica_consulting.mz.api.schema.XmlSchema;
+import ru.systematica_consulting.mz.api.schema.XmlElement;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,22 +9,22 @@ import java.util.Set;
 
 public class JsonSchemaGenerator {
 
-  public SchemaBean generate(XmlSchema xmlSchema){
+  public SchemaBean generate(XmlElement xmlElement) {
     SchemaBean schemaBean = new SchemaBean();
 
-    if (xmlSchema.getType().isList()){
+    if (xmlElement.getType().isList()) {
       schemaBean.setType(Type.array);
-      xmlSchema.getType().setList(false);
-      schemaBean.setItems(generate(xmlSchema));
+      xmlElement.getType().setList(false);
+      schemaBean.setItems(generate(xmlElement));
       return schemaBean;
     }
 
-    schemaBean.setTitle(xmlSchema.getType().getDescription());
-    schemaBean.setType(Type.fromXmlType(xmlSchema.getType().getType()));
+    schemaBean.setTitle(xmlElement.getType().getDescription());
+    schemaBean.setType(Type.fromXmlType(xmlElement.getType().getType()));
 
-    if (schemaBean.getType().isSimple()){
-      schemaBean.setFormat(Format.fromXmlType(xmlSchema.getType().getType()));
-      schemaBean.setEnumeration(xmlSchema.getType().getEnumeration());
+    if (schemaBean.getType().isSimple()) {
+      schemaBean.setFormat(Format.fromXmlType(xmlElement.getType().getType()));
+      schemaBean.setEnumeration(xmlElement.getType().getEnumeration());
       return schemaBean;
     }
 
@@ -32,8 +32,8 @@ public class JsonSchemaGenerator {
 
     Map<String, SchemaBean> properties = new HashMap<>();
 
-    if (xmlSchema.getChildren() != null) {
-      xmlSchema.getChildren().forEach((name, schema) -> {
+    if (xmlElement.getChildren() != null) {
+      xmlElement.getChildren().forEach((name, schema) -> {
         properties.put(name, generate(schema));
         if (schema.getType().isRequired()) {
           required.add(name);

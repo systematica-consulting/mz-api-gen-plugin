@@ -54,16 +54,16 @@ public abstract class XmlSchemaGenerator {
     this.addressTypeMap = guidTypeMap.values().stream().collect(Collectors.toMap(XmlType::getElementAddress, t -> t));
   }
 
-  protected XmlSchema generate(Element element) {
-    XmlSchema xmlSchema = _generate(element);
-    fillObjectsTypes(xmlSchema);
-    return xmlSchema;
+  protected XmlElement generate(Element element) {
+    XmlElement xmlElement = _generate(element);
+    fillObjectsTypes(xmlElement);
+    return xmlElement;
   }
 
-  private XmlSchema _generate(Element element) {
-    XmlSchema xmlSchema = new XmlSchema();
-    xmlSchema.setElementName(element.getLocalName());
-    xmlSchema.setElementAddress(getElementAddress(element));
+  private XmlElement _generate(Element element) {
+    XmlElement xmlElement = new XmlElement();
+    xmlElement.setElementName(element.getLocalName());
+    xmlElement.setElementAddress(getElementAddress(element));
 
     NodeList childNodes = element.getChildNodes();
     int count = 0;
@@ -71,22 +71,22 @@ public abstract class XmlSchemaGenerator {
       Node item = childNodes.item(i);
       if (item instanceof Element) {
         count++;
-        xmlSchema.putChild(item.getLocalName(), _generate((Element) item));
+        xmlElement.putChild(item.getLocalName(), _generate((Element) item));
       }
     }
     if (count == 0) {//simple type
       String guid = element.getTextContent();
-      xmlSchema.setElementValue(guid);
+      xmlElement.setElementValue(guid);
 
-      XmlType oldType = findSimpleType(xmlSchema);
+      XmlType oldType = findSimpleType(xmlElement);
 
       XmlType type;
       if (oldType == null){
         type = createTypeFromElementName(element.getLocalName());
         if (type == null) {
-          notFoundedTypes.add(xmlSchema.getElementAddress());
+          notFoundedTypes.add(xmlElement.getElementAddress());
           type = new XmlType();
-          type.setType(getTypeFromValue(xmlSchema.getElementValue()));
+          type.setType(getTypeFromValue(xmlElement.getElementValue()));
           type.setDescription("");
         }
       }else {
@@ -96,13 +96,13 @@ public abstract class XmlSchemaGenerator {
         type.setElementAddress(oldType.getElementAddress());
         type.setEnumeration(oldType.getEnumeration());
       }
-      xmlSchema.setType(type);
+      xmlElement.setType(type);
     }
 
-    return xmlSchema;
+    return xmlElement;
   }
 
-  private XmlType fillObjectsTypes(XmlSchema schema) {
+  private XmlType fillObjectsTypes(XmlElement schema) {
     if (schema.getType() == null && schema.getChildren() != null) {
       Set<XmlType> childrenTypes = new HashSet<>();
       schema.getChildren().forEach((k, v) -> childrenTypes.add(fillObjectsTypes(v)));
@@ -140,7 +140,7 @@ public abstract class XmlSchemaGenerator {
       Set<String> elementNames = new HashSet<>();
       do {
         if (sib instanceof Element){
-          if (elementNames.contains(sib.getLocalName())){
+          if (elementNames.contains(sib.getLocalName())) {
             result.add(getElementAddress((Element) sib));
           }
           elementNames.add(sib.getLocalName());
@@ -150,14 +150,14 @@ public abstract class XmlSchemaGenerator {
     return result;
   }
 
-  protected void setArrayType(XmlSchema xmlSchema, Set<String> arrayNodes){
-    if (arrayNodes.contains(xmlSchema.getElementAddress())){
-      if (!noArrayElements.contains(xmlSchema.getElementAddress()) || xmlSchema.getChildren() != null){
-        xmlSchema.getType().setList(true);
+  protected void setArrayType(XmlElement xmlElement, Set<String> arrayNodes) {
+    if (arrayNodes.contains(xmlElement.getElementAddress())) {
+      if (!noArrayElements.contains(xmlElement.getElementAddress()) || xmlElement.getChildren() != null) {
+        xmlElement.getType().setList(true);
       }
     }
-    if (xmlSchema.getChildren() != null){
-      xmlSchema.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));
+    if (xmlElement.getChildren() != null) {
+      xmlElement.getChildren().values().forEach(s -> setArrayType(s, arrayNodes));
     }
   }
 
@@ -211,9 +211,9 @@ public abstract class XmlSchemaGenerator {
     return null;
   }
 
-  private XmlType findSimpleType(XmlSchema schema){
+  private XmlType findSimpleType(XmlElement schema) {
     XmlType type = guidTypeMap.get(schema.getElementValue());
-    type =  type != null ? type : functions
+    type = type != null ? type : functions
       .stream()
       .map(f -> f.apply(schema.getElementValue()))
       .filter(guidTypeMap::containsKey)
@@ -221,7 +221,7 @@ public abstract class XmlSchemaGenerator {
       .findFirst()
       .orElse(null);
 
-    if (type != null){
+    if (type != null) {
       foundedGuids.add(schema.getElementValue());
     }
     return type;

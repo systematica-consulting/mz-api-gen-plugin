@@ -7,22 +7,22 @@ import java.util.Map;
 
 
 @Data
-public class XmlSchema {
+public class XmlElement {
   private XmlType type;
   private String elementValue;
   private String elementAddress;
   private String elementName;
-  private Map<String, XmlSchema> children;
-  private XmlSchema parent;
+  private Map<String, XmlElement> children;
+  private XmlElement parent;
 
-  public void putChild(String name, XmlSchema schema){
-    if (children == null){
+  public void putChild(String name, XmlElement schema) {
+    if (children == null) {
       children = new HashMap<>();
     }
     children.compute(name, (n, s) -> {
-      if (s == null){
+      if (s == null) {
         return schema;
-      }else {
+      } else {
         if (schema.children != null) {
           schema.children.forEach(s::putChild);
         }

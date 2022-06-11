@@ -12,7 +12,7 @@ import ru.systematica_consulting.mz.api.json.JsonSchemaGenerator;
 import ru.systematica_consulting.mz.api.json.SchemaBean;
 import ru.systematica_consulting.mz.api.schema.RequestSchemaGenerator;
 import ru.systematica_consulting.mz.api.schema.ResponseSchemaGenerator;
-import ru.systematica_consulting.mz.api.schema.XmlSchema;
+import ru.systematica_consulting.mz.api.schema.XmlElement;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -44,17 +44,17 @@ public class ApiPlugin implements Plugin<Project> {
 
   @SneakyThrows
   public static SchemaBean generateResponse(ResponseConfig config) {
-    XmlSchema xmlSchema = new ResponseSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
+    XmlElement xmlElement = new ResponseSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
       .generate();
-    return new JsonSchemaGenerator().generate(xmlSchema);
+    return new JsonSchemaGenerator().generate(xmlElement);
   }
 
   @SneakyThrows
   public static SchemaBean generateRequest(RequestConfig config) {
     byte[] request = FileUtils.getFileContent(config.getRequest());
-    XmlSchema xmlSchema = new RequestSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
+    XmlElement xmlElement = new RequestSchemaGenerator(config.getSchema(), config.getElement(), config.getTemplate())
       .generate(request);
-    return new JsonSchemaGenerator().generate(xmlSchema);
+    return new JsonSchemaGenerator().generate(xmlElement);
   }
 
 
