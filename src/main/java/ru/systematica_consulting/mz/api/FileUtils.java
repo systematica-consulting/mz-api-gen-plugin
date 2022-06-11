@@ -4,6 +4,9 @@ import lombok.SneakyThrows;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileUtils {
 
@@ -46,5 +49,25 @@ public class FileUtils {
     try (inputStream) {
       return inputStream.readAllBytes();
     }
+  }
+
+  public static String[] getSchemas(String schemaPath, String elementName) throws IOException {
+    Path path = Paths.get(schemaPath);
+    if (!Files.exists(path)) {
+      URL systemResource = ClassLoader.getSystemResource(schemaPath);
+      if (systemResource == null) {
+        throw new FileNotFoundException(schemaPath + " not found");
+      }
+      path = new File(systemResource.getFile()).toPath();
+    }
+    return Files.find(path.getParent(), Integer.MAX_VALUE, (p, a) -> p.toString().endsWith(".xsd"))
+      .map(p -> {
+        try {
+          return Files.readString(p);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      })
+      .toArray(String[]::new);
   }
 }
