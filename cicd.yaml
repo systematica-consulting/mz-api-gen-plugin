@@ -1,0 +1,4 @@
+projectName: pgs
+build:
+  images:
+    - name: mz-api-gen-plugin
