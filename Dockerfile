@@ -4,4 +4,4 @@ ARG NEXUS_PASS
 COPY . /workspace
 WORKDIR /workspace
 
-RUN gradle test uploadArchives
+RUN gradle test publish
