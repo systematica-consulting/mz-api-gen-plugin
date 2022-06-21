@@ -1,6 +1,9 @@
 package ru.systematica_consulting.mz.api;
 
 import lombok.SneakyThrows;
+import org.apache.xmlbeans.XmlException;
+import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlOptions;
 
 import java.io.*;
 import java.net.URL;
@@ -51,7 +54,7 @@ public class FileUtils {
     }
   }
 
-  public static String[] getSchemas(String schemaPath, String elementName) throws IOException {
+  public static XmlObject[] getSchemas(String schemaPath) throws IOException {
     Path path = Paths.get(schemaPath);
     if (!Files.exists(path)) {
       URL systemResource = ClassLoader.getSystemResource(schemaPath);
@@ -68,6 +71,13 @@ public class FileUtils {
           throw new RuntimeException(e);
         }
       })
-      .toArray(String[]::new);
+      .map(s -> {
+        try {
+          return XmlObject.Factory.parse(s, (new XmlOptions()).setLoadLineNumbers().setLoadMessageDigest());
+        } catch (XmlException e) {
+          throw new RuntimeException(e);
+        }
+      })
+      .toArray(XmlObject[]::new);
   }
 }
