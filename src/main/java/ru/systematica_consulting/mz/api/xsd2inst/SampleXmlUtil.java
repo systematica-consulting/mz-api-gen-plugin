@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import ru.systematica_consulting.mz.api.schema.XmlType;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -343,6 +344,7 @@ class SampleXmlUtil {
       if (sp.getMaxOccurs() == null) {
         ((SchemaParticleImpl) schemaParticle).setMaxOccurs(null);
       }
+      ((SchemaParticleImpl) schemaParticle).setMinOccurs(BigInteger.ZERO);
       processParticle(schemaParticle, xmlc, mixed);
     }
   }

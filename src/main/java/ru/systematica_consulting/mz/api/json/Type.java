@@ -2,7 +2,7 @@ package ru.systematica_consulting.mz.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-enum Type {
+public enum Type {
   string, array, object, number, integer, @JsonProperty("boolean") _boolean;
 
   public static Type fromXmlType(String type) {
