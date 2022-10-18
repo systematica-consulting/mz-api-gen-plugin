@@ -1,7 +1,6 @@
 /config/
 /.idea/
 /.gradle/
-/.git/
 /build/
 /target/
 /out/
