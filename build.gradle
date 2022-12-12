@@ -4,8 +4,8 @@ plugins {
   id 'com.gradle.plugin-publish' version '0.16.0'
 }
 
-group 'ru.systematica-consulting'
-version '1.0'
+group = groupId
+version = groupVersion
 
 repositories {
   mavenCentral()
