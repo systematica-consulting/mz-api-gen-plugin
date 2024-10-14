@@ -12,8 +12,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class SampleXmlUtil {
-  private static final int MAX_ELEMENTS = 1000;
-  private int _nElements;
   private final Map<String, XmlType> types = new HashMap<>();
 
   public XmlInstance createSampleForType(SchemaType sType) {
@@ -156,7 +154,7 @@ class SampleXmlUtil {
     }
 
     int result = minOccurs;
-    if (result == 0 && _nElements < MAX_ELEMENTS) {
+    if (result == 0) {
       result = 1;
     }
 
@@ -184,7 +182,7 @@ class SampleXmlUtil {
   private void processElement(SchemaParticle sp, XmlCursor xmlc, boolean mixed) {
     SchemaLocalElement element = (SchemaLocalElement) sp;
     xmlc.insertElement(element.getName().getLocalPart(), element.getName().getNamespaceURI());
-    _nElements++;
+
     xmlc.toPrevToken();
 
     SchemaType elementType = element.getType();
