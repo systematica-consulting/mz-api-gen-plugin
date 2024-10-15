@@ -43,35 +43,9 @@ dependencies {
   testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    from sourceSets.main.allSource
-}
 
 tasks.withType(JavaCompile) {
   options.encoding = "UTF-8"
   options.compilerArgs.add('-parameters')
 }
 
-artifacts {
-  archives sourcesJar
-}
-
-publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-    }
-  }
-  repositories {
-    maven {
-      name 'nexus'
-      def releasesRepoUrl = "https://nexus.devsun.ru/repository/releases/devsun/"
-      def snapshotsRepoUrl = "https://nexus.devsun.ru/repository/snapshots/devsun/"
-      url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-      credentials {
-        username = System.env.NEXUS_USER
-        password = System.env.NEXUS_PASS
-      }
-    }
-  }
-}
